@@ -5,9 +5,12 @@ import PortfolioGrid from "@/components/PortfolioGrid";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import Footer from "@/components/Footer";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
+import LuxuryManifesto from "@/components/LuxuryManifesto";
+import StatsSection from "@/components/StatsSection";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
+import { Sparkles, Award, Users } from "lucide-react";
 import heroImage from "@assets/tslm_hp_slider_1_1762333728329.jpg";
 import heroImage2 from "@assets/image00011_1762333728333.jpeg";
 import heroImage3 from "@assets/tslm_hp_slider_3-1_1762333728332.jpg";
@@ -127,33 +130,94 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       <Header />
-      <HomeSlider slides={sliderContent} autoPlayDelay={6000} />
+      <HomeSlider slides={sliderContent} autoPlayDelay={7000} />
       
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-background text-center">
-        <div className="max-w-4xl mx-auto">
+      {/* Introduction Elegante */}
+      <section className="relative py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-muted/10 overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <motion.div
+            animate={{
+              scale: [1, 1.2, 1],
+              rotate: [0, 90, 0],
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+            className="absolute top-0 right-0 w-96 h-96 bg-primary rounded-full blur-3xl"
+          ></motion.div>
+        </div>
+
+        <div className="relative max-w-5xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="mb-8"
+          >
+            <span className="inline-block text-destructive text-sm font-['Montserrat'] font-semibold tracking-[0.2em] uppercase mb-4">
+              Studio TSELEM
+            </span>
+          </motion.div>
+
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-3xl sm:text-4xl font-bold mb-6"
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-4xl sm:text-5xl lg:text-6xl font-['Playfair_Display'] font-bold mb-8 leading-tight"
+            style={{ letterSpacing: "-0.02em" }}
           >
-            Bienvenue chez TSELEM
+            L'Art de Capturer l'Émotion
           </motion.h2>
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg text-muted-foreground leading-relaxed mb-8 font-['Cormorant_Garamond']"
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-xl sm:text-2xl text-muted-foreground leading-relaxed mb-12 font-['Cormorant_Garamond'] max-w-4xl mx-auto"
           >
-            Nous sommes un studio créatif spécialisé dans la photographie professionnelle et la production vidéo. 
-            Notre passion est de capturer l'essence de chaque moment, de raconter votre histoire à travers des images 
-            qui restent gravées dans le temps. De la photographie de mariage aux événements corporatifs, en passant par 
-            les sessions fashion et le design graphique, nous mettons notre expertise au service de votre vision.
+            Studio créatif de photographie et vidéographie de luxe basé à Abidjan. 
+            Nous transformons vos moments précieux en œuvres d'art intemporelles, 
+            capturant l'essence de chaque instant avec une sensibilité artistique incomparable.
           </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="flex flex-wrap justify-center gap-8 md:gap-12"
+          >
+            {[
+              { icon: Sparkles, label: "Créativité" },
+              { icon: Award, label: "Excellence" },
+              { icon: Users, label: "Confiance" },
+            ].map((item, index) => (
+              <motion.div
+                key={item.label}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
+                className="flex flex-col items-center gap-3"
+              >
+                <div className="w-16 h-16 rounded-full bg-destructive/10 flex items-center justify-center">
+                  <item.icon className="w-7 h-7 text-destructive" />
+                </div>
+                <span className="font-['Montserrat'] font-medium text-foreground">
+                  {item.label}
+                </span>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
+
+      <LuxuryManifesto />
 
       <ServicesSection />
 
@@ -247,50 +311,87 @@ export default function Home() {
         </div>
       </section>
 
+      <StatsSection />
+
       <TestimonialsSection testimonials={testimonials} />
 
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-background">
-        <div className="max-w-4xl mx-auto text-center">
+      <section className="relative py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-muted/10 to-background overflow-hidden">
+        {/* Decorative Background */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-destructive rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="relative max-w-5xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="mb-8"
+          >
+            <span className="inline-block text-destructive text-sm font-['Montserrat'] font-semibold tracking-[0.2em] uppercase">
+              Commencez Votre Histoire
+            </span>
+          </motion.div>
+
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-4xl sm:text-5xl font-bold mb-6"
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-4xl sm:text-5xl lg:text-6xl font-['Playfair_Display'] font-bold mb-8 leading-tight"
+            style={{ letterSpacing: "-0.02em" }}
           >
             Prêt à Donner Vie à Votre Vision ?
           </motion.h2>
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-xl mb-10 text-muted-foreground font-['Cormorant_Garamond']"
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-xl sm:text-2xl mb-14 text-muted-foreground font-['Cormorant_Garamond'] leading-relaxed max-w-3xl mx-auto"
           >
-            Réservez dès maintenant votre séance et laissez-nous capturer vos moments précieux
+            Collaborons pour créer des images qui transcendent le temps et racontent votre histoire avec authenticité et élégance
           </motion.p>
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="flex flex-col sm:flex-row gap-6 justify-center"
           >
             <Link href="/rendez-vous" data-testid="button-cta-book">
-              <Button size="lg" variant="destructive" className="text-lg px-10 py-6 font-['Montserrat']">
-                RÉSERVER MAINTENANT
-              </Button>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button size="lg" variant="destructive" className="text-lg px-12 py-7 font-['Montserrat'] font-semibold shadow-xl">
+                  RÉSERVER UNE SÉANCE
+                </Button>
+              </motion.div>
             </Link>
             <Link href="/contact" data-testid="button-cta-contact">
-              <Button
-                size="lg"
-                variant="outline"
-                className="text-lg px-10 py-6 font-['Montserrat']"
-              >
-                NOUS CONTACTER
-              </Button>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="text-lg px-12 py-7 font-['Montserrat'] font-semibold border-2"
+                >
+                  NOUS CONTACTER
+                </Button>
+              </motion.div>
             </Link>
           </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="mt-12 text-sm text-muted-foreground font-['Montserrat']"
+          >
+            Réponse sous 24h · Consultation gratuite · Devis personnalisé
+          </motion.p>
         </div>
       </section>
 
