@@ -50,7 +50,6 @@ export default function Blog() {
               {blogPosts.map((post) => (
                 <BlogCard
                   key={post.id}
-                  id={parseInt(post.id)}
                   title={post.title}
                   excerpt={post.excerpt}
                   image={post.image}

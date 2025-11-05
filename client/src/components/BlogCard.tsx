@@ -4,7 +4,6 @@ import { Calendar } from "lucide-react";
 import { Link } from "wouter";
 
 interface BlogCardProps {
-  id: number;
   title: string;
   excerpt: string;
   image: string;
@@ -14,7 +13,6 @@ interface BlogCardProps {
 }
 
 export default function BlogCard({
-  id,
   title,
   excerpt,
   image,
@@ -24,7 +22,7 @@ export default function BlogCard({
 }: BlogCardProps) {
   return (
     <Link href={`/blog/${slug}`}>
-      <Card className="overflow-hidden hover-elevate cursor-pointer h-full" data-testid={`blog-card-${id}`}>
+      <Card className="overflow-hidden hover-elevate cursor-pointer h-full" data-testid={`blog-card-${slug}`}>
         <div className="aspect-video overflow-hidden">
           <img
             src={image}
