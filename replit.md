@@ -12,7 +12,29 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
-### November 5, 2025
+### November 5, 2025 - Session 2
+- **Case Studies Detail Pages**: Created dynamic case study detail pages with full project information
+  - Route added: `/etudes-de-cas/:id` displays complete case study with gallery, challenge, solution, and results
+  - Each case study includes client info, project type, images gallery, and call-to-action
+  - CaseStudyDetail component with responsive design and smooth animations
+- **Testimonials System**: Full testimonials management with admin validation
+  - Database table `testimonials` created with fields: name, role, company, avatar, rating, message, projectType, isApproved
+  - Storage interface methods: createTestimonial, getTestimonials, getApprovedTestimonials, approveTestimonial, deleteTestimonial
+  - API routes: GET /api/testimonials (public approved only), GET /api/admin/testimonials (admin all), PATCH /api/admin/testimonials/:id/approve, DELETE /api/admin/testimonials/:id
+  - AdminDashboard enhanced with tabs: Messages and Témoignages with badge counters for pending items
+- **Booking System Enhanced**: Smart time slot management respecting business hours and current time
+  - Time slots filter based on selected duration to prevent booking beyond 18h
+  - For today's bookings, only shows future time slots (minimum 1h ahead)
+  - Duration selection now updates available time slots dynamically
+  - Visual feedback when no slots available for selected date/duration combination
+- **Email Safety Guard**: Added validation in sendContactNotificationEmail to prevent errors when RESEND_API_KEY is missing
+- **InstagramVideo Accessibility**: Full keyboard, touch, and mouse accessibility
+  - Keyboard navigation: Container is focusable (tabIndex={0}), controls appear on focus
+  - Touch devices: Tap video to toggle controls overlay
+  - Mouse devices: Hover to reveal controls
+  - ARIA labels for all interactive buttons with dynamic state announcements
+
+### November 5, 2025 - Session 1
 - **Blog System**: Complete blog implementation with database-backed posts, individual article pages (/blog/:slug), rich HTML content support
   - Three seed articles published on photography tips, wedding packages, and video trends
   - Fixed blog image display by configuring static asset serving for /attached_assets
@@ -22,7 +44,7 @@ Preferred communication style: Simple, everyday language.
   - Contact form emails sent to contact@tselemrdc.com
 - **Instagram Video Component**: Created InstagramVideo component for 5100x1080 format videos
   - Supports autoplay, mute/unmute, play/pause controls
-  - Responsive design with overlay controls on hover
+  - Responsive design with overlay controls on hover/touch/keyboard
   - Ready for local video export integration (see VIDEO_INSTAGRAM_GUIDE.md)
 - **Static Assets**: Server configured to serve attached_assets directory for images and videos
 - **Bug Fixes**: HomeSlider navigation buttons fixed using useCallback, ScrollToTop verified working

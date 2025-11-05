@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -15,14 +15,48 @@ const serviceTypes = [
 ];
 
 const durations = [
-  { value: "1h", label: "1 heure" },
-  { value: "2h", label: "2 heures" },
-  { value: "3h", label: "3 heures" },
+  { value: "1h", label: "1 heure", hours: 1 },
+  { value: "2h", label: "2 heures", hours: 2 },
+  { value: "3h", label: "3 heures", hours: 3 },
 ];
 
-const timeSlots = [
+const allTimeSlots = [
   "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"
 ];
+
+function getAvailableTimeSlots(selectedDate: string, durationHours: number): string[] {
+  const now = new Date();
+  const today = new Date().toISOString().split('T')[0];
+  const isToday = selectedDate === today;
+  
+  return allTimeSlots.filter((slot) => {
+    const [hours, minutes] = slot.split(':').map(Number);
+    
+    // Vérifier que l'heure de fin ne dépasse pas 18h
+    const endHour = hours + durationHours;
+    if (endHour > 18) {
+      return false;
+    }
+    
+    // Si c'est aujourd'hui, filtrer les créneaux passés
+    if (isToday) {
+      const currentHour = now.getHours();
+      const currentMinutes = now.getMinutes();
+      
+      // Le créneau doit être au moins 1h dans le futur
+      if (hours < currentHour + 1) {
+        return false;
+      }
+      
+      // Si c'est dans la même heure, vérifier les minutes
+      if (hours === currentHour + 1 && currentMinutes > 0) {
+        return false;
+      }
+    }
+    
+    return true;
+  });
+}
 
 export default function BookingForm() {
   const [step, setStep] = useState(1);
@@ -48,6 +82,14 @@ export default function BookingForm() {
     console.log("Booking submitted:", formData);
     setConfirmed(true);
   };
+
+  const availableTimeSlots = useMemo(() => {
+    if (!formData.date || !formData.duration) {
+      return allTimeSlots;
+    }
+    const duration = durations.find(d => d.value === formData.duration);
+    return getAvailableTimeSlots(formData.date, duration?.hours || 1);
+  }, [formData.date, formData.duration]);
 
   if (confirmed) {
     return (
@@ -136,24 +178,6 @@ export default function BookingForm() {
               </div>
 
               <div>
-                <Label>Créneau horaire *</Label>
-                <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 mt-2">
-                  {timeSlots.map((time) => (
-                    <Button
-                      key={time}
-                      type="button"
-                      variant={formData.time === time ? "default" : "outline"}
-                      onClick={() => setFormData({ ...formData, time })}
-                      className="font-['Montserrat']"
-                      data-testid={`time-${time}`}
-                    >
-                      {time}
-                    </Button>
-                  ))}
-                </div>
-              </div>
-
-              <div>
                 <Label>Durée *</Label>
                 <div className="grid grid-cols-3 gap-3 mt-2">
                   {durations.map((dur) => (
@@ -161,7 +185,9 @@ export default function BookingForm() {
                       key={dur.value}
                       type="button"
                       variant={formData.duration === dur.value ? "default" : "outline"}
-                      onClick={() => setFormData({ ...formData, duration: dur.value })}
+                      onClick={() => {
+                        setFormData({ ...formData, duration: dur.value, time: "" });
+                      }}
                       className="font-['Montserrat']"
                       data-testid={`duration-${dur.value}`}
                     >
@@ -170,6 +196,36 @@ export default function BookingForm() {
                     </Button>
                   ))}
                 </div>
+              </div>
+
+              <div>
+                <Label>Créneau horaire *</Label>
+                {!formData.duration && (
+                  <p className="text-sm text-muted-foreground mt-2">
+                    Veuillez d'abord sélectionner une durée
+                  </p>
+                )}
+                {formData.duration && availableTimeSlots.length === 0 && (
+                  <p className="text-sm text-destructive mt-2">
+                    Aucun créneau disponible pour cette date et cette durée
+                  </p>
+                )}
+                {formData.duration && availableTimeSlots.length > 0 && (
+                  <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 mt-2">
+                    {availableTimeSlots.map((time) => (
+                      <Button
+                        key={time}
+                        type="button"
+                        variant={formData.time === time ? "default" : "outline"}
+                        onClick={() => setFormData({ ...formData, time })}
+                        className="font-['Montserrat']"
+                        data-testid={`time-${time}`}
+                      >
+                        {time}
+                      </Button>
+                    ))}
+                  </div>
+                )}
               </div>
 
               <div className="flex gap-3">

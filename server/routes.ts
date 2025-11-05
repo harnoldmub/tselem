@@ -180,6 +180,46 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.get("/api/testimonials", async (req: Request, res: Response) => {
+    try {
+      const testimonialsList = await storage.getApprovedTestimonials();
+      res.json(testimonialsList);
+    } catch (error) {
+      console.error("Error fetching testimonials:", error);
+      res.status(500).json({ error: "Erreur serveur" });
+    }
+  });
+
+  app.get("/api/admin/testimonials", requireAuth, async (req: Request, res: Response) => {
+    try {
+      const testimonialsList = await storage.getTestimonials();
+      res.json(testimonialsList);
+    } catch (error) {
+      console.error("Error fetching testimonials:", error);
+      res.status(500).json({ error: "Erreur serveur" });
+    }
+  });
+
+  app.patch("/api/admin/testimonials/:id/approve", requireAuth, async (req: Request, res: Response) => {
+    try {
+      await storage.approveTestimonial(req.params.id);
+      res.json({ success: true });
+    } catch (error) {
+      console.error("Error approving testimonial:", error);
+      res.status(500).json({ error: "Erreur serveur" });
+    }
+  });
+
+  app.delete("/api/admin/testimonials/:id", requireAuth, async (req: Request, res: Response) => {
+    try {
+      await storage.deleteTestimonial(req.params.id);
+      res.json({ success: true });
+    } catch (error) {
+      console.error("Error deleting testimonial:", error);
+      res.status(500).json({ error: "Erreur serveur" });
+    }
+  });
+
   const httpServer = createServer(app);
 
   return httpServer;

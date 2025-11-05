@@ -14,6 +14,7 @@ import BlogPost from "@/pages/BlogPost";
 import Contact from "@/pages/Contact";
 import Booking from "@/pages/Booking";
 import CaseStudies from "@/pages/CaseStudies";
+import CaseStudyDetail from "@/pages/CaseStudyDetail";
 import AdminLogin from "@/pages/AdminLogin";
 import AdminDashboard from "@/pages/AdminDashboard";
 import NotFound from "@/pages/not-found";
@@ -28,6 +29,7 @@ function Router() {
         <Route path="/services" component={Services} />
         <Route path="/portfolio" component={Portfolio} />
         <Route path="/etudes-de-cas" component={CaseStudies} />
+        <Route path="/etudes-de-cas/:id" component={CaseStudyDetail} />
         <Route path="/temoignages" component={Testimonials} />
         <Route path="/blog" component={Blog} />
         <Route path="/blog/:slug" component={BlogPost} />
