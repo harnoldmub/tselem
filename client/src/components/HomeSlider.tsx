@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -22,28 +22,28 @@ export default function HomeSlider({ slides, autoPlayDelay = 5000 }: HomeSliderP
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(0);
 
+  const nextSlide = useCallback(() => {
+    setDirection(1);
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  }, [slides.length]);
+
+  const prevSlide = useCallback(() => {
+    setDirection(-1);
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  }, [slides.length]);
+
+  const goToSlide = useCallback((index: number) => {
+    setDirection(index > currentSlide ? 1 : -1);
+    setCurrentSlide(index);
+  }, [currentSlide]);
+
   useEffect(() => {
     const timer = setInterval(() => {
       nextSlide();
     }, autoPlayDelay);
 
     return () => clearInterval(timer);
-  }, [currentSlide, autoPlayDelay]);
-
-  const nextSlide = () => {
-    setDirection(1);
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-  };
-
-  const prevSlide = () => {
-    setDirection(-1);
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  };
-
-  const goToSlide = (index: number) => {
-    setDirection(index > currentSlide ? 1 : -1);
-    setCurrentSlide(index);
-  };
+  }, [nextSlide, autoPlayDelay]);
 
   const slideVariants = {
     enter: (direction: number) => ({
