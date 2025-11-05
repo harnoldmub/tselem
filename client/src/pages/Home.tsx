@@ -180,7 +180,7 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl sm:text-2xl text-muted-foreground leading-relaxed mb-12 font-['Cormorant_Garamond'] max-w-4xl mx-auto"
           >
-            Studio créatif de photographie et vidéographie de luxe basé à Abidjan. 
+            Studio créatif de photographie et vidéographie de luxe basé à Kinshasa. 
             Nous transformons vos moments précieux en œuvres d'art intemporelles, 
             capturant l'essence de chaque instant avec une sensibilité artistique incomparable.
           </motion.p>
