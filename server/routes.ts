@@ -37,6 +37,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const validatedData = insertContactSchema.parse(req.body);
       const contact = await storage.createContact(validatedData);
+      
+      try {
+        const { sendContactNotificationEmail } = await import("./email");
+        await sendContactNotificationEmail(validatedData);
+      } catch (emailError) {
+        console.error("Email notification failed:", emailError);
+      }
+      
       res.json({ success: true, contact });
     } catch (error) {
       console.error("Error creating contact:", error);

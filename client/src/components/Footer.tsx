@@ -94,6 +94,7 @@ export default function Footer() {
                 { path: "/services", label: "Services" },
                 { path: "/portfolio", label: "Portfolio" },
                 { path: "/blog", label: "Blog" },
+                { path: "/admin/login", label: "Admin" },
               ].map((link) => (
                 <li key={link.path}>
                   <Link href={link.path}>
