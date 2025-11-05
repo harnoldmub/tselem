@@ -4,8 +4,10 @@ import ServicesSection from "@/components/ServicesSection";
 import PortfolioGrid from "@/components/PortfolioGrid";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import Footer from "@/components/Footer";
+import YouTubeEmbed from "@/components/YouTubeEmbed";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
+import { motion } from "framer-motion";
 import heroImage from "@assets/tslm_hp_slider_1_1762333728329.jpg";
 import corporate from "@assets/generated_images/Corporate_event_portfolio_sample_33e8e1fb.png";
 import fashion from "@assets/generated_images/Fashion_photography_portfolio_sample_f408a497.png";
@@ -102,52 +104,153 @@ export default function Home() {
         subtitle="Studio professionnel de photographie et production vidéo. Capturons vos moments les plus précieux avec art et passion."
       />
       
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-background text-center">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-background text-center">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-6">Bienvenue chez TSELEM</h2>
-          <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-3xl sm:text-4xl font-bold mb-6"
+          >
+            Bienvenue chez TSELEM
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-lg text-muted-foreground leading-relaxed mb-8 font-['Cormorant_Garamond']"
+          >
             Nous sommes un studio créatif spécialisé dans la photographie professionnelle et la production vidéo. 
             Notre passion est de capturer l'essence de chaque moment, de raconter votre histoire à travers des images 
             qui restent gravées dans le temps. De la photographie de mariage aux événements corporatifs, en passant par 
             les sessions fashion et le design graphique, nous mettons notre expertise au service de votre vision.
-          </p>
+          </motion.p>
         </div>
       </section>
 
       <ServicesSection />
 
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-primary text-primary-foreground">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl sm:text-5xl font-bold mb-4">
+              Découvrez Notre Travail en Action
+            </h2>
+            <p className="text-xl text-primary-foreground/90 max-w-3xl mx-auto font-['Cormorant_Garamond']">
+              Plongez dans nos créations à travers nos vidéos de projets
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <YouTubeEmbed
+                videoId="dQw4w9WgXcQ"
+                title="TSELEM - Showreel 2024"
+              />
+              <h3 className="text-xl font-semibold mt-4 mb-2 font-['Montserrat']">
+                Showreel 2024
+              </h3>
+              <p className="text-primary-foreground/80 font-['Cormorant_Garamond']">
+                Notre meilleur travail de l'année en quelques minutes
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <YouTubeEmbed
+                videoId="9bZkp7q19f0"
+                title="TSELEM - Making Of"
+              />
+              <h3 className="text-xl font-semibold mt-4 mb-2 font-['Montserrat']">
+                Dans les Coulisses
+              </h3>
+              <p className="text-primary-foreground/80 font-['Cormorant_Garamond']">
+                Découvrez comment nous créons la magie
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-24 px-4 sm:px-6 lg:px-8 bg-muted/30">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
             <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">
               Nos Dernières Réalisations
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8 font-['Cormorant_Garamond']">
               Découvrez quelques-uns de nos projets récents
             </p>
-          </div>
+          </motion.div>
           <PortfolioGrid items={portfolioItems.slice(0, 6)} showFilter={false} />
-          <div className="text-center mt-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mt-12"
+          >
             <Link href="/portfolio" data-testid="button-view-portfolio">
               <Button size="lg" variant="default" className="font-['Montserrat']">
                 VOIR TOUT LE PORTFOLIO
               </Button>
             </Link>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       <TestimonialsSection testimonials={testimonials} />
 
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-primary text-primary-foreground">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-background">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-6">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-4xl sm:text-5xl font-bold mb-6"
+          >
             Prêt à Donner Vie à Votre Vision ?
-          </h2>
-          <p className="text-xl mb-10 text-primary-foreground/90">
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-xl mb-10 text-muted-foreground font-['Cormorant_Garamond']"
+          >
             Réservez dès maintenant votre séance et laissez-nous capturer vos moments précieux
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+          >
             <Link href="/rendez-vous" data-testid="button-cta-book">
               <Button size="lg" variant="destructive" className="text-lg px-10 py-6 font-['Montserrat']">
                 RÉSERVER MAINTENANT
@@ -157,12 +260,12 @@ export default function Home() {
               <Button
                 size="lg"
                 variant="outline"
-                className="text-lg px-10 py-6 bg-white/10 backdrop-blur-md border-white text-white hover:bg-white hover:text-primary font-['Montserrat']"
+                className="text-lg px-10 py-6 font-['Montserrat']"
               >
                 NOUS CONTACTER
               </Button>
             </Link>
-          </div>
+          </motion.div>
         </div>
       </section>
 

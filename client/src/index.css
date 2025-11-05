@@ -76,8 +76,9 @@
   --chart-4: 354 60% 55%;
   --chart-5: 248 25% 45%;
 
-  --font-sans: Poppins, sans-serif;
-  --font-serif: Georgia, serif;
+  --font-sans: 'Montserrat', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+  --font-heading: 'Cormorant Garamond', serif;
   --font-mono: Menlo, monospace;
   --radius: .5rem; /* 8px */
   --shadow-2xs: 0px 1px 2px 0px hsl(248 46% 17% / 0.05);
@@ -239,6 +240,13 @@
 
   body {
     @apply font-sans antialiased bg-background text-foreground;
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    letter-spacing: -0.02em;
   }
 }
 

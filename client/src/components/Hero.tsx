@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
+import { motion } from "framer-motion";
 
 interface HeroProps {
   image: string;
@@ -11,22 +12,41 @@ interface HeroProps {
 export default function Hero({ image, title, subtitle, showCTA = true }: HeroProps) {
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div
+      <motion.div
+        initial={{ scale: 1.1 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${image})` }}
       />
       <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/60 to-primary/80" />
 
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-        <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight tracking-tight">
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight"
+          style={{ letterSpacing: '-0.02em' }}
+        >
           {title}
-        </h1>
-        <p className="text-xl sm:text-2xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed">
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="text-xl sm:text-2xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed font-['Cormorant_Garamond'] font-light"
+        >
           {subtitle}
-        </p>
+        </motion.p>
 
         {showCTA && (
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          >
             <Link href="/rendez-vous" data-testid="button-hero-book">
               <Button
                 size="lg"
@@ -45,10 +65,14 @@ export default function Hero({ image, title, subtitle, showCTA = true }: HeroPro
                 VOIR NOS RÉALISATIONS
               </Button>
             </Link>
-          </div>
+          </motion.div>
         )}
 
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        >
           <svg
             className="w-6 h-6 text-white"
             fill="none"
@@ -60,7 +84,7 @@ export default function Hero({ image, title, subtitle, showCTA = true }: HeroPro
           >
             <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
           </svg>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
