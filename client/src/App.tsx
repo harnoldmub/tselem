@@ -11,6 +11,7 @@ import Testimonials from "@/pages/Testimonials";
 import Blog from "@/pages/Blog";
 import Contact from "@/pages/Contact";
 import Booking from "@/pages/Booking";
+import CaseStudies from "@/pages/CaseStudies";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -20,6 +21,7 @@ function Router() {
       <Route path="/apropos" component={About} />
       <Route path="/services" component={Services} />
       <Route path="/portfolio" component={Portfolio} />
+      <Route path="/etudes-de-cas" component={CaseStudies} />
       <Route path="/temoignages" component={Testimonials} />
       <Route path="/blog" component={Blog} />
       <Route path="/contact" component={Contact} />

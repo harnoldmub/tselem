@@ -1,5 +1,5 @@
 import Header from "@/components/Header";
-import Hero from "@/components/Hero";
+import HomeSlider from "@/components/HomeSlider";
 import ServicesSection from "@/components/ServicesSection";
 import PortfolioGrid from "@/components/PortfolioGrid";
 import TestimonialsSection from "@/components/TestimonialsSection";
@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import heroImage from "@assets/tslm_hp_slider_1_1762333728329.jpg";
+import heroImage2 from "@assets/image00011_1762333728333.jpeg";
+import heroImage3 from "@assets/tslm_hp_slider_3-1_1762333728332.jpg";
 import corporate from "@assets/generated_images/Corporate_event_portfolio_sample_33e8e1fb.png";
 import fashion from "@assets/generated_images/Fashion_photography_portfolio_sample_f408a497.png";
 import product from "@assets/generated_images/Product_photography_portfolio_sample_b044f8fc.png";
@@ -18,6 +20,33 @@ import team from "@assets/tslm_hp_slider_3-1_1762333728332.jpg";
 import avatar1 from "@assets/generated_images/Client_testimonial_avatar_1_e9ec5690.png";
 import avatar2 from "@assets/generated_images/Client_testimonial_avatar_2_9020b159.png";
 import avatar3 from "@assets/generated_images/Client_testimonial_avatar_3_68bb7cac.png";
+
+const sliderContent = [
+  {
+    id: 1,
+    image: heroImage,
+    title: "L'Art de Capturer l'Émotion",
+    subtitle: "Photographie et vidéographie de luxe pour vos moments les plus précieux",
+    ctaText: "DÉCOUVRIR NOS RÉALISATIONS",
+    ctaLink: "/portfolio",
+  },
+  {
+    id: 2,
+    image: heroImage2,
+    title: "Excellence Créative",
+    subtitle: "Des solutions visuelles sur mesure qui racontent votre histoire",
+    ctaText: "EXPLORER NOS SERVICES",
+    ctaLink: "/services",
+  },
+  {
+    id: 3,
+    image: heroImage3,
+    title: "Passion & Professionnalisme",
+    subtitle: "Une équipe dédiée à transformer vos visions en réalité",
+    ctaText: "RÉSERVER UNE SÉANCE",
+    ctaLink: "/rendez-vous",
+  },
+];
 
 const portfolioItems = [
   {
@@ -98,11 +127,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       <Header />
-      <Hero
-        image={heroImage}
-        title="TSELEM – Chaque Pixel Compte"
-        subtitle="Studio professionnel de photographie et production vidéo. Capturons vos moments les plus précieux avec art et passion."
-      />
+      <HomeSlider slides={sliderContent} autoPlayDelay={6000} />
       
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-background text-center">
         <div className="max-w-4xl mx-auto">
