@@ -1,0 +1,183 @@
+1. Présentation du projet
+Nom du projet : TSELEM – Chaque Pixel Compte
+Objectif : Créer une application web complète vitrine + prise de rendez-vous, avec gestion de contenu (blog + témoignages).
+________________________________________
+2. Stack technique recommandée
+Comme Replit ne supporte pas tous les frameworks avec bases lourdes ni l’envoi SMTP direct sans configuration spécifique :
+Élément	Recommandation
+Base de données	Mysql / PostgreSQL 
+Authentification	JWT ou Passport.js / Flask-Login + OAuth2 Google
+Emails	Google SMTP (smtp.gmail.com) avec compte client
+Déploiement	Sur Replit avec URL publique .replit.dev
+Stockage images	Dossier /static/uploads ou service externe (Cloudinary, Firebase Storage)
+________________________________________
+3. Structure générale du site
+Pages principales
+1.	Accueil
+2.	À propos
+3.	Services
+4.	Portfolio
+5.	Témoignages
+6.	Blog
+7.	Contact / Prendre rendez-vous
+8.	(Le lien admin caché sur le site)
+________________________________________
+4. Fonctionnalités principales
+🏠 Page d’accueil
+•	Hero avec image ou vidéo + bouton CTA.
+•	Présentation de TSELEM (texte fourni).
+•	3 services principaux en cartes.
+•	Exemples de projets récents.
+•	Témoignages (3 à 5).
+•	Bouton “Réserver une séance”.
+•	Coordonnées rapides + réseaux sociaux.
+________________________________________
+👥 Page À propos
+•	Histoire du studio (texte fourni).
+•	Présentation de l’équipe (photo, nom, rôle, mini bio).
+•	Bloc mission & valeurs.
+________________________________________
+🎨 Page Services
+•	Présentation des 4 services principaux :
+1.	Photographie
+2.	Production vidéo
+3.	Design graphique & retouche
+4.	Packages personnalisés
+•	CTA : “Demander un devis”.
+________________________________________
+🖼️ Page Portfolio
+•	Galerie photo (filtrable par catégorie).
+•	Lightbox (zoom) ou carousel.
+•	Détails du projet (titre, description, type de prestation).
+________________________________________
+💬 Témoignages / Avis
+•	Formulaire d’avis client :
+o	Nom, note (1–5), texte, type de projet.
+•	Enregistrement en base de données.
+•	Avis validé manuellement avant affichage.
+•	Possibilité d’ajouter lien vers Google Reviews.
+(Pas besoin d’intégration API Google Reviews à ce stade.)
+________________________________________
+🗓️ Prendre rendez-vous
+Fonctionnalités :
+•	Sélection de type de séance (photo / vidéo / autre)
+•	Choix de la date + créneau (entre 10h et 18h)
+•	Durée : 1h / 2h / 3h
+•	Coordonnées client (nom, email, téléphone)
+•	Commentaire libre
+•	Confirmation instantanée à l’écran
+•	Envoi d’un email de confirmation (au client + TSELEM)
+Détails techniques :
+•	Créneaux enregistrés en DB 
+•	Vérification d’indisponibilité avant validation
+•	Envoi d’email via Google SMTP
+•	Host: smtp.gmail.com  
+•	Port: 465 (SSL) ou 587 (TLS)  
+•	Auth: Email + App Password  
+•	(Option) Générer un fichier .ics pour ajout au calendrier.
+________________________________________
+📨 Page Contact
+•	Formulaire classique :
+o	Nom
+o	Email
+o	Téléphone (facultatif)
+o	Sujet
+o	Message
+•	Envoi email via Google SMTP
+•	Message de confirmation visuel : “Merci, nous vous répondrons sous 24h !”
+________________________________________
+📰 Blog (prévu V2 mais à structurer dès V1)
+•	Liste d’articles avec image, titre, extrait, date.
+•	Page article complète.
+•	Système de catégories.
+Backoffice (admin) :
+•	Connexion par identifiant/mot de passe ou Google OAuth.
+•	CRUD sur les articles :
+o	Créer / Modifier / Supprimer.
+o	Upload image (facultatif).
+________________________________________
+5. Design & UI
+🎨 Identité visuelle
+Élément	Code couleur
+Bleu nuit	#1b153f
+Rouge	#be1e2d
+Blanc	#ffffff
+🧭 Style graphique
+•	Minimaliste, moderne, sobre.
+•	Inspiration “studio photo / artistique”.
+•	Police : Poppins ou Montserrat (Google Fonts).
+•	Icônes : Lucide / Font Awesome.
+•	Layout responsive (mobile first).
+💡 Expérience utilisateur
+•	Header fixe (sticky navbar).
+•	Transitions légères (fade / slide).
+•	Scroll fluide.
+•	Pied de page complet :
+o	Liens utiles, contact, adresse, copyright.
+o	Liens vers Facebook / Instagram / LinkedIn.
+________________________________________
+6. SEO & performance
+•	URL claires (slug par page).
+•	Balises <title> et <meta description> dynamiques.
+•	Sitemap XML généré automatiquement.
+•	Lazy loading images.
+•	Score cible : +80 Google PageSpeed.
+•	Balises ALT pour toutes les images.
+________________________________________
+7. Backoffice (Admin)
+Accessible à : /admin
+7.1 Authentification
+•	Login par identifiant / mot de passe (hashé).
+•	Option de login avec Google (OAuth2).
+•	Déconnexion sécurisée (session/token).
+7.2 Gestion
+•	Rendez-vous :
+o	Liste des réservations.
+o	Statut (confirmé / annulé).
+o	Export CSV.
+•	Avis :
+o	Liste / validation / suppression.
+•	Blog :
+o	CRUD articles.
+•	Paramètres généraux :
+o	Jours ouvrables, horaires, infos contact.
+________________________________________
+8. Emails
+8.1 Configuration SMTP Google
+•	Serveur : smtp.gmail.com
+•	Port : 465 (SSL) ou 587 (TLS)
+•	Auth : adresse email TSELEM + mot de passe d’application (non le mot de passe principal)
+•	Envoi d’emails :
+o	contact@tselem.studio → vers client / admin.
+o	Formats HTML simples (signature, logo, couleurs TSELEM).
+8.2 Types d’emails
+1.	Confirmation de rendez-vous (client)
+2.	Notification de nouvelle réservation (admin)
+3.	Accusé de réception contact
+4.	Réinitialisation de mot de passe (admin)
+________________________________________
+9. Base de données – Modèle minimal
+Table	Champs principaux
+users	id, name, email, password_hash, role, google_id
+appointments	id, client_name, email, phone, service_type, date, start_time, duration, comment, status
+reviews	id, name, rating, message, project_type, is_validated
+articles	id, title, slug, content, image_url, author_id, created_at, updated_at
+settings	key, value
+________________________________________
+10. Livrables
+1.	Code source complet (hébergé sur Replit)
+2.	Accès admin + documentation (README)
+3.	Base de données initiale (vides + schéma)
+4.	Fichier .env d’exemple avec :
+5.	EMAIL_USER=
+6.	EMAIL_PASS=
+7.	DATABASE_URL=
+8.	GOOGLE_CLIENT_ID=
+9.	GOOGLE_CLIENT_SECRET=
+10.	JWT_SECRET=
+11.	Tests :
+o	Réservation → email client + admin.
+o	Formulaire contact → email reçu.
+o	Ajout article blog → affichage page publique.
+o	Responsive sur mobile et desktop.
+
