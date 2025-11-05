@@ -40,7 +40,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       try {
         const { sendContactNotificationEmail } = await import("./email");
-        await sendContactNotificationEmail(validatedData);
+        await sendContactNotificationEmail({
+          name: validatedData.name,
+          email: validatedData.email,
+          phone: validatedData.phone || undefined,
+          subject: validatedData.subject,
+          message: validatedData.message,
+        });
       } catch (emailError) {
         console.error("Email notification failed:", emailError);
       }
