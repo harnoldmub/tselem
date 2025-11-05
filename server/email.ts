@@ -23,6 +23,11 @@ export async function sendContactNotificationEmail(contactData: {
   subject: string;
   message: string;
 }) {
+  if (!RESEND_API_KEY) {
+    console.error('Cannot send email: RESEND_API_KEY is not configured');
+    return { success: false, error: 'Email service not configured' };
+  }
+
   try {
     const { client, fromEmail } = getResendClient();
     
