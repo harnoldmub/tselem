@@ -12,6 +12,8 @@ import Blog from "@/pages/Blog";
 import Contact from "@/pages/Contact";
 import Booking from "@/pages/Booking";
 import CaseStudies from "@/pages/CaseStudies";
+import AdminLogin from "@/pages/AdminLogin";
+import AdminDashboard from "@/pages/AdminDashboard";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -26,6 +28,8 @@ function Router() {
       <Route path="/blog" component={Blog} />
       <Route path="/contact" component={Contact} />
       <Route path="/rendez-vous" component={Booking} />
+      <Route path="/admin/login" component={AdminLogin} />
+      <Route path="/admin/dashboard" component={AdminDashboard} />
       <Route component={NotFound} />
     </Switch>
   );

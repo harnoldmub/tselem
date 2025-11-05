@@ -33,8 +33,7 @@ export default function Contact() {
                     <div>
                       <h3 className="font-semibold mb-2">Adresse</h3>
                       <p className="text-muted-foreground">
-                        Cocody, Abidjan<br />
-                        Côte d'Ivoire
+                        1er étage, Immeuble de La Bourse 22389/ Rond point Forescom
                       </p>
                     </div>
                   </div>
@@ -50,10 +49,10 @@ export default function Contact() {
                     <div>
                       <h3 className="font-semibold mb-2">Téléphone</h3>
                       <a
-                        href="tel:+2250700000000"
+                        href="tel:+243980001014"
                         className="text-muted-foreground hover:text-destructive transition-colors"
                       >
-                        +225 07 00 00 00 00
+                        +243 980 001 014
                       </a>
                     </div>
                   </div>
@@ -69,10 +68,10 @@ export default function Contact() {
                     <div>
                       <h3 className="font-semibold mb-2">Email</h3>
                       <a
-                        href="mailto:contact@tselem.studio"
+                        href="mailto:contact@tselemrdc.com"
                         className="text-muted-foreground hover:text-destructive transition-colors break-all"
                       >
-                        contact@tselem.studio
+                        contact@tselemrdc.com
                       </a>
                     </div>
                   </div>

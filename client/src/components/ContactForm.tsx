@@ -4,6 +4,9 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useMutation } from "@tanstack/react-query";
+import { apiRequest } from "@/lib/queryClient";
+import { useToast } from "@/hooks/use-toast";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -14,12 +17,34 @@ export default function ContactForm() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const { toast } = useToast();
+
+  const mutation = useMutation({
+    mutationFn: async (data: typeof formData) => {
+      const res = await apiRequest("POST", "/api/contacts", data);
+      return res.json();
+    },
+    onSuccess: () => {
+      setSubmitted(true);
+      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+      setTimeout(() => setSubmitted(false), 5000);
+      toast({
+        title: "Message envoyé !",
+        description: "Nous vous répondrons dans les plus brefs délais.",
+      });
+    },
+    onError: (error) => {
+      toast({
+        title: "Erreur",
+        description: "Une erreur est survenue. Veuillez réessayer.",
+        variant: "destructive",
+      });
+    },
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Contact form submitted:", formData);
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 5000);
+    mutation.mutate(formData);
   };
 
   const handleChange = (
@@ -120,8 +145,14 @@ export default function ContactForm() {
               />
             </div>
 
-            <Button type="submit" size="lg" className="w-full font-['Montserrat']" data-testid="button-submit">
-              ENVOYER LE MESSAGE
+            <Button 
+              type="submit" 
+              size="lg" 
+              className="w-full font-['Montserrat']" 
+              data-testid="button-submit"
+              disabled={mutation.isPending}
+            >
+              {mutation.isPending ? "ENVOI EN COURS..." : "ENVOYER LE MESSAGE"}
             </Button>
           </form>
         )}
