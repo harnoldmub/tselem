@@ -87,17 +87,17 @@ export default function Header() {
                           initial={{ opacity: 0, y: -10 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.3 }}
-                          className="grid w-[400px] gap-3 p-4 bg-primary"
+                          className="grid w-[400px] gap-3 p-4 bg-gradient-to-br from-primary via-primary to-primary/95"
                         >
                           {item.submenu.map((subItem) => (
                             <li key={subItem.path}>
                               <Link href={subItem.path}>
                                 <NavigationMenuLink asChild>
                                   <a
-                                    className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover-elevate active-elevate-2 cursor-pointer"
+                                    className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-all hover-elevate active-elevate-2 cursor-pointer border border-destructive/20 bg-destructive/5 hover:border-destructive/40 hover:bg-destructive/10"
                                     data-testid={`submenu-${subItem.label.toLowerCase().replace(/ /g, '-')}`}
                                   >
-                                    <div className="text-sm font-medium leading-none text-primary-foreground font-['Montserrat']">
+                                    <div className="text-sm font-medium leading-none text-primary-foreground font-['Montserrat'] group-hover:text-destructive">
                                       {subItem.label}
                                     </div>
                                     {subItem.description && (

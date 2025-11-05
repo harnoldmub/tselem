@@ -246,7 +246,7 @@ export default function Home() {
               transition={{ duration: 0.6 }}
             >
               <YouTubeEmbed
-                videoId="dQw4w9WgXcQ"
+                videoId="W6nmtFtO-94"
                 title="TSELEM - Showreel 2024"
               />
               <h3 className="text-xl font-semibold mt-4 mb-2 font-['Montserrat']">
@@ -264,7 +264,7 @@ export default function Home() {
               transition={{ duration: 0.6 }}
             >
               <YouTubeEmbed
-                videoId="9bZkp7q19f0"
+                videoId="ooezcDUKmR8"
                 title="TSELEM - Making Of"
               />
               <h3 className="text-xl font-semibold mt-4 mb-2 font-['Montserrat']">

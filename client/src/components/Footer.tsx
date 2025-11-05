@@ -123,27 +123,27 @@ export default function Footer() {
               <li className="flex items-start gap-2">
                 <MapPin className="w-5 h-5 flex-shrink-0 mt-0.5" />
                 <span className="text-primary-foreground/80">
-                  Abidjan, Côte d'Ivoire
+                  1er étage, Immeuble de La Bourse 22389/ Rond point Forescom
                 </span>
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="w-5 h-5 flex-shrink-0" />
                 <a
-                  href="tel:+2250700000000"
+                  href="tel:+243980001014"
                   className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                   data-testid="link-phone"
                 >
-                  +225 07 00 00 00 00
+                  +243 980 001 014
                 </a>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="w-5 h-5 flex-shrink-0" />
                 <a
-                  href="mailto:contact@tselem.studio"
+                  href="mailto:contact@tselemrdc.com"
                   className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                   data-testid="link-email"
                 >
-                  contact@tselem.studio
+                  contact@tselemrdc.com
                 </a>
               </li>
             </ul>
