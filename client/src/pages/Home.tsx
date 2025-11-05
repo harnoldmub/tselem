@@ -23,13 +23,16 @@ import team from "@assets/tslm_hp_slider_3-1_1762333728332.jpg";
 import avatar1 from "@assets/generated_images/Client_testimonial_avatar_1_e9ec5690.png";
 import avatar2 from "@assets/generated_images/Client_testimonial_avatar_2_9020b159.png";
 import avatar3 from "@assets/generated_images/Client_testimonial_avatar_3_68bb7cac.png";
+import InstagramVideo from "@/components/InstagramVideo";
+import videoSrc from "@assets/videos/tselem-instagram-showcase.mp4";
 
 const sliderContent = [
   {
     id: 1,
     image: heroImage,
     title: "L'Art de Capturer l'Émotion",
-    subtitle: "Photographie et vidéographie de luxe pour vos moments les plus précieux",
+    subtitle:
+      "Photographie et vidéographie de luxe pour vos moments les plus précieux",
     ctaText: "DÉCOUVRIR NOS RÉALISATIONS",
     ctaLink: "/portfolio",
   },
@@ -103,7 +106,8 @@ const testimonials = [
     role: "Directrice Marketing",
     avatar: avatar1,
     rating: 5,
-    message: "TSELEM a capturé notre événement corporate avec un professionnalisme exceptionnel. Les photos sont magnifiques et reflètent parfaitement l'esprit de notre marque.",
+    message:
+      "TSELEM a capturé notre événement corporate avec un professionnalisme exceptionnel. Les photos sont magnifiques et reflètent parfaitement l'esprit de notre marque.",
     projectType: "Événement Corporate",
   },
   {
@@ -112,7 +116,8 @@ const testimonials = [
     role: "Entrepreneur",
     avatar: avatar2,
     rating: 5,
-    message: "Service impeccable du début à la fin. L'équipe est créative, à l'écoute et livre un travail de qualité supérieure. Je recommande vivement !",
+    message:
+      "Service impeccable du début à la fin. L'équipe est créative, à l'écoute et livre un travail de qualité supérieure. Je recommande vivement !",
     projectType: "Portraits Professionnels",
   },
   {
@@ -121,7 +126,8 @@ const testimonials = [
     role: "Mariée",
     avatar: avatar3,
     rating: 5,
-    message: "Notre mariage a été immortalisé de façon extraordinaire. Chaque photo raconte une histoire. Merci TSELEM pour ces souvenirs inoubliables !",
+    message:
+      "Notre mariage a été immortalisé de façon extraordinaire. Chaque photo raconte une histoire. Merci TSELEM pour ces souvenirs inoubliables !",
     projectType: "Photographie de Mariage",
   },
 ];
@@ -131,7 +137,7 @@ export default function Home() {
     <div className="min-h-screen">
       <Header />
       <HomeSlider slides={sliderContent} autoPlayDelay={7000} />
-      
+
       {/* Introduction Elegante */}
       <section className="relative py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-muted/10 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
@@ -173,6 +179,14 @@ export default function Home() {
             L'Art de Capturer l'Émotion
           </motion.h2>
 
+          <InstagramVideo
+            videoSrc={videoSrc}
+            title="TSELEM - Chaque Pixel Compte"
+            autoPlay={true}
+            muted={true}
+            loop={true}
+          />
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -180,9 +194,10 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl sm:text-2xl text-muted-foreground leading-relaxed mb-12 font-['Cormorant_Garamond'] max-w-4xl mx-auto"
           >
-            Studio créatif de photographie et vidéographie de luxe basé à Kinshasa. 
-            Nous transformons vos moments précieux en œuvres d'art intemporelles, 
-            capturant l'essence de chaque instant avec une sensibilité artistique incomparable.
+            Studio créatif de photographie et vidéographie de luxe basé à
+            Kinshasa. Nous transformons vos moments précieux en œuvres d'art
+            intemporelles, capturant l'essence de chaque instant avec une
+            sensibilité artistique incomparable.
           </motion.p>
 
           <motion.div
@@ -263,10 +278,7 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <YouTubeEmbed
-                videoId="ooezcDUKmR8"
-                title="TSELEM - Making Of"
-              />
+              <YouTubeEmbed videoId="ooezcDUKmR8" title="TSELEM - Making Of" />
               <h3 className="text-xl font-semibold mt-4 mb-2 font-['Montserrat']">
                 Dans les Coulisses
               </h3>
@@ -294,7 +306,10 @@ export default function Home() {
               Découvrez quelques-uns de nos projets récents
             </p>
           </motion.div>
-          <PortfolioGrid items={portfolioItems.slice(0, 6)} showFilter={false} />
+          <PortfolioGrid
+            items={portfolioItems.slice(0, 6)}
+            showFilter={false}
+          />
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -303,7 +318,11 @@ export default function Home() {
             className="text-center mt-12"
           >
             <Link href="/portfolio" data-testid="button-view-portfolio">
-              <Button size="lg" variant="default" className="font-['Montserrat']">
+              <Button
+                size="lg"
+                variant="default"
+                className="font-['Montserrat']"
+              >
                 VOIR TOUT LE PORTFOLIO
               </Button>
             </Link>
@@ -353,7 +372,8 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl sm:text-2xl mb-14 text-muted-foreground font-['Cormorant_Garamond'] leading-relaxed max-w-3xl mx-auto"
           >
-            Collaborons pour créer des images qui transcendent le temps et racontent votre histoire avec authenticité et élégance
+            Collaborons pour créer des images qui transcendent le temps et
+            racontent votre histoire avec authenticité et élégance
           </motion.p>
 
           <motion.div
@@ -364,14 +384,24 @@ export default function Home() {
             className="flex flex-col sm:flex-row gap-6 justify-center"
           >
             <Link href="/rendez-vous" data-testid="button-cta-book">
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button size="lg" variant="destructive" className="text-lg px-12 py-7 font-['Montserrat'] font-semibold shadow-xl">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button
+                  size="lg"
+                  variant="destructive"
+                  className="text-lg px-12 py-7 font-['Montserrat'] font-semibold shadow-xl"
+                >
                   RÉSERVER UNE SÉANCE
                 </Button>
               </motion.div>
             </Link>
             <Link href="/contact" data-testid="button-cta-contact">
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Button
                   size="lg"
                   variant="outline"
