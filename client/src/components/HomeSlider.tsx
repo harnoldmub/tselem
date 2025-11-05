@@ -81,7 +81,7 @@ export default function HomeSlider({ slides, autoPlayDelay = 5000 }: HomeSliderP
   };
 
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-primary">
+    <div className="relative w-full h-screen overflow-hidden bg-primary isolate">
       <AnimatePresence initial={false} custom={direction} mode="sync">
         <motion.div
           key={currentSlide}
@@ -95,13 +95,13 @@ export default function HomeSlider({ slides, autoPlayDelay = 5000 }: HomeSliderP
             opacity: { duration: 0.5 },
             scale: { duration: 0.8 },
           }}
-          className="absolute inset-0"
+          className="absolute inset-0 z-0"
         >
           <div
-            className="absolute inset-0 bg-cover bg-center"
+            className="absolute inset-0 bg-cover bg-center -z-10"
             style={{ backgroundImage: `url(${slides[currentSlide].image})` }}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-primary/70 via-primary/50 to-primary/80" />
+          <div className="absolute inset-0 bg-gradient-to-b from-primary/70 via-primary/50 to-primary/80 -z-10" />
 
           <div className="relative h-full flex items-center justify-center px-4 sm:px-6 lg:px-8">
             <div className="max-w-5xl mx-auto text-center">
@@ -156,60 +156,63 @@ export default function HomeSlider({ slides, autoPlayDelay = 5000 }: HomeSliderP
         </motion.div>
       </AnimatePresence>
 
-      {/* Navigation Arrows */}
-      <button
-        onClick={prevSlide}
-        className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-10 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover-elevate active-elevate-2 transition-all"
-        aria-label="Previous slide"
-        data-testid="slider-prev"
-      >
-        <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7" />
-      </button>
-
-      <button
-        onClick={nextSlide}
-        className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-10 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover-elevate active-elevate-2 transition-all"
-        aria-label="Next slide"
-        data-testid="slider-next"
-      >
-        <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7" />
-      </button>
-
-      {/* Dots Navigation */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex gap-3">
-        {slides.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => goToSlide(index)}
-            className={`transition-all duration-300 rounded-full ${
-              index === currentSlide
-                ? "w-12 h-3 bg-destructive"
-                : "w-3 h-3 bg-white/40 hover:bg-white/60"
-            }`}
-            aria-label={`Go to slide ${index + 1}`}
-            data-testid={`slider-dot-${index}`}
-          />
-        ))}
-      </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-24 left-1/2 -translate-x-1/2 z-10"
-      >
-        <svg
-          className="w-6 h-6 text-white/80"
-          fill="none"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
+      {/* Navigation Controls Container - creates isolated stacking context */}
+      <div className="absolute inset-0 z-20 pointer-events-none">
+        {/* Navigation Arrows */}
+        <button
+          onClick={prevSlide}
+          className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-10 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover-elevate active-elevate-2 transition-all pointer-events-auto"
+          aria-label="Previous slide"
+          data-testid="slider-prev"
         >
-          <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-        </svg>
-      </motion.div>
+          <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7" />
+        </button>
+
+        <button
+          onClick={nextSlide}
+          className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-10 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover-elevate active-elevate-2 transition-all pointer-events-auto"
+          aria-label="Next slide"
+          data-testid="slider-next"
+        >
+          <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7" />
+        </button>
+
+        {/* Dots Navigation */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex gap-3 pointer-events-auto">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className={`transition-all duration-300 rounded-full ${
+                index === currentSlide
+                  ? "w-12 h-3 bg-destructive"
+                  : "w-3 h-3 bg-white/40 hover:bg-white/60"
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+              data-testid={`slider-dot-${index}`}
+            />
+          ))}
+        </div>
+
+        {/* Scroll Indicator */}
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-24 left-1/2 -translate-x-1/2 z-10 pointer-events-none"
+        >
+          <svg
+            className="w-6 h-6 text-white/80"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+          </svg>
+        </motion.div>
+      </div>
     </div>
   );
 }
