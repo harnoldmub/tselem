@@ -36,3 +36,24 @@ export const insertContactSchema = createInsertSchema(contacts).omit({
 
 export type InsertContact = z.infer<typeof insertContactSchema>;
 export type Contact = typeof contacts.$inferSelect;
+
+export const blogPosts = pgTable("blog_posts", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  title: text("title").notNull(),
+  slug: text("slug").notNull().unique(),
+  excerpt: text("excerpt").notNull(),
+  content: text("content").notNull(),
+  image: text("image").notNull(),
+  category: text("category").notNull(),
+  author: text("author").notNull().default("TSELEM Studio"),
+  publishedAt: timestamp("published_at").notNull().defaultNow(),
+  isPublished: boolean("is_published").notNull().default(true),
+});
+
+export const insertBlogPostSchema = createInsertSchema(blogPosts).omit({
+  id: true,
+  publishedAt: true,
+});
+
+export type InsertBlogPost = z.infer<typeof insertBlogPostSchema>;
+export type BlogPost = typeof blogPosts.$inferSelect;

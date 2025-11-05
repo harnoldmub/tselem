@@ -1,6 +1,6 @@
-import { type User, type InsertUser, type Contact, type InsertContact } from "@shared/schema";
+import { type User, type InsertUser, type Contact, type InsertContact, type BlogPost, type InsertBlogPost } from "@shared/schema";
 import { db } from "./db";
-import { users, contacts } from "@shared/schema";
+import { users, contacts, blogPosts } from "@shared/schema";
 import { eq, desc } from "drizzle-orm";
 
 export interface IStorage {
@@ -13,6 +13,12 @@ export interface IStorage {
   getContactById(id: string): Promise<Contact | undefined>;
   markContactAsRead(id: string): Promise<void>;
   deleteContact(id: string): Promise<void>;
+  
+  createBlogPost(post: InsertBlogPost): Promise<BlogPost>;
+  getBlogPosts(): Promise<BlogPost[]>;
+  getPublishedBlogPosts(): Promise<BlogPost[]>;
+  getBlogPostBySlug(slug: string): Promise<BlogPost | undefined>;
+  getBlogPostById(id: string): Promise<BlogPost | undefined>;
 }
 
 export class DbStorage implements IStorage {
@@ -51,6 +57,29 @@ export class DbStorage implements IStorage {
 
   async deleteContact(id: string): Promise<void> {
     await db.delete(contacts).where(eq(contacts.id, id));
+  }
+
+  async createBlogPost(insertPost: InsertBlogPost): Promise<BlogPost> {
+    const [post] = await db.insert(blogPosts).values(insertPost).returning();
+    return post;
+  }
+
+  async getBlogPosts(): Promise<BlogPost[]> {
+    return db.select().from(blogPosts).orderBy(desc(blogPosts.publishedAt));
+  }
+
+  async getPublishedBlogPosts(): Promise<BlogPost[]> {
+    return db.select().from(blogPosts).where(eq(blogPosts.isPublished, true)).orderBy(desc(blogPosts.publishedAt));
+  }
+
+  async getBlogPostBySlug(slug: string): Promise<BlogPost | undefined> {
+    const [post] = await db.select().from(blogPosts).where(eq(blogPosts.slug, slug));
+    return post;
+  }
+
+  async getBlogPostById(id: string): Promise<BlogPost | undefined> {
+    const [post] = await db.select().from(blogPosts).where(eq(blogPosts.id, id));
+    return post;
   }
 }
 

@@ -10,6 +10,7 @@ import Services from "@/pages/Services";
 import Portfolio from "@/pages/Portfolio";
 import Testimonials from "@/pages/Testimonials";
 import Blog from "@/pages/Blog";
+import BlogPost from "@/pages/BlogPost";
 import Contact from "@/pages/Contact";
 import Booking from "@/pages/Booking";
 import CaseStudies from "@/pages/CaseStudies";
@@ -29,6 +30,7 @@ function Router() {
         <Route path="/etudes-de-cas" component={CaseStudies} />
         <Route path="/temoignages" component={Testimonials} />
         <Route path="/blog" component={Blog} />
+        <Route path="/blog/:slug" component={BlogPost} />
         <Route path="/contact" component={Contact} />
         <Route path="/rendez-vous" component={Booking} />
         <Route path="/admin/login" component={AdminLogin} />
