@@ -10,6 +10,23 @@ The application is a full-stack web platform designed for the French-speaking ma
 
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes
+
+### November 5, 2025
+- **Blog System**: Complete blog implementation with database-backed posts, individual article pages (/blog/:slug), rich HTML content support
+  - Three seed articles published on photography tips, wedding packages, and video trends
+  - Fixed blog image display by configuring static asset serving for /attached_assets
+  - BlogCard component uses slug-based test IDs for reliable testing
+- **Email Configuration**: Resend API integrated with mbote@tselem.studio as sender for contact form notifications
+  - Simplified email.ts to use direct API key from environment variable
+  - Contact form emails sent to contact@tselemrdc.com
+- **Instagram Video Component**: Created InstagramVideo component for 5100x1080 format videos
+  - Supports autoplay, mute/unmute, play/pause controls
+  - Responsive design with overlay controls on hover
+  - Ready for local video export integration (see VIDEO_INSTAGRAM_GUIDE.md)
+- **Static Assets**: Server configured to serve attached_assets directory for images and videos
+- **Bug Fixes**: HomeSlider navigation buttons fixed using useCallback, ScrollToTop verified working
+
 ## System Architecture
 
 ### Frontend Architecture
@@ -23,6 +40,7 @@ Preferred communication style: Simple, everyday language.
 - Portfolio (`/portfolio`)
 - Testimonials (`/temoignages`)
 - Blog (`/blog`)
+- Blog Post (`/blog/:slug`)
 - Contact (`/contact`)
 - Booking (`/rendez-vous`)
 
@@ -40,19 +58,23 @@ Preferred communication style: Simple, everyday language.
 
 **Runtime**: Node.js with Express.js framework running in ESM mode.
 
-**Server Structure**: Minimal API surface with routes registered through a centralized `registerRoutes` function. The server currently implements a basic structure ready for expansion with business logic.
+**Server Structure**: Minimal API surface with routes registered through a centralized `registerRoutes` function. The server implements blog management, contact form handling with email notifications, and booking functionality.
 
-**Storage Layer**: Implements a storage interface pattern (`IStorage`) with an initial in-memory implementation (`MemStorage`). This abstraction allows easy migration to database-backed storage without changing business logic.
+**Storage Layer**: Implements a storage interface pattern (`IStorage`) with both in-memory (`MemStorage`) and PostgreSQL implementations. The abstraction allows easy switching between storage backends without changing business logic.
 
 **Development Server**: Integration with Vite's middleware mode for hot module replacement during development. Production builds serve static assets from the compiled `/dist/public` directory.
 
 **Session Management**: Infrastructure in place for connect-pg-simple session storage (PostgreSQL-backed sessions).
 
+**Static Assets**: Express static middleware configured to serve `/attached_assets` directory for images and videos.
+
 ### Data Architecture
 
 **Database ORM**: Drizzle ORM configured for PostgreSQL dialect with Neon serverless driver using WebSocket connections.
 
-**Schema Design**: Centralized schema definitions in `shared/schema.ts` using Drizzle's table definitions and Zod for runtime validation. Current schema includes a basic users table with UUID primary keys.
+**Schema Design**: Centralized schema definitions in `shared/schema.ts` using Drizzle's table definitions and Zod for runtime validation. Current schema includes:
+- Users table with UUID primary keys, bcrypt-hashed passwords
+- Blog posts table with UUID IDs, unique slugs, rich HTML content, categories, and publication flags
 
 **Type Safety**: Full TypeScript coverage with shared types between frontend and backend. Drizzle generates type-safe database access, and Zod schemas provide runtime validation aligned with database schema.
 
@@ -74,18 +96,23 @@ Preferred communication style: Simple, everyday language.
 - Shared Header/Footer across all pages
 - Modular section components (ServicesSection, TestimonialsSection, PortfolioGrid)
 - Form components for booking and contact
+- InstagramVideo component for ultra-wide format videos (5100x1080)
 
 **Responsive Strategy**: Mobile-first approach with breakpoint-specific layouts (mobile stack, desktop multi-column).
 
 ### Asset Management
 
-**Static Assets**: Images stored in `/attached_assets` directory with alias `@assets` for imports.
+**Static Assets**: Images and videos stored in `/attached_assets` directory with Express static middleware serving them at `/attached_assets/*` URLs.
 
 **Asset Types**:
 - Logo variations (white for dark backgrounds)
 - Hero images for different pages
 - Generated placeholder images for portfolio, services, and testimonials
 - Team photos
+- Blog post featured images
+- Video files (MP4, WebM) for Instagram-format showcases
+
+**Import Aliases**: Vite configured with `@assets` alias for importing static assets in components.
 
 ## External Dependencies
 
@@ -94,6 +121,15 @@ Preferred communication style: Simple, everyday language.
 **Neon Serverless PostgreSQL**: Serverless PostgreSQL database accessed via WebSocket connections using `@neondatabase/serverless`. Requires `DATABASE_URL` environment variable.
 
 **Rationale**: Serverless PostgreSQL provides scalability and cost-effectiveness for a portfolio site with variable traffic. WebSocket-based connections work well in serverless environments.
+
+### Email Service
+
+**Resend**: Email delivery service for contact form notifications and transactional emails. Requires `RESEND_API_KEY` environment variable.
+
+**Configuration**: 
+- Sender email: mbote@tselem.studio
+- Recipient: contact@tselemrdc.com
+- Used for contact form submissions
 
 ### UI Framework
 
@@ -143,8 +179,10 @@ Preferred communication style: Simple, everyday language.
 
 **SSR Strategy**: Client-side rendering only (no SSR/SSG). The `rsc: false` configuration indicates no React Server Components.
 
-**Email Strategy**: Design documents mention Google SMTP (smtp.gmail.com) for email notifications, though not yet implemented.
+**Email Strategy**: Resend integration configured with API key (RESEND_API_KEY) and sender email mbote@tselem.studio for contact form notifications.
 
 **Image Storage**: Currently using local file storage in `/attached_assets`. Production might require migration to cloud storage (Cloudinary or Firebase Storage mentioned in requirements).
+
+**Video Strategy**: InstagramVideo component created for ultra-wide format videos (5100x1080). Videos stored locally in `/attached_assets` and served statically. See VIDEO_INSTAGRAM_GUIDE.md for integration details.
 
 **Authentication**: JWT or Passport.js authentication planned for admin functionality, but not yet implemented. OAuth2 Google integration mentioned in requirements.
