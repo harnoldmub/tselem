@@ -161,7 +161,7 @@ export default function HomeSlider({ slides, autoPlayDelay = 5000 }: HomeSliderP
         {/* Navigation Arrows */}
         <button
           onClick={prevSlide}
-          className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-10 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover-elevate active-elevate-2 transition-all pointer-events-auto"
+          className="absolute left-4 sm:left-8 bottom-32 sm:bottom-36 z-10 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover-elevate active-elevate-2 transition-all pointer-events-auto"
           aria-label="Previous slide"
           data-testid="slider-prev"
         >
@@ -170,7 +170,7 @@ export default function HomeSlider({ slides, autoPlayDelay = 5000 }: HomeSliderP
 
         <button
           onClick={nextSlide}
-          className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-10 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover-elevate active-elevate-2 transition-all pointer-events-auto"
+          className="absolute right-4 sm:right-8 bottom-32 sm:bottom-36 z-10 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover-elevate active-elevate-2 transition-all pointer-events-auto"
           aria-label="Next slide"
           data-testid="slider-next"
         >
