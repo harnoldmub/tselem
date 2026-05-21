@@ -1,140 +1,145 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { Camera, Video, Palette, Package, Check } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowUpRight, Camera, Video, Sparkles, Building2, Heart, UserRound } from "lucide-react";
 import servicePhoto from "@assets/generated_images/Photography_service_studio_setup_7ea0b469.png";
+import wedding from "@assets/tslm_hp_slider_1_1762333728329.jpg";
+import portrait from "@assets/image_1762347913707.png";
+import maternity from "@assets/image_1762348066656.png";
+import branding from "@assets/image_1762348129373.png";
+import production from "@assets/image_1762348165011.png";
+import corporate from "@assets/generated_images/Corporate_event_portfolio_sample_33e8e1fb.png";
 
 const services = [
   {
+    icon: UserRound,
+    title: "Portrait",
+    description: "Portraits premium, éditoriaux et corporate pour construire une image mémorable.",
+    image: portrait,
+    items: ["Direction de pose", "Sélection artistique", "Retouche peau premium"],
+  },
+  {
+    icon: Heart,
+    title: "Mariage",
+    description: "Un récit photographique et vidéo pensé comme une archive familiale de luxe.",
+    image: wedding,
+    items: ["Préparation", "Cérémonie", "Livre photo & film"],
+  },
+  {
+    icon: Sparkles,
+    title: "Maternité",
+    description: "Images sensibles, sobres et intemporelles pour préserver une période unique.",
+    image: maternity,
+    items: ["Moodboard", "Studio ou lieu", "Galerie privée"],
+  },
+  {
     icon: Camera,
-    title: "Photographie Professionnelle",
-    description: "Capturer l'essence de vos moments importants avec excellence et créativité",
-    features: [
-      "Mariages et cérémonies",
-      "Événements corporatifs",
-      "Portraits professionnels et artistiques",
-      "Photographie de mode et éditoriale",
-      "Photographie produit et commerciale",
-      "Séances famille et nouveau-nés",
-    ],
+    title: "Branding Personnel",
+    description: "Banque d'images pour dirigeants, créateurs, artistes et marques personnelles.",
+    image: branding,
+    items: ["Portraits", "Lifestyle", "Assets réseaux"],
+  },
+  {
+    icon: Building2,
+    title: "Entreprise",
+    description: "Images de marque pour équipes, campagnes, événements et communication corporate.",
+    image: corporate,
+    items: ["Reportage", "Portraits équipe", "Usage commercial"],
   },
   {
     icon: Video,
     title: "Production Vidéo",
-    description: "Raconter votre histoire à travers des vidéos cinématographiques captivantes",
-    features: [
-      "Vidéos promotionnelles d'entreprise",
-      "Documentaires et reportages",
-      "Captation d'événements en direct",
-      "Vidéos pour réseaux sociaux",
-      "Clips musicaux et artistiques",
-      "Films de mariage cinématographiques",
-    ],
-  },
-  {
-    icon: Palette,
-    title: "Design Graphique & Retouche",
-    description: "Sublimer vos visuels avec notre expertise en post-production créative",
-    features: [
-      "Retouche photo professionnelle",
-      "Montage vidéo créatif",
-      "Design d'identité visuelle",
-      "Création de supports marketing",
-      "Compositing et effets spéciaux",
-      "Colorimétrie avancée",
-    ],
-  },
-  {
-    icon: Package,
-    title: "Packages Personnalisés",
-    description: "Solutions complètes sur mesure adaptées à vos besoins spécifiques",
-    features: [
-      "Combinaison photo + vidéo",
-      "Couverture événementielle complète",
-      "Campagnes marketing intégrées",
-      "Suivi de projet de A à Z",
-      "Livraison multiformat",
-      "Support et révisions inclus",
-    ],
+    description: "Films courts, reels, campagnes et contenus vidéo avec direction artistique.",
+    image: production,
+    items: ["Storyboard", "Tournage", "Montage & colorimétrie"],
   },
 ];
 
 export default function Services() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-[#E8E8E8] text-[#111111]">
       <Header />
       <Hero
         image={servicePhoto}
-        title="Nos Services"
-        subtitle="Des solutions créatives professionnelles pour tous vos besoins visuels"
+        title="Services"
+        subtitle="Des offres administrables pour piloter portraits, mariages, marques, entreprises et productions vidéo."
         showCTA={false}
       />
 
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-background">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-              Excellence en Photographie & Vidéo
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Nous offrons une gamme complète de services pour donner vie à votre vision créative
+      <section className="px-4 py-8 sm:px-6 md:py-10">
+        <div className="mx-auto max-w-[1440px] rounded-[2.5rem] bg-[#F8F6F3] p-6 shadow-[0_26px_90px_rgba(17,17,17,0.06)] sm:p-10 lg:p-16">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.75 }}
+            className="mb-16 grid gap-8 md:grid-cols-[1fr_1fr] md:items-end"
+          >
+            <div>
+              <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.35em] text-[#BE1E2D]">Catalogue dynamique</p>
+              <h2 className="text-5xl font-semibold leading-[0.95] sm:text-7xl">Une offre claire. Une perception premium.</h2>
+            </div>
+            <p className="max-w-2xl text-xl leading-relaxed text-[#2A2A2A]/72">
+              Chaque service est pensé comme un produit éditorial: promesse nette, visuels forts, options lisibles et conversion directe vers la réservation.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="space-y-16">
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {services.map((service, index) => {
               const Icon = service.icon;
               return (
-                <Card key={index} className="overflow-visible" data-testid={`service-detail-${index}`}>
-                  <CardContent className="p-8 md:p-12">
-                    <div className="flex flex-col md:flex-row gap-8">
-                      <div className="flex-shrink-0">
-                        <div className="w-20 h-20 rounded-md bg-destructive/10 flex items-center justify-center">
-                          <Icon className="w-10 h-10 text-destructive" />
-                        </div>
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="text-3xl font-bold mb-3">{service.title}</h3>
-                        <p className="text-lg text-muted-foreground mb-6">
-                          {service.description}
-                        </p>
-                        <div className="grid md:grid-cols-2 gap-3">
-                          {service.features.map((feature, idx) => (
-                            <div key={idx} className="flex items-start gap-2">
-                              <Check className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
-                              <span className="text-foreground">{feature}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
+                <motion.article
+                  key={service.title}
+                  initial={{ opacity: 0, y: 36 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.65, delay: index * 0.06 }}
+                  className="group rounded-[2rem] bg-[#ECECEC] p-3 shadow-[inset_0_0_0_1px_rgba(17,17,17,0.04)]"
+                >
+                  <div className="relative aspect-[5/4] overflow-hidden rounded-[1.5rem] bg-[#ECECEC]">
+                    <img src={service.image} alt={service.title} className="h-full w-full object-cover grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0" />
+                    <div className="absolute left-5 top-5 flex h-12 w-12 items-center justify-center rounded-full bg-[#111111] text-[#F8F6F3]">
+                      <Icon className="h-5 w-5" />
                     </div>
-                  </CardContent>
-                </Card>
+                  </div>
+                  <div className="p-7">
+                    <p className="mb-10 text-xs text-[#BE1E2D]">0{index + 1}</p>
+                    <h3 className="mb-4 text-4xl font-semibold leading-none">{service.title}</h3>
+                    <p className="mb-7 text-base leading-relaxed text-[#2A2A2A]/72">{service.description}</p>
+                    <div className="mb-8 space-y-3 border-y border-[#111111]/10 py-5">
+                      {service.items.map((item) => (
+                        <div key={item} className="flex items-center justify-between text-sm text-[#111111]/70">
+                          <span>{item}</span>
+                          <span className="h-px w-8 bg-[#111111]/16" />
+                        </div>
+                      ))}
+                    </div>
+                    <Link href="/rendez-vous">
+                      <span className="inline-flex items-center gap-3 border-b border-[#111111]/20 pb-2 text-[11px] font-bold uppercase tracking-[0.22em] transition-colors group-hover:text-[#BE1E2D]">
+                        Réserver ce service <ArrowUpRight className="h-4 w-4" />
+                      </span>
+                    </Link>
+                  </div>
+                </motion.article>
               );
             })}
           </div>
+        </div>
+      </section>
 
-          <div className="mt-16 text-center">
-            <h3 className="text-3xl font-bold mb-4">Intéressé par nos services ?</h3>
-            <p className="text-xl text-muted-foreground mb-8">
-              Contactez-nous pour discuter de votre projet et obtenir un devis personnalisé
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/rendez-vous" data-testid="button-book-service">
-                <Button size="lg" variant="default" className="font-['Montserrat']">
-                  RÉSERVER UNE SÉANCE
-                </Button>
-              </Link>
-              <Link href="/contact" data-testid="button-quote">
-                <Button size="lg" variant="outline" className="font-['Montserrat']">
-                  DEMANDER UN DEVIS
-                </Button>
-              </Link>
-            </div>
+      <section className="px-4 py-8 sm:px-6 md:py-10">
+        <div className="mx-auto flex max-w-[1440px] flex-col gap-8 rounded-[2.5rem] bg-[#111111] p-8 text-[#F8F6F3] shadow-[0_26px_90px_rgba(17,17,17,0.12)] sm:p-12 md:flex-row md:items-end md:justify-between lg:p-16">
+          <div>
+            <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.35em] text-[#BE1E2D]">Prochaine étape</p>
+            <h2 className="max-w-4xl text-5xl font-semibold leading-[0.95] sm:text-7xl">Transformer une demande en projet signé.</h2>
           </div>
+          <Link href="/contact">
+            <span className="inline-flex items-center gap-3 rounded-full bg-[#BE1E2D] px-6 py-4 text-[11px] font-black uppercase tracking-[0.22em] text-white hover:bg-[#A01C32]">
+              Demander un devis <ArrowUpRight className="h-4 w-4" />
+            </span>
+          </Link>
         </div>
       </section>
 

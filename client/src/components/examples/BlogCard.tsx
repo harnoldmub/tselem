@@ -5,7 +5,6 @@ export default function BlogCardExample() {
   return (
     <div className="p-8 max-w-sm">
       <BlogCard
-        id={1}
         title="Les 10 Conseils pour Réussir Votre Séance Photo"
         excerpt="Découvrez nos meilleurs conseils pour préparer votre séance photo et obtenir des résultats exceptionnels..."
         image={photoService}

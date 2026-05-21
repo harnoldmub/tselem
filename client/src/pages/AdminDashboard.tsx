@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
-import { LogOut, Mail, Phone, Clock, Trash2, CheckCircle, Star, MessageSquare } from "lucide-react";
+import { LogOut, Mail, Phone, Clock, Trash2, CheckCircle, Star, MessageSquare, BarChart3, KanbanSquare, CalendarDays, Images, FileText, LayoutTemplate } from "lucide-react";
 import logoWhite from "@assets/logo-white_1762333728331.png";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
@@ -125,19 +125,26 @@ export default function AdminDashboard() {
   const unreadCount = contacts.filter((c) => !c.isRead).length;
   const pendingTestimonials = testimonials.filter((t) => !t.isApproved).length;
 
+  const platformModules = [
+    { label: "Leads actifs", value: contacts.length, icon: KanbanSquare, note: "Messages convertis en opportunités" },
+    { label: "Demandes entrantes", value: unreadCount, icon: MessageSquare, note: "À traiter dans l'inbox" },
+    { label: "Contenus CMS", value: "6", icon: FileText, note: "Pages, services, projets, blog" },
+    { label: "Templates", value: "5", icon: LayoutTemplate, note: "Luxury, portfolio, wedding, corporate" },
+  ];
+
   return (
-    <div className="min-h-screen bg-background">
-      <header className="bg-primary text-primary-foreground border-b border-primary-foreground/10">
+    <div className="min-h-screen bg-[#F8F6F3] text-[#111111]">
+      <header className="border-b border-[#111111]/10 bg-[#111111] text-[#F8F6F3]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <img src={logoWhite} alt="TSELEM" className="h-8" />
-              <h1 className="text-2xl font-['Playfair_Display'] font-bold">
-                Back Office
+              <h1 className="text-2xl font-semibold">
+                Studio OS
               </h1>
             </div>
             <div className="flex items-center gap-4">
-              <span className="text-sm font-['Montserrat']">
+              <span className="text-sm text-[#F8F6F3]/70">
                 {authData.user?.username}
               </span>
               <Button
@@ -145,7 +152,7 @@ export default function AdminDashboard() {
                 size="sm"
                 onClick={() => logoutMutation.mutate()}
                 data-testid="button-logout"
-                className="bg-transparent border-primary-foreground/30 hover:bg-primary-foreground/10"
+                className="rounded-none border-[#F8F6F3]/30 bg-transparent hover:bg-[#F8F6F3]/10"
               >
                 <LogOut className="w-4 h-4 mr-2" />
                 Déconnexion
@@ -155,9 +162,40 @@ export default function AdminDashboard() {
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <section className="mb-10 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+          <div>
+            <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.35em] text-[#BE1E2D]">Plateforme V2</p>
+            <h2 className="max-w-4xl text-5xl font-semibold leading-[0.95] sm:text-6xl">
+              Piloter le studio, les contenus et les clients depuis un seul espace.
+            </h2>
+          </div>
+          <p className="max-w-xl text-lg leading-relaxed text-[#2A2A2A]/72">
+            Cette console pose les modules clés: inbox, CRM leads, réservations, CMS, médiathèque, templates et statistiques.
+          </p>
+        </section>
+
+        <div className="mb-10 grid gap-px bg-[#111111]/10 md:grid-cols-4">
+          {platformModules.map((module) => {
+            const Icon = module.icon;
+            return (
+              <Card key={module.label} className="rounded-none border-0 bg-[#F8F6F3] shadow-none">
+                <CardContent className="p-6">
+                  <div className="mb-8 flex items-center justify-between">
+                    <Icon className="h-5 w-5 text-[#BE1E2D]" />
+                    <span className="text-xs text-[#111111]/45">Live</span>
+                  </div>
+                  <div className="text-4xl font-semibold">{module.value}</div>
+                  <div className="mt-3 font-semibold">{module.label}</div>
+                  <p className="mt-2 text-sm leading-relaxed text-[#2A2A2A]/60">{module.note}</p>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
+
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
-          <TabsList className="grid w-full max-w-md grid-cols-2">
+          <TabsList className="grid h-auto w-full grid-cols-2 rounded-none bg-[#ECECEC] p-1 md:grid-cols-6">
             <TabsTrigger value="contacts" data-testid="tab-contacts">
               <MessageSquare className="w-4 h-4 mr-2" />
               Messages
@@ -175,6 +213,22 @@ export default function AdminDashboard() {
                   {pendingTestimonials}
                 </Badge>
               )}
+            </TabsTrigger>
+            <TabsTrigger value="crm">
+              <KanbanSquare className="w-4 h-4 mr-2" />
+              CRM
+            </TabsTrigger>
+            <TabsTrigger value="content">
+              <FileText className="w-4 h-4 mr-2" />
+              Contenu
+            </TabsTrigger>
+            <TabsTrigger value="reservations">
+              <CalendarDays className="w-4 h-4 mr-2" />
+              Réservations
+            </TabsTrigger>
+            <TabsTrigger value="media">
+              <Images className="w-4 h-4 mr-2" />
+              Médias
             </TabsTrigger>
           </TabsList>
 
@@ -374,6 +428,87 @@ export default function AdminDashboard() {
                 ))}
               </div>
             )}
+          </TabsContent>
+
+          <TabsContent value="crm">
+            <div className="grid gap-6 lg:grid-cols-[0.75fr_1.25fr]">
+              <Card className="rounded-none border-[#111111]/10 bg-[#F8F6F3] shadow-none">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-3 text-2xl">
+                    <BarChart3 className="h-5 w-5 text-[#BE1E2D]" />
+                    Pipeline leads
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {["Nouveau", "Contacté", "Rendez-vous", "Proposition envoyée", "Signé", "Perdu"].map((stage, index) => (
+                    <div key={stage} className="flex items-center justify-between border-b border-[#111111]/10 pb-3 text-sm last:border-b-0">
+                      <span>{stage}</span>
+                      <Badge variant={index === 0 ? "destructive" : "outline"}>{index === 0 ? unreadCount : index + 1}</Badge>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+              <Card className="rounded-none border-[#111111]/10 bg-[#111111] text-[#F8F6F3] shadow-none">
+                <CardHeader>
+                  <CardTitle className="text-2xl">Fiche lead cible</CardTitle>
+                </CardHeader>
+                <CardContent className="grid gap-4 md:grid-cols-2">
+                  {["Nom", "Téléphone", "Email", "Type prestation", "Budget", "Date événement", "Source acquisition", "Responsable"].map((field) => (
+                    <div key={field} className="border border-[#F8F6F3]/10 p-4">
+                      <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#BE1E2D]">{field}</p>
+                      <p className="mt-2 text-sm text-[#F8F6F3]/60">Champ CRM administrable</p>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="content">
+            <div className="grid gap-px bg-[#111111]/10 md:grid-cols-3">
+              {["Pages", "Services", "Portfolio", "Études de cas", "Blog", "FAQ", "Instagram", "Témoignages", "SEO"].map((module) => (
+                <Card key={module} className="rounded-none border-0 bg-[#F8F6F3] shadow-none">
+                  <CardContent className="p-6">
+                    <p className="mb-10 text-[11px] font-bold uppercase tracking-[0.25em] text-[#BE1E2D]">CRUD</p>
+                    <h3 className="text-3xl font-semibold">{module}</h3>
+                    <p className="mt-4 text-sm leading-relaxed text-[#2A2A2A]/62">Création, édition, publication, SEO et mise en avant depuis l'administration.</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </TabsContent>
+
+          <TabsContent value="reservations">
+            <Card className="rounded-none border-[#111111]/10 bg-[#F8F6F3] shadow-none">
+              <CardContent className="grid gap-8 p-8 md:grid-cols-5">
+                {["Type séance", "Date souhaitée", "Heure", "Lieu", "Participants"].map((field, index) => (
+                  <div key={field} className="border-t border-[#111111]/15 pt-5">
+                    <p className="mb-8 text-sm text-[#BE1E2D]">0{index + 1}</p>
+                    <h3 className="text-2xl font-semibold">{field}</h3>
+                    <p className="mt-3 text-sm text-[#2A2A2A]/60">Synchronisable agenda.</p>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="media">
+            <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
+              <Card className="rounded-none border-[#111111]/10 bg-[#F8F6F3] shadow-none">
+                <CardHeader>
+                  <CardTitle className="text-2xl">Médiathèque</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3 text-sm text-[#2A2A2A]/70">
+                  <p>Photos, vidéos, documents, dossiers, tags et recherche globale.</p>
+                  <p>Prête pour Cloudinary ou S3 avec transformations d'images et CDN.</p>
+                </CardContent>
+              </Card>
+              <div className="grid grid-cols-3 gap-px bg-[#111111]/10">
+                {[1, 2, 3, 4, 5, 6].map((item) => (
+                  <div key={item} className="aspect-square bg-[#ECECEC]" />
+                ))}
+              </div>
+            </div>
           </TabsContent>
         </Tabs>
       </main>

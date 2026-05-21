@@ -1,17 +1,9 @@
 import { Link, useLocation } from "wouter";
-import { Menu, X, ChevronDown } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { Menu, X, ChevronDown, ArrowUpRight } from "lucide-react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
 import logoWhite from "@assets/logo-white_1762333728331.png";
+import icon from "@assets/tselem_icon_1762333728332.png";
 
 interface SubMenuItem {
   path: string;
@@ -25,101 +17,99 @@ interface NavItem {
   submenu?: SubMenuItem[];
 }
 
+const navItems: NavItem[] = [
+  { path: "/", label: "Accueil" },
+  {
+    label: "Studio",
+    submenu: [
+      { path: "/apropos", label: "À propos", description: "Maison de l'image, vision et méthode." },
+      { path: "/temoignages", label: "Témoignages", description: "La parole des clients Tselem." },
+      { path: "/blog", label: "Journal", description: "Conseils, culture image et coulisses." },
+    ],
+  },
+  {
+    label: "Travaux",
+    submenu: [
+      { path: "/portfolio", label: "Portfolio", description: "Sélection photo, vidéo et branding." },
+      { path: "/etudes-de-cas", label: "Études de cas", description: "Projets racontés façon magazine." },
+    ],
+  },
+  { path: "/services", label: "Services" },
+  { path: "/contact", label: "Contact" },
+];
+
 export default function Header() {
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileSubMenuOpen, setMobileSubMenuOpen] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
+  const isHomeAtTop = location === "/" && !scrolled;
+  const darkMode = isHomeAtTop;
 
-  const navItems: NavItem[] = [
-    { path: "/", label: "ACCUEIL" },
-    {
-      label: "L'ESPRIT TSELEM",
-      submenu: [
-        { path: "/apropos", label: "À propos", description: "Découvrez notre histoire" },
-        { path: "/temoignages", label: "Témoignages", description: "Ce que nos clients disent" },
-        { path: "/blog", label: "Blog", description: "Actualités et inspirations" },
-      ],
-    },
-    {
-      label: "RÉALISATIONS",
-      submenu: [
-        { path: "/portfolio", label: "Portfolio", description: "Nos meilleurs projets" },
-        { path: "/etudes-de-cas", label: "Études de cas", description: "Projets en détail" },
-      ],
-    },
-    { path: "/services", label: "SERVICES" },
-    { path: "/contact", label: "CONTACT" },
-  ];
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [location]);
 
-  const toggleMobileSubMenu = (label: string) => {
-    setMobileSubMenuOpen(mobileSubMenuOpen === label ? null : label);
-  };
+  const textColor = darkMode ? "text-[#F8F6F3]" : "text-[#111111]";
+  const mutedColor = darkMode ? "text-[#F8F6F3]/72" : "text-[#111111]/62";
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-md text-primary-foreground border-b border-primary-foreground/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          <Link href="/" className="flex items-center" data-testid="link-home">
-            <motion.img
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              src={logoWhite}
-              alt="TSELEM Logo"
-              className="h-8 sm:h-10"
-            />
+    <motion.header
+      initial={{ y: -24, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+      className="fixed left-0 right-0 top-0 z-50 px-4 py-4"
+    >
+      <div
+        className={`mx-auto max-w-[1440px] rounded-full border px-5 shadow-[0_20px_80px_rgba(17,17,17,0.08)] backdrop-blur-2xl transition-all duration-500 sm:px-7 ${
+          darkMode
+            ? "border-[#F8F6F3]/16 bg-[#111111]/24"
+            : "border-white/80 bg-[#F8F6F3]/88"
+        }`}
+      >
+        <div className="flex h-14 items-center justify-between gap-6">
+          <Link href="/" className="group flex items-center gap-3" data-testid="link-home">
+            {darkMode ? (
+              <motion.img src={logoWhite} alt="TSELEM Logo" className="h-8 w-auto" layoutId="tselem-logo" />
+            ) : (
+              <motion.span layoutId="tselem-logo" className="flex items-center gap-3">
+                <img src={icon} alt="" className="h-8 w-8" />
+                <span className="text-sm font-black uppercase tracking-[0.28em] text-[#111111]">Tselem</span>
+              </motion.span>
+            )}
           </Link>
 
-          <NavigationMenu className="hidden lg:block">
-            <NavigationMenuList className="gap-2">
-              {navItems.map((item, index) => (
-                <NavigationMenuItem key={item.label}>
+          <nav className="hidden items-center gap-1 lg:flex">
+            {navItems.map((item) => {
+              const active = item.path === location || item.submenu?.some((sub) => sub.path === location);
+              return (
+                <div key={item.label} className="group relative">
                   {item.submenu ? (
-                    <>
-                      <NavigationMenuTrigger
-                        className="bg-transparent text-primary-foreground/90 hover:text-primary-foreground hover-elevate font-['Montserrat'] text-sm font-medium tracking-wide data-[state=open]:text-destructive"
-                        data-testid={`menu-${item.label.toLowerCase().replace(/'/g, '').replace(/ /g, '-')}`}
-                      >
-                        {item.label}
-                      </NavigationMenuTrigger>
-                      <NavigationMenuContent>
-                        <motion.ul
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.3 }}
-                          className="grid w-[400px] gap-3 p-4 bg-gradient-to-br from-primary via-primary to-primary/95"
-                        >
-                          {item.submenu.map((subItem) => (
-                            <li key={subItem.path}>
-                              <Link href={subItem.path}>
-                                <NavigationMenuLink asChild>
-                                  <a
-                                    className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-all hover-elevate active-elevate-2 cursor-pointer border border-destructive/20 bg-destructive/5 hover:border-destructive/40 hover:bg-destructive/10"
-                                    data-testid={`submenu-${subItem.label.toLowerCase().replace(/ /g, '-')}`}
-                                  >
-                                    <div className="text-sm font-medium leading-none text-primary-foreground font-['Montserrat'] group-hover:text-destructive">
-                                      {subItem.label}
-                                    </div>
-                                    {subItem.description && (
-                                      <p className="line-clamp-2 text-xs leading-snug text-primary-foreground/70 font-['Cormorant_Garamond']">
-                                        {subItem.description}
-                                      </p>
-                                    )}
-                                  </a>
-                                </NavigationMenuLink>
-                              </Link>
-                            </li>
-                          ))}
-                        </motion.ul>
-                      </NavigationMenuContent>
-                    </>
+                    <button
+                      className={`inline-flex h-10 items-center gap-1 px-4 text-[11px] font-bold uppercase tracking-[0.22em] transition-colors ${
+                        active
+                          ? "text-[#BE1E2D]"
+                          : darkMode
+                            ? "text-[#F8F6F3]/72 hover:text-[#F8F6F3]"
+                            : "text-[#111111]/62 hover:text-[#111111]"
+                      }`}
+                      data-testid={`menu-${item.label.toLowerCase()}`}
+                    >
+                      {item.label}
+                      <ChevronDown className="h-3.5 w-3.5 transition-transform duration-300 group-hover:rotate-180" />
+                    </button>
                   ) : (
                     <Link href={item.path || "/"}>
                       <span
-                        className={`inline-flex items-center justify-center h-9 px-4 py-2 text-sm font-medium tracking-wide cursor-pointer transition-colors hover-elevate rounded font-['Montserrat'] ${
-                          location === item.path
-                            ? "text-destructive"
-                            : "text-primary-foreground/90 hover:text-primary-foreground"
+                        className={`inline-flex h-10 cursor-pointer items-center px-4 text-[11px] font-bold uppercase tracking-[0.22em] transition-colors ${
+                          active
+                            ? "text-[#BE1E2D]"
+                            : darkMode
+                              ? "text-[#F8F6F3]/72 hover:text-[#F8F6F3]"
+                              : "text-[#111111]/62 hover:text-[#111111]"
                         }`}
                         data-testid={`link-${item.label.toLowerCase()}`}
                       >
@@ -127,22 +117,56 @@ export default function Header() {
                       </span>
                     </Link>
                   )}
-                </NavigationMenuItem>
-              ))}
-            </NavigationMenuList>
-          </NavigationMenu>
 
-          <div className="hidden lg:block">
+                  {item.submenu && (
+                    <div className="pointer-events-none absolute left-1/2 top-full w-[420px] -translate-x-1/2 translate-y-4 opacity-0 transition duration-300 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
+                      <div className="mt-5 rounded-[2rem] border border-white/80 bg-[#F8F6F3] p-3 shadow-[0_30px_90px_rgba(17,17,17,0.16)]">
+                        {item.submenu.map((subItem) => (
+                          <Link key={subItem.path} href={subItem.path}>
+                            <span className="group/item flex cursor-pointer items-start justify-between gap-6 rounded-[1.4rem] p-4 hover:bg-[#111111]">
+                              <span>
+                                <span className="block text-sm font-semibold text-[#111111] group-hover/item:text-[#F8F6F3]">
+                                  {subItem.label}
+                                </span>
+                                {subItem.description && (
+                                  <span className="mt-1 block text-xs leading-relaxed text-[#111111]/58 group-hover/item:text-[#F8F6F3]/62">
+                                    {subItem.description}
+                                  </span>
+                                )}
+                              </span>
+                              <ArrowUpRight className="mt-1 h-4 w-4 text-[#BE1E2D]" />
+                            </span>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </nav>
+
+          <div className="hidden items-center gap-3 lg:flex">
+            <Link href="/admin/login">
+              <span className={`text-[11px] font-bold uppercase tracking-[0.22em] ${mutedColor} transition-colors hover:text-[#BE1E2D]`}>
+                Studio OS
+              </span>
+            </Link>
             <Link href="/rendez-vous" data-testid="button-book-cta">
-              <Button variant="destructive" size="default" className="font-['Montserrat']">
-                RÉSERVER
-              </Button>
+              <motion.span
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center gap-3 rounded-full bg-[#BE1E2D] px-5 py-3 text-[11px] font-black uppercase tracking-[0.22em] text-white shadow-[0_12px_34px_rgba(190,30,45,0.24)] hover:bg-[#A01C32]"
+              >
+                Réserver
+                <ArrowUpRight className="h-4 w-4" />
+              </motion.span>
             </Link>
           </div>
 
           <button
-            className="lg:hidden"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className={`lg:hidden ${textColor}`}
+            onClick={() => setMobileMenuOpen((open) => !open)}
             data-testid="button-menu-toggle"
           >
             {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -156,83 +180,53 @@ export default function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="lg:hidden bg-primary/98 backdrop-blur-sm border-t border-primary-foreground/10"
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="mx-4 overflow-hidden rounded-[1.8rem] border border-white/80 bg-[#F8F6F3] shadow-[0_24px_80px_rgba(17,17,17,0.12)] lg:hidden"
           >
-            <nav className="px-4 py-6 space-y-2 font-['Montserrat']">
+            <nav className="space-y-1 px-5 py-6">
               {navItems.map((item) => (
                 <div key={item.label}>
                   {item.submenu ? (
-                    <div>
+                    <>
                       <button
-                        onClick={() => toggleMobileSubMenu(item.label)}
-                        className="flex items-center justify-between w-full text-sm font-medium tracking-wide py-2 px-2 rounded hover-elevate text-primary-foreground/90"
-                        data-testid={`mobile-menu-${item.label.toLowerCase().replace(/'/g, '').replace(/ /g, '-')}`}
+                        onClick={() => setMobileSubMenuOpen(mobileSubMenuOpen === item.label ? null : item.label)}
+                        className="flex w-full items-center justify-between border-b border-[#111111]/10 py-4 text-left text-sm font-bold uppercase tracking-[0.22em] text-[#111111]"
                       >
-                        <span>{item.label}</span>
-                        <ChevronDown
-                          className={`h-4 w-4 transition-transform ${
-                            mobileSubMenuOpen === item.label ? "rotate-180" : ""
-                          }`}
-                        />
+                        {item.label}
+                        <ChevronDown className={`h-4 w-4 transition-transform ${mobileSubMenuOpen === item.label ? "rotate-180" : ""}`} />
                       </button>
                       <AnimatePresence>
                         {mobileSubMenuOpen === item.label && (
-                          <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: "auto" }}
-                            exit={{ opacity: 0, height: 0 }}
-                            transition={{ duration: 0.2 }}
-                            className="ml-4 mt-2 space-y-2"
-                          >
+                          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
                             {item.submenu.map((subItem) => (
-                              <Link
-                                key={subItem.path}
-                                href={subItem.path}
-                                onClick={() => setMobileMenuOpen(false)}
-                              >
-                                <div
-                                  className="block text-sm py-2 px-2 rounded hover-elevate text-primary-foreground/80"
-                                  data-testid={`mobile-submenu-${subItem.label.toLowerCase().replace(/ /g, '-')}`}
-                                >
+                              <Link key={subItem.path} href={subItem.path} onClick={() => setMobileMenuOpen(false)}>
+                                <span className="block border-b border-[#111111]/10 px-4 py-3 text-sm text-[#111111]/70">
                                   {subItem.label}
-                                </div>
+                                </span>
                               </Link>
                             ))}
                           </motion.div>
                         )}
                       </AnimatePresence>
-                    </div>
+                    </>
                   ) : (
-                    <Link
-                      href={item.path || "/"}
-                      onClick={() => setMobileMenuOpen(false)}
-                      data-testid={`mobile-link-${item.label.toLowerCase()}`}
-                    >
-                      <div
-                        className={`block text-sm font-medium tracking-wide py-2 hover-elevate px-2 rounded ${
-                          location === item.path ? "text-destructive" : "text-primary-foreground/90"
-                        }`}
-                      >
+                    <Link href={item.path || "/"} onClick={() => setMobileMenuOpen(false)}>
+                      <span className={`block border-b border-[#111111]/10 py-4 text-sm font-bold uppercase tracking-[0.22em] ${location === item.path ? "text-[#BE1E2D]" : "text-[#111111]"}`}>
                         {item.label}
-                      </div>
+                      </span>
                     </Link>
                   )}
                 </div>
               ))}
               <Link href="/rendez-vous" onClick={() => setMobileMenuOpen(false)}>
-                <Button
-                  variant="destructive"
-                  className="w-full mt-4 font-['Montserrat']"
-                  data-testid="mobile-button-book"
-                >
-                  RÉSERVER
-                </Button>
+                <span className="mt-5 inline-flex w-full items-center justify-center rounded-full bg-[#BE1E2D] px-5 py-4 text-[11px] font-black uppercase tracking-[0.22em] text-white">
+                  Réserver une séance
+                </span>
               </Link>
             </nav>
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </motion.header>
   );
 }

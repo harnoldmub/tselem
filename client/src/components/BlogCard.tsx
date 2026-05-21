@@ -1,7 +1,6 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Calendar } from "lucide-react";
+import { Calendar, ArrowUpRight } from "lucide-react";
 import { Link } from "wouter";
+import { motion } from "framer-motion";
 
 interface BlogCardProps {
   title: string;
@@ -12,41 +11,38 @@ interface BlogCardProps {
   slug: string;
 }
 
-export default function BlogCard({
-  title,
-  excerpt,
-  image,
-  category,
-  date,
-  slug,
-}: BlogCardProps) {
+export default function BlogCard({ title, excerpt, image, category, date, slug }: BlogCardProps) {
   return (
     <Link href={`/blog/${slug}`}>
-      <Card className="overflow-hidden hover-elevate cursor-pointer h-full" data-testid={`blog-card-${slug}`}>
-        <div className="aspect-video overflow-hidden">
-          <img
-            src={image}
-            alt={title}
-            className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-          />
+      <motion.article
+        whileHover={{ y: -8 }}
+        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+        className="group h-full cursor-pointer rounded-[2rem] border border-white/80 bg-[#F8F6F3] p-3 shadow-[0_22px_70px_rgba(17,17,17,0.06)]"
+        data-testid={`blog-card-${slug}`}
+      >
+        <div className="aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-[#ECECEC]">
+          <img src={image} alt={title} className="h-full w-full object-cover grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0" />
         </div>
-        <CardContent className="p-6">
-          <div className="flex items-center gap-3 mb-3">
-            <Badge variant="destructive" className="text-xs">
-              {category}
-            </Badge>
-            <div className="flex items-center gap-1 text-sm text-muted-foreground">
-              <Calendar className="w-4 h-4" />
-              <span>{date}</span>
-            </div>
+        <div className="px-1 py-6">
+          <div className="mb-5 flex flex-wrap items-center gap-3 text-[11px] font-bold uppercase tracking-[0.2em]">
+            <span className="text-[#BE1E2D]">{category}</span>
+            <span className="h-px w-7 bg-[#111111]/20" />
+            <span className="inline-flex items-center gap-1.5 text-[#111111]/52">
+              <Calendar className="h-3.5 w-3.5" />
+              {date}
+            </span>
           </div>
-          <h3 className="text-xl font-semibold mb-3 line-clamp-2">{title}</h3>
-          <p className="text-muted-foreground line-clamp-3 mb-4">{excerpt}</p>
-          <span className="text-destructive font-medium hover:underline">
-            Lire la suite →
+          <h3 className="mb-4 text-2xl font-semibold leading-tight tracking-normal text-[#111111]">
+            {title}
+          </h3>
+          <p className="line-clamp-3 text-sm leading-relaxed text-[#2A2A2A]/72">
+            {excerpt}
+          </p>
+          <span className="mt-7 inline-flex items-center gap-2 border-b border-[#111111]/20 pb-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#111111] transition-colors group-hover:text-[#BE1E2D]">
+            Lire l'article <ArrowUpRight className="h-4 w-4" />
           </span>
-        </CardContent>
-      </Card>
+        </div>
+      </motion.article>
     </Link>
   );
 }

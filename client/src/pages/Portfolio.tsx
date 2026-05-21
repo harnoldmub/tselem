@@ -80,7 +80,7 @@ const portfolioItems = [
 
 export default function Portfolio() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-[#E8E8E8]">
       <Header />
       <Hero
         image={portfolioHero}
@@ -89,8 +89,8 @@ export default function Portfolio() {
         showCTA={false}
       />
 
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-background">
-        <div className="max-w-7xl mx-auto">
+      <section className="px-4 py-8 sm:px-6 md:py-10">
+        <div className="mx-auto max-w-[1440px] rounded-[2.5rem] bg-[#F8F6F3] p-6 shadow-[0_26px_90px_rgba(17,17,17,0.06)] sm:p-10 lg:p-16">
           <div className="text-center mb-16">
             <h2 className="text-4xl sm:text-5xl font-bold mb-4">
               Nos Réalisations

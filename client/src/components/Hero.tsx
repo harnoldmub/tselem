@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 
 interface HeroProps {
   image: string;
@@ -10,82 +11,59 @@ interface HeroProps {
 }
 
 export default function Hero({ image, title, subtitle, showCTA = true }: HeroProps) {
-  return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <motion.div
-        initial={{ scale: 1.1 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 1.5, ease: "easeOut" }}
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${image})` }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/60 to-primary/80" />
+  const { scrollYProgress } = useScroll();
+  const y = useTransform(scrollYProgress, [0, 0.35], ["0%", "12%"]);
 
-      <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
+  return (
+    <section className="relative min-h-[78vh] overflow-hidden bg-[#E8E8E8] p-4 pt-24 text-[#F8F6F3] sm:p-6 sm:pt-24">
+      <motion.div style={{ y }} className="absolute inset-x-4 bottom-4 top-24 overflow-hidden rounded-[2.5rem] bg-[#111111] sm:inset-x-6 sm:bottom-6 sm:top-24 sm:rounded-[3rem]">
+        <img src={image} alt="" className="h-[112%] w-full object-cover opacity-62 grayscale" />
+      </motion.div>
+      <div className="absolute inset-x-4 bottom-4 top-24 rounded-[2.5rem] bg-[#111111]/55 sm:inset-x-6 sm:bottom-6 sm:top-24 sm:rounded-[3rem]" />
+      <div className="absolute inset-x-4 bottom-4 top-24 rounded-[2.5rem] bg-gradient-to-t from-[#111111] via-transparent to-transparent sm:inset-x-6 sm:bottom-6 sm:top-24 sm:rounded-[3rem]" />
+
+      <div className="relative z-10 mx-auto flex min-h-[calc(78vh-2rem)] max-w-[1440px] flex-col justify-end rounded-[2.5rem] px-5 pb-12 sm:px-8 lg:px-12">
+        <motion.p
+          initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight"
-          style={{ letterSpacing: '-0.02em' }}
+          transition={{ duration: 0.7 }}
+          className="mb-5 text-[11px] font-bold uppercase tracking-[0.42em] text-[#BE1E2D]"
+        >
+          Tselem Studio
+        </motion.p>
+        <motion.h1
+          initial={{ opacity: 0, y: 38 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-6xl text-6xl font-semibold leading-[0.92] tracking-normal sm:text-8xl lg:text-[9rem]"
         >
           {title}
         </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-xl sm:text-2xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed font-['Cormorant_Garamond'] font-light"
-        >
-          {subtitle}
-        </motion.p>
-
-        {showCTA && (
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-          >
-            <Link href="/rendez-vous" data-testid="button-hero-book">
-              <Button
-                size="lg"
-                variant="destructive"
-                className="text-lg px-8 py-6 font-['Montserrat'] font-semibold"
-              >
-                RÉSERVER UNE SÉANCE
-              </Button>
-            </Link>
-            <Link href="/portfolio" data-testid="button-hero-portfolio">
-              <Button
-                size="lg"
-                variant="outline"
-                className="text-lg px-8 py-6 bg-white/10 backdrop-blur-md border-white text-white hover:bg-white hover:text-primary font-['Montserrat'] font-semibold"
-              >
-                VOIR NOS RÉALISATIONS
-              </Button>
-            </Link>
-          </motion.div>
-        )}
-
         <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.75, delay: 0.22 }}
+          className="mt-8 flex flex-col gap-7 border-t border-[#F8F6F3]/18 pt-7 md:flex-row md:items-end md:justify-between"
         >
-          <svg
-            className="w-6 h-6 text-white"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-          </svg>
+          <p className="max-w-2xl text-xl leading-relaxed text-[#F8F6F3]/78 sm:text-2xl">
+            {subtitle}
+          </p>
+          {showCTA && (
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <Link href="/rendez-vous" data-testid="button-hero-book">
+                <Button size="lg" variant="destructive" className="rounded-full bg-[#BE1E2D] px-6 text-[11px] font-black uppercase tracking-[0.22em] hover:bg-[#A01C32]">
+                  Réserver <ArrowUpRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+              <Link href="/portfolio" data-testid="button-hero-portfolio">
+                <Button size="lg" variant="outline" className="rounded-full border-[#F8F6F3]/30 bg-transparent px-6 text-[11px] font-black uppercase tracking-[0.22em] text-[#F8F6F3] hover:bg-[#F8F6F3] hover:text-[#111111]">
+                  Portfolio
+                </Button>
+              </Link>
+            </div>
+          )}
         </motion.div>
       </div>
-    </div>
+    </section>
   );
 }
