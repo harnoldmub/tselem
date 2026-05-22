@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Tselem Miedinger";
+  src: url("./assets/font/Miedinger W01 Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tselem Unbounded";
+  src: url("./assets/font/Unbounded/Unbounded-VariableFont_wght.ttf") format("truetype");
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* LIGHT MODE */
 :root {
   --button-outline: rgba(0,0,0, .10);
@@ -76,9 +92,10 @@
   --chart-4: 354 60% 55%;
   --chart-5: 248 25% 45%;
 
-  --font-sans: 'Inter', sans-serif;
-  --font-serif: 'General Sans', 'Satoshi', 'Inter', sans-serif;
-  --font-heading: 'General Sans', 'Satoshi', 'Inter', sans-serif;
+  --font-sans: 'Tselem Unbounded', sans-serif;
+  --font-serif: 'Tselem Unbounded', sans-serif;
+  --font-heading: 'Tselem Unbounded', sans-serif;
+  --font-display: 'Tselem Miedinger', 'Tselem Unbounded', sans-serif;
   --font-mono: Menlo, monospace;
   --radius: .5rem; /* 8px */
   --shadow-2xs: 0px 1px 2px 0px hsl(248 46% 17% / 0.05);
@@ -244,9 +261,14 @@
     scroll-behavior: smooth;
   }
 
+  img,
+  video {
+    filter: none !important;
+  }
+
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-serif);
-    font-weight: 600;
+    font-family: var(--font-heading);
+    font-weight: 700;
     letter-spacing: 0;
   }
 }

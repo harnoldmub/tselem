@@ -120,7 +120,7 @@ export default function CaseStudyDetail() {
           <Link href="/etudes-de-cas">
             <Button
               variant="ghost"
-              className="mb-8 font-['Montserrat']"
+              className="mb-8 font-sans"
               data-testid="button-back"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
@@ -133,7 +133,7 @@ export default function CaseStudyDetail() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="flex flex-wrap gap-4 mb-6 text-sm text-muted-foreground font-['Montserrat']">
+            <div className="flex flex-wrap gap-4 mb-6 text-sm text-muted-foreground font-sans">
               <div className="flex items-center gap-2">
                 <User className="w-4 h-4" />
                 <span>{caseStudy.client}</span>
@@ -151,7 +151,7 @@ export default function CaseStudyDetail() {
               {caseStudy.title}
             </h1>
 
-            <p className="text-xl text-muted-foreground mb-12 font-['Cormorant_Garamond']">
+            <p className="text-xl text-muted-foreground mb-12 font-sans">
               {caseStudy.excerpt}
             </p>
 
@@ -167,10 +167,10 @@ export default function CaseStudyDetail() {
             <div className="grid md:grid-cols-2 gap-12 mb-16">
               <Card>
                 <CardContent className="p-8">
-                  <h2 className="text-2xl font-bold mb-4 font-['Montserrat']">
+                  <h2 className="text-2xl font-bold mb-4 font-sans">
                     Le Défi
                   </h2>
-                  <p className="text-muted-foreground font-['Cormorant_Garamond'] text-lg leading-relaxed">
+                  <p className="text-muted-foreground font-sans text-lg leading-relaxed">
                     {caseStudy.challenge}
                   </p>
                 </CardContent>
@@ -178,10 +178,10 @@ export default function CaseStudyDetail() {
 
               <Card>
                 <CardContent className="p-8">
-                  <h2 className="text-2xl font-bold mb-4 font-['Montserrat']">
+                  <h2 className="text-2xl font-bold mb-4 font-sans">
                     Notre Solution
                   </h2>
-                  <p className="text-muted-foreground font-['Cormorant_Garamond'] text-lg leading-relaxed">
+                  <p className="text-muted-foreground font-sans text-lg leading-relaxed">
                     {caseStudy.solution}
                   </p>
                 </CardContent>
@@ -189,7 +189,7 @@ export default function CaseStudyDetail() {
             </div>
 
             <div className="mb-16">
-              <h2 className="text-3xl font-bold mb-8 font-['Montserrat']">
+              <h2 className="text-3xl font-bold mb-8 font-sans">
                 Galerie de Photos
               </h2>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -215,7 +215,7 @@ export default function CaseStudyDetail() {
 
             <Card className="bg-primary text-primary-foreground">
               <CardContent className="p-8">
-                <h2 className="text-3xl font-bold mb-6 font-['Montserrat']">
+                <h2 className="text-3xl font-bold mb-6 font-sans">
                   Résultats Obtenus
                 </h2>
                 <div className="grid sm:grid-cols-2 gap-4">
@@ -228,7 +228,7 @@ export default function CaseStudyDetail() {
                       <div className="w-6 h-6 rounded-full bg-destructive flex items-center justify-center flex-shrink-0 mt-1">
                         <Check className="w-4 h-4 text-white" />
                       </div>
-                      <span className="font-['Cormorant_Garamond'] text-lg">
+                      <span className="font-sans text-lg">
                         {result}
                       </span>
                     </div>
@@ -238,14 +238,14 @@ export default function CaseStudyDetail() {
             </Card>
 
             <div className="mt-16 text-center">
-              <h3 className="text-2xl font-bold mb-6 font-['Montserrat']">
+              <h3 className="text-2xl font-bold mb-6 font-sans">
                 Prêt à créer quelque chose d'exceptionnel ?
               </h3>
               <Link href="/rendez-vous">
                 <Button
                   size="lg"
                   variant="destructive"
-                  className="font-['Montserrat']"
+                  className="font-sans"
                   data-testid="button-book-now"
                 >
                   Réserver une Consultation

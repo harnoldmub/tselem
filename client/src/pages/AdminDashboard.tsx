@@ -89,21 +89,21 @@ export default function AdminDashboard() {
       client: "Jonathan K.",
       email: "jonathan@example.com",
       phone: "+243 980 441 019",
-      service: "Portrait",
+      service: "Corporate",
       date: "2026-05-29",
       time: "10:30",
       participants: 1,
       location: "Studio Tselem",
       budget: "Standard",
       status: "Confirmée",
-      message: "Portrait professionnel pour LinkedIn, presse et site web.",
+      message: "Images corporate pour LinkedIn, presse et site web.",
     },
     {
       id: "RSV-1026",
       client: "Maison Kivu",
       email: "brand@example.com",
       phone: "+243 812 300 777",
-      service: "Branding Personnel",
+      service: "Mode",
       date: "2026-06-03",
       time: "09:00",
       participants: 4,
@@ -238,7 +238,7 @@ export default function AdminDashboard() {
         <section className="mb-10 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
           <div>
             <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.35em] text-[#BE1E2D]">Plateforme V2</p>
-            <h2 className="max-w-4xl text-5xl font-semibold leading-[0.95] sm:text-6xl">
+            <h2 className="max-w-4xl text-4xl font-semibold leading-[1] sm:text-5xl">
               Piloter le studio, les contenus et les clients depuis un seul espace.
             </h2>
           </div>
@@ -306,10 +306,10 @@ export default function AdminDashboard() {
 
           <TabsContent value="contacts">
             <div className="mb-8">
-              <h2 className="text-3xl font-['Playfair_Display'] font-bold mb-2">
+              <h2 className="text-3xl font-heading font-bold mb-2">
                 Messages de Contact
               </h2>
-              <p className="text-muted-foreground font-['Cormorant_Garamond']">
+              <p className="text-muted-foreground font-sans">
                 {unreadCount} message{unreadCount !== 1 ? "s" : ""} non lu{unreadCount !== 1 ? "s" : ""}
               </p>
             </div>
@@ -319,7 +319,7 @@ export default function AdminDashboard() {
             ) : contacts.length === 0 ? (
               <Card>
                 <CardContent className="p-12 text-center">
-                  <p className="text-muted-foreground font-['Cormorant_Garamond'] text-lg">
+                  <p className="text-muted-foreground font-sans text-lg">
                     Aucun message pour le moment
                   </p>
                 </CardContent>
@@ -335,7 +335,7 @@ export default function AdminDashboard() {
                       <div className="flex items-start justify-between gap-4">
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-2">
-                            <CardTitle className="text-xl font-['Montserrat']">
+                            <CardTitle className="text-xl font-sans">
                               {contact.name}
                             </CardTitle>
                             {!contact.isRead && (
@@ -394,7 +394,7 @@ export default function AdminDashboard() {
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-foreground whitespace-pre-wrap font-['Cormorant_Garamond'] text-lg leading-relaxed">
+                      <p className="text-foreground whitespace-pre-wrap font-sans text-lg leading-relaxed">
                         {contact.message}
                       </p>
                     </CardContent>
@@ -406,10 +406,10 @@ export default function AdminDashboard() {
 
           <TabsContent value="testimonials">
             <div className="mb-8">
-              <h2 className="text-3xl font-['Playfair_Display'] font-bold mb-2">
+              <h2 className="text-3xl font-heading font-bold mb-2">
                 Témoignages
               </h2>
-              <p className="text-muted-foreground font-['Cormorant_Garamond']">
+              <p className="text-muted-foreground font-sans">
                 {pendingTestimonials} témoignage{pendingTestimonials !== 1 ? "s" : ""} en attente de validation
               </p>
             </div>
@@ -419,7 +419,7 @@ export default function AdminDashboard() {
             ) : testimonials.length === 0 ? (
               <Card>
                 <CardContent className="p-12 text-center">
-                  <p className="text-muted-foreground font-['Cormorant_Garamond'] text-lg">
+                  <p className="text-muted-foreground font-sans text-lg">
                     Aucun témoignage pour le moment
                   </p>
                 </CardContent>
@@ -435,7 +435,7 @@ export default function AdminDashboard() {
                       <div className="flex items-start justify-between gap-4">
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-2">
-                            <CardTitle className="text-xl font-['Montserrat']">
+                            <CardTitle className="text-xl font-sans">
                               {testimonial.name}
                             </CardTitle>
                             {!testimonial.isApproved ? (
@@ -492,7 +492,7 @@ export default function AdminDashboard() {
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-foreground whitespace-pre-wrap font-['Cormorant_Garamond'] text-lg leading-relaxed">
+                      <p className="text-foreground whitespace-pre-wrap font-sans text-lg leading-relaxed">
                         {testimonial.message}
                       </p>
                     </CardContent>

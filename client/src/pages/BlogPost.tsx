@@ -89,11 +89,11 @@ export default function BlogPost() {
               </div>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-['Playfair_Display'] font-bold mb-6 leading-tight" data-testid="post-title">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold mb-6 leading-tight" data-testid="post-title">
               {post.title}
             </h1>
 
-            <p className="text-xl text-muted-foreground font-['Cormorant_Garamond'] leading-relaxed" data-testid="post-excerpt">
+            <p className="text-xl text-muted-foreground font-sans leading-relaxed" data-testid="post-excerpt">
               {post.excerpt}
             </p>
           </div>
@@ -109,17 +109,17 @@ export default function BlogPost() {
 
           <div
             className="prose prose-lg max-w-none
-              prose-headings:font-['Playfair_Display'] prose-headings:font-bold
-              prose-p:font-['Cormorant_Garamond'] prose-p:text-lg prose-p:leading-relaxed
+              prose-headings:font-heading prose-headings:font-bold
+              prose-p:font-sans prose-p:text-lg prose-p:leading-relaxed
               prose-p:text-foreground
               prose-a:text-destructive prose-a:no-underline hover:prose-a:underline
               prose-strong:text-foreground prose-strong:font-semibold
               prose-ul:list-disc prose-ul:pl-6
               prose-ol:list-decimal prose-ol:pl-6
-              prose-li:text-foreground prose-li:font-['Cormorant_Garamond']
+              prose-li:text-foreground prose-li:font-sans
               prose-blockquote:border-l-4 prose-blockquote:border-destructive
               prose-blockquote:pl-6 prose-blockquote:italic
-              prose-blockquote:font-['Cormorant_Garamond'] prose-blockquote:text-muted-foreground
+              prose-blockquote:font-sans prose-blockquote:text-muted-foreground
               prose-img:rounded-lg prose-img:shadow-lg"
             dangerouslySetInnerHTML={{ __html: post.content }}
             data-testid="post-content"

@@ -93,7 +93,7 @@ export default function PortfolioGrid({ items, showFilter = true, linkToGallery 
               <img
                 src={item.image}
                 alt={item.title}
-                className="h-full w-full object-cover grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0"
+                className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/86 via-[#111111]/10 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-6 text-[#F8F6F3] sm:p-8">

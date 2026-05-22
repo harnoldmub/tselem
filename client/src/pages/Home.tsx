@@ -8,18 +8,14 @@ import hero1 from "@assets/images/hero/hero-1.jpg";
 import hero2 from "@assets/images/hero/hero-2.jpg";
 import heroMobile from "@assets/images/mode/mode-13.jpg";
 import weddingHero from "@assets/images/mariage/mariage-01.jpg";
-import weddingGroup from "@assets/images/mariage/mariage-01.jpg";
+import weddingGroup from "@assets/images/mariage/mariage-02.jpg";
 import editorialWide from "@assets/images/slider-editorial.jpg";
-import portraitVertical from "@assets/images/portrait-large.jpg";
-import portraitStudio from "@assets/images/portraits/portraits-08.jpg";
+import corporateFrame from "@assets/images/corporate/corporate-01.jpg";
 import maternityMood from "@assets/images/maternite/maternite-01.jpg";
 import brandFrame from "@assets/images/mode/mode-08.jpg";
-import productionStill from "@assets/images/corporate/corporate-01.jpg";
 import detailFrame from "@assets/images/couple/couple-01.jpg";
 import backstageFrame from "@assets/images/famille-et-enfant/famille-enfant-09.jpg";
 import socialFrame from "@assets/images/anniversaire/anniversaire-01.jpg";
-import clientPortrait from "@assets/images/portraits/portraits-01.jpg";
-import clientPortrait2 from "@assets/images/portraits/portraits-02.jpg";
 
 const HERO_SLIDES = [hero1, hero2];
 
@@ -27,20 +23,20 @@ const fadeUp = { hidden: { opacity: 0, y: 42 }, visible: { opacity: 1, y: 0 } };
 const reveal = { hidden: { opacity: 0, y: 70, scale: 0.98 }, visible: { opacity: 1, y: 0, scale: 1 } };
 
 const services = [
-  ["Corporate", "Présence, regard, peau, silence. Des portraits construits comme des couvertures éditoriales.", portraitStudio],
+  ["Corporate", "Images professionnelles pour dirigeants, équipes, entreprises et communication de marque.", corporateFrame],
   ["Mariage", "Un récit visuel sobre et cinématographique pour les engagements qui traversent une vie.", weddingHero],
   ["Maternité", "Une lumière douce, une direction sensible, une mémoire intime sans artifice.", maternityMood],
-  ["Mode", "Images d'autorité pour dirigeants, artistes, créateurs et marques personnelles.", brandFrame],
+  ["Mode", "Séances éditoriales, silhouettes, attitudes et images pensées pour une présence visuelle forte.", brandFrame],
   ["Événement & Famille", "Couple, famille, anniversaire et moments précieux avec une direction sobre et sensible.", backstageFrame],
 ];
 
 const projects = [
-  ["Mariage", "Mariage d'Exception", "Une célébration pensée comme un film: gestes mesurés, lumière naturelle, élégance collective.", weddingGroup],
-  ["Corporate", "Corporate", "Portraits de caractère pour une présence publique plus forte, plus maîtrisée, plus mémorable.", productionStill],
-  ["Maternité", "The Waiting Room", "Une série intime et lumineuse autour du corps, du lien et de la transmission.", maternityMood],
+  ["Mariage", "Mariage", "Reportage complet, portraits de couple, détails, famille et moments forts de la cérémonie.", weddingGroup],
+  ["Corporate", "Corporate", "Des images nettes et crédibles pour présenter une équipe, une marque ou un dirigeant.", corporateFrame],
+  ["Maternité", "Maternité", "Des images douces et intemporelles pour garder une trace sensible de cette période.", maternityMood],
 ];
 
-const socialPosts = [weddingHero, detailFrame, brandFrame, productionStill, socialFrame, editorialWide];
+const socialPosts = [weddingHero, detailFrame, brandFrame, corporateFrame, socialFrame, editorialWide];
 const instagramUrl = "https://www.instagram.com/tselem_studio_rdc/";
 
 function CountUp({ value }: { value: number }) {
@@ -142,12 +138,12 @@ export default function Home() {
         <div className="relative z-10 flex min-h-screen flex-col justify-end px-5 pb-10 pt-28 sm:px-8 lg:px-12 lg:pb-14">
           <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }} className="max-w-7xl">
             <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.42em] text-[#F8F6F3]/70">Kinshasa · Photo · Film · Direction artistique</p>
-            <h1 className="max-w-6xl text-[18vw] font-semibold uppercase leading-[0.78] tracking-normal sm:text-[13vw] lg:text-[11.5vw]">
+            <h1 className="max-w-6xl text-[14vw] font-semibold uppercase leading-[0.86] tracking-normal sm:text-[10.5vw] lg:text-[8.8vw]">
               TSELEM<br />STUDIO
             </h1>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.35 }} className="mt-8 flex flex-col gap-7 border-t border-[#F8F6F3]/20 pt-7 md:flex-row md:items-end md:justify-between">
-            <p className="max-w-xl text-2xl leading-tight text-[#F8F6F3] sm:text-3xl md:text-4xl">Créer des images qui traversent le temps.</p>
+            <p className="max-w-xl text-xl leading-tight text-[#F8F6F3] sm:text-2xl md:text-3xl">Créer des images qui traversent le temps.</p>
             <Link href="/galerie">
               <motion.span whileHover={{ scale: 1.02 }} className="inline-flex w-fit items-center gap-3 rounded-full bg-[#BE1E2D] px-6 py-4 text-[11px] font-bold uppercase tracking-[0.22em] text-white shadow-[0_18px_44px_rgba(190,30,45,0.28)] transition-colors hover:bg-[#A01C32]">
                 Découvrir notre univers <ArrowUpRight className="h-4 w-4" />
@@ -160,16 +156,16 @@ export default function Home() {
       <section className="px-4 py-8 sm:px-6 md:py-10">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-120px" }} variants={fadeUp} transition={{ duration: 0.8 }} className="mx-auto max-w-[1440px] rounded-[2.5rem] bg-[#F8F6F3] p-6 shadow-[0_26px_90px_rgba(17,17,17,0.06)] sm:p-10 lg:p-16">
           <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
-            <h2 className="text-5xl font-semibold leading-[0.95] tracking-normal sm:text-7xl lg:text-8xl">Chaque image raconte une histoire.</h2>
-            <p className="max-w-2xl text-xl leading-relaxed text-[#2A2A2A] sm:text-2xl">
-              Nous créons des portraits, des films et des récits visuels pour celles et ceux qui veulent être vus avec justesse, émotion et exigence.
+            <h2 className="text-4xl font-semibold leading-[1] tracking-normal sm:text-5xl lg:text-6xl">Chaque image raconte une histoire.</h2>
+            <p className="max-w-2xl text-lg leading-relaxed text-[#2A2A2A] sm:text-xl">
+              Nous créons des images corporate, des films et des récits visuels pour celles et ceux qui veulent être vus avec justesse, émotion et exigence.
             </p>
           </div>
           <div className="mt-16 overflow-hidden rounded-[2rem] bg-[#111111] md:mt-24">
             <img
-              className="aspect-[16/9] w-full object-cover grayscale"
-              src={editorialWide}
-              alt="Séance éditoriale Tselem Studio"
+              className="aspect-[16/9] w-full object-cover"
+              src={hero2}
+              alt="Tselem Studio RDC"
             />
           </div>
         </motion.div>
@@ -180,7 +176,7 @@ export default function Home() {
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ duration: 0.8 }} className="mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.35em] text-[#BE1E2D]">Services</p>
-              <h2 className="text-5xl font-semibold leading-none text-[#111111] sm:text-7xl">Une production complète.</h2>
+              <h2 className="text-4xl font-semibold leading-[1] text-[#111111] sm:text-5xl lg:text-6xl">Une production complète.</h2>
             </div>
             <p className="max-w-md text-base leading-relaxed text-[#2A2A2A]/65">De la première intention à la livraison finale, Tselem conçoit des images avec la précision d'un studio et le regard d'une maison éditoriale.</p>
           </motion.div>
@@ -188,7 +184,7 @@ export default function Home() {
             {services.map(([name, description, image], index) => (
               <motion.article key={name} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={reveal} transition={{ duration: 0.75, delay: index * 0.06 }} className={`group rounded-[2rem] p-3 shadow-[inset_0_0_0_1px_rgba(17,17,17,0.05)] ${index === 2 ? "bg-[#111111] text-[#F8F6F3]" : "bg-[#ECECEC] text-[#111111]"}`}>
                 <div className="relative aspect-[3/4] overflow-hidden rounded-[1.5rem]">
-                  <img src={image} alt={name} className="h-full w-full object-cover grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0" />
+                  <img src={image} alt={name} className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-[#111111]/20 transition group-hover:bg-transparent" />
                 </div>
                 <div className="min-h-[230px] p-5 sm:p-6">
@@ -207,7 +203,10 @@ export default function Home() {
         <div className="mx-auto max-w-[1440px] rounded-[2.5rem] bg-[#F8F6F3] p-6 shadow-[0_26px_90px_rgba(17,17,17,0.06)] sm:p-10 lg:p-16">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ duration: 0.8 }} className="mb-20 max-w-4xl">
             <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.35em] text-[#BE1E2D]">Galerie</p>
-            <h2 className="text-5xl font-semibold leading-[0.95] sm:text-7xl lg:text-8xl">Des images qui installent une présence.</h2>
+            <h2 className="text-4xl font-semibold leading-[1] sm:text-5xl lg:text-6xl">Choisissez votre univers de séance.</h2>
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#2A2A2A]/70">
+              Une lecture simple des prestations principales pour passer rapidement de l'inspiration à la réservation.
+            </p>
           </motion.div>
           <div className="space-y-24 md:space-y-32">
             {projects.map(([category, title, description, image], index) => (
@@ -215,9 +214,9 @@ export default function Home() {
                 <ParallaxImage src={image} alt={title} className="aspect-[4/5] rounded-[2rem] md:aspect-[5/6]" />
                 <div className="max-w-xl rounded-[2rem] bg-[#ECECEC] p-8 md:p-10">
                   <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.3em] text-[#BE1E2D]">{category}</p>
-                  <h3 className="mb-6 text-4xl font-semibold leading-none sm:text-6xl">{title}</h3>
+                  <h3 className="mb-6 text-3xl font-semibold leading-tight sm:text-4xl">{title}</h3>
                   <p className="mb-9 text-lg leading-relaxed text-[#2A2A2A]">{description}</p>
-                  <EditorialLink href="/galerie">Voir le projet</EditorialLink>
+                  <EditorialLink href="/galerie">Voir les images</EditorialLink>
                 </div>
               </motion.article>
             ))}
@@ -229,7 +228,7 @@ export default function Home() {
         <div className="mx-auto grid max-w-[1440px] gap-4 md:grid-cols-3">
           {[[500, "Séances réalisées"], [100, "Entreprises accompagnées"], [1000, "Moments capturés"]].map(([value, label]) => (
             <motion.div key={label as string} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="rounded-[2rem] bg-[#F8F6F3] p-8 shadow-[0_22px_70px_rgba(17,17,17,0.05)]">
-              <div className="text-6xl font-semibold leading-none sm:text-7xl"><CountUp value={value as number} /></div>
+              <div className="text-5xl font-semibold leading-none sm:text-6xl"><CountUp value={value as number} /></div>
               <p className="mt-4 text-sm uppercase tracking-[0.22em] text-[#2A2A2A]/70">{label}</p>
             </motion.div>
           ))}
@@ -239,7 +238,7 @@ export default function Home() {
       <section className="px-4 py-8 sm:px-6 md:py-10">
         <div className="mx-auto max-w-[1440px] rounded-[2.5rem] bg-[#F8F6F3] p-6 shadow-[0_26px_90px_rgba(17,17,17,0.06)] sm:p-10 lg:p-16">
           <div className="mb-14 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
-            <h2 className="text-5xl font-semibold leading-none sm:text-7xl">L'expérience Tselem.</h2>
+            <h2 className="text-4xl font-semibold leading-[1] sm:text-5xl lg:text-6xl">L'expérience Tselem.</h2>
             <p className="max-w-md text-[#2A2A2A]/75">Une méthode claire, silencieuse et exigeante pour que chaque production garde son intensité.</p>
           </div>
           <div className="grid gap-4 md:grid-cols-5">
@@ -258,7 +257,7 @@ export default function Home() {
           <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.35em] text-[#BE1E2D]">Instagram</p>
-              <h2 className="text-5xl font-semibold leading-none sm:text-7xl">Le studio en mouvement.</h2>
+              <h2 className="text-4xl font-semibold leading-[1] sm:text-5xl lg:text-6xl">Le studio en mouvement.</h2>
             </div>
             <a href={instagramUrl} target="_blank" rel="noreferrer" className="inline-flex w-fit items-center gap-3 border-b border-[#111111]/25 pb-2 text-[11px] font-semibold uppercase tracking-[0.22em] hover:text-[#BE1E2D]">
               Voir les dernières publications <ArrowUpRight className="h-4 w-4" />
@@ -267,7 +266,7 @@ export default function Home() {
           <div className="grid grid-cols-2 gap-4 md:grid-cols-6">
             {socialPosts.map((post, index) => (
               <motion.a key={post} href={instagramUrl} target="_blank" rel="noreferrer" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: index * 0.05 }} className="group aspect-square overflow-hidden rounded-[1.6rem] bg-[#111111] shadow-[0_18px_50px_rgba(17,17,17,0.08)]">
-                <img src={post} alt={`Publication Instagram Tselem ${index + 1}`} className="h-full w-full object-cover grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0" />
+                <img src={post} alt={`Publication Instagram Tselem ${index + 1}`} className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
               </motion.a>
             ))}
           </div>
@@ -275,17 +274,13 @@ export default function Home() {
       </section>
 
       <section className="px-4 py-8 sm:px-6 md:py-10">
-        <div className="mx-auto grid max-w-[1440px] gap-4 rounded-[2.5rem] bg-[#F8F6F3] p-6 shadow-[0_26px_90px_rgba(17,17,17,0.06)] sm:p-10 md:grid-cols-[0.85fr_1.15fr] md:items-center lg:p-16">
-          <ParallaxImage src={clientPortrait} alt="Portrait client Tselem" className="aspect-[4/5] rounded-[2rem]" />
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ duration: 0.8 }} className="rounded-[2rem] bg-[#ECECEC] p-8 md:p-12">
+        <div className="mx-auto max-w-[1440px] rounded-[2.5rem] bg-[#F8F6F3] p-6 shadow-[0_26px_90px_rgba(17,17,17,0.06)] sm:p-10 lg:p-16">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ duration: 0.8 }} className="rounded-[2rem] bg-[#ECECEC] p-8 md:p-12 lg:p-16">
             <p className="mb-8 text-[11px] font-semibold uppercase tracking-[0.35em] text-[#BE1E2D]">Témoignages</p>
-            <blockquote className="text-4xl font-medium leading-tight sm:text-6xl">"Tselem ne prend pas seulement des photos. Ils composent une mémoire que l'on a envie de transmettre."</blockquote>
-            <div className="mt-10 flex items-center gap-4">
-              <img src={clientPortrait2} alt="Client Tselem" className="h-14 w-14 rounded-full object-cover grayscale" />
-              <div>
-                <p className="font-semibold">Amina K.</p>
-                <p className="text-sm text-[#2A2A2A]/65">Portrait & branding personnel</p>
-              </div>
+            <blockquote className="max-w-5xl text-3xl font-medium leading-tight sm:text-5xl">"Tselem ne prend pas seulement des photos. Ils composent une mémoire que l'on a envie de transmettre."</blockquote>
+            <div className="mt-10 border-t border-[#111111]/10 pt-6">
+              <p className="font-semibold">Amina K.</p>
+              <p className="text-sm text-[#2A2A2A]/65">Portrait & branding personnel</p>
             </div>
           </motion.div>
         </div>
@@ -294,12 +289,12 @@ export default function Home() {
       <section className="px-4 py-8 sm:px-6 md:py-10">
         <div className="relative mx-auto max-w-[1440px] overflow-hidden rounded-[2.5rem] bg-[#111111] px-6 py-24 text-[#F8F6F3] shadow-[0_28px_90px_rgba(17,17,17,0.14)] sm:px-10 md:py-32 lg:px-16">
         <div className="absolute inset-y-0 right-0 hidden w-1/2 opacity-45 md:block">
-          <img src={weddingHero} alt="Moment émotionnel Tselem" className="h-full w-full object-cover grayscale" />
+          <img src={weddingHero} alt="Moment émotionnel Tselem" className="h-full w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#111111] via-[#111111]/60 to-transparent" />
         </div>
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ duration: 0.8 }} className="relative z-10 max-w-4xl">
           <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.35em] text-[#BE1E2D]">Contact</p>
-          <h2 className="text-5xl font-semibold leading-[0.95] sm:text-7xl lg:text-8xl">Prêt à créer quelque chose d'exceptionnel ?</h2>
+          <h2 className="text-4xl font-semibold leading-[1] sm:text-5xl lg:text-6xl">Prêt à créer quelque chose d'exceptionnel ?</h2>
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <Link href="/rendez-vous">
               <span className="inline-flex items-center justify-center gap-3 rounded-full bg-[#BE1E2D] px-6 py-4 text-[11px] font-bold uppercase tracking-[0.2em] text-white hover:bg-[#A01C32]"><Calendar className="h-4 w-4" />Réserver une séance</span>

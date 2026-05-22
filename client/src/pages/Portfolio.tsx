@@ -5,7 +5,7 @@ import PortfolioGrid from "@/components/PortfolioGrid";
 import portfolioHero from "@assets/images/hero/hero-1.jpg";
 import corporate from "@assets/images/corporate/corporate-01.jpg";
 import fashion from "@assets/images/mode/mode-04.jpg";
-import portrait from "@assets/images/portraits/portraits-14.jpg";
+import corporateImage from "@assets/images/corporate/corporate-01.jpg";
 import couple from "@assets/images/couple/couple-01.jpg";
 import wedding from "@assets/images/mariage/mariage-01.jpg";
 import family from "@assets/images/famille-et-enfant/famille-enfant-01.jpg";
@@ -23,7 +23,7 @@ const portfolioItems = [
   {
     id: 2,
     image: corporate,
-    title: "Portrait Corporate",
+    title: "Corporate",
     category: "Corporate",
     description: "Image professionnelle pour marque, dirigeant et communication d'entreprise",
   },
@@ -36,10 +36,10 @@ const portfolioItems = [
   },
   {
     id: 4,
-    image: portrait,
-    title: "Portrait Signature",
-    category: "Portrait",
-    description: "Portrait premium avec direction de pose et retouche éditoriale",
+    image: corporateImage,
+    title: "Corporate Signature",
+    category: "Corporate",
+    description: "Images professionnelles pour dirigeant, équipe et communication de marque",
   },
   {
     id: 5,

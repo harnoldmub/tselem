@@ -36,13 +36,13 @@ const CATEGORY_LABELS: Record<string, string> = {
   mariage: "Mariage",
   maternite: "Maternité",
   mode: "Mode",
-  portraits: "Portraits",
 };
 
 const ALL_IMAGES: GalleryImage[] = Object.entries(imageModules)
   .filter(([path]) => !EXCLUDED_IMAGES.some((ex) => path.endsWith(ex)))
   .map(([path, src]) => {
-    const category = path.split("/images/")[1]?.split("/")[0] || "images";
+    const sourceCategory = path.split("/images/")[1]?.split("/")[0] || "images";
+    const category = sourceCategory === "portraits" ? "corporate" : sourceCategory;
     const label = CATEGORY_LABELS[category] || category;
     return { src, label, category };
   });
@@ -51,7 +51,6 @@ const CATEGORIES = [
   { id: "all", label: "Tous" },
   { id: "mariage", label: "Mariage" },
   { id: "maternite", label: "Maternité" },
-  { id: "portraits", label: "Portraits" },
   { id: "couple", label: "Couple" },
   { id: "famille-et-enfant", label: "Famille & Enfants" },
   { id: "anniversaire", label: "Anniversaire" },
@@ -125,7 +124,7 @@ export default function Gallery() {
             </div>
             <div className="flex flex-col justify-end gap-6">
               <p className="max-w-xl text-xl leading-relaxed text-[#2A2A2A]/70">
-                Portraits, mariages, maternité, mode, branding et productions.
+                Corporate, mariages, maternité, mode, famille et productions.
               </p>
               <div className="flex items-center gap-6">
                 <div className="flex flex-col">
@@ -225,7 +224,7 @@ export default function Gallery() {
                   <img
                     src={image.src}
                     alt={image.label}
-                    className="h-full w-full object-cover grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0"
+                    className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-[#111111]/0 transition duration-500 group-hover:bg-[#111111]/30" />
                   <div className="invisible absolute bottom-3 left-3 rounded-full bg-[#F8F6F3]/92 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-[#111111] shadow-[0_8px_24px_rgba(17,17,17,0.14)] transition duration-500 group-hover:visible group-hover:opacity-100 opacity-0">

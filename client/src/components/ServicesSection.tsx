@@ -8,7 +8,7 @@ const services = [
   {
     icon: Camera,
     title: "Photographie",
-    description: "Mariages, événements corporatifs, portraits professionnels et sessions fashion. Nous capturons l'essence de chaque moment.",
+    description: "Mariages, événements corporatifs, images corporate et sessions mode. Nous capturons l'essence de chaque moment.",
   },
   {
     icon: Video,
@@ -41,7 +41,7 @@ export default function ServicesSection() {
           <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">
             Nos Services
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-['Cormorant_Garamond']">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-sans">
             Des solutions créatives professionnelles pour donner vie à votre vision
           </p>
         </motion.div>
@@ -72,7 +72,7 @@ export default function ServicesSection() {
                         <h3 className="text-2xl font-semibold text-foreground mb-3">
                           {service.title}
                         </h3>
-                        <p className="text-muted-foreground leading-relaxed font-['Cormorant_Garamond'] text-lg">
+                        <p className="text-muted-foreground leading-relaxed font-sans text-lg">
                           {service.description}
                         </p>
                       </div>
@@ -92,7 +92,7 @@ export default function ServicesSection() {
           className="text-center"
         >
           <Link href="/services" data-testid="button-all-services">
-            <Button size="lg" variant="default" className="font-['Montserrat']">
+            <Button size="lg" variant="default" className="font-sans">
               DÉCOUVRIR TOUS NOS SERVICES
             </Button>
           </Link>

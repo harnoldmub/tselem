@@ -1,13 +1,11 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Star } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { motion } from "framer-motion";
 
 interface Testimonial {
   id: number;
   name: string;
   role: string;
-  avatar?: string;
   rating: number;
   message: string;
   projectType: string;
@@ -31,7 +29,7 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
           <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">
             Ce Que Disent Nos Clients
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-['Cormorant_Garamond']">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-sans">
             La satisfaction de nos clients est notre plus grande fierté
           </p>
         </motion.div>
@@ -63,26 +61,15 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
                     ))}
                   </div>
 
-                  <p className="text-foreground/80 italic mb-6 leading-relaxed text-lg font-['Cormorant_Garamond']">
+                  <p className="text-foreground/80 italic mb-6 leading-relaxed text-lg font-sans">
                     "{testimonial.message}"
                   </p>
 
-                  <div className="flex items-center gap-4">
-                    <Avatar className="h-12 w-12">
-                      <AvatarImage src={testimonial.avatar} alt={testimonial.name} />
-                      <AvatarFallback className="bg-primary text-primary-foreground">
-                        {testimonial.name
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <div className="font-semibold text-foreground font-['Montserrat']">{testimonial.name}</div>
-                      <div className="text-sm text-muted-foreground">{testimonial.role}</div>
-                      <div className="text-xs text-muted-foreground mt-1">
-                        {testimonial.projectType}
-                      </div>
+                  <div className="border-t border-border pt-5">
+                    <div className="font-semibold text-foreground font-sans">{testimonial.name}</div>
+                    <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                    <div className="mt-1 text-xs text-muted-foreground">
+                      {testimonial.projectType}
                     </div>
                   </div>
                 </CardContent>

@@ -1,7 +1,7 @@
 import PortfolioGrid from "../PortfolioGrid";
 import corporate from "@assets/images/corporate/corporate-01.jpg";
 import fashion from "@assets/images/mode/mode-04.jpg";
-import portrait from "@assets/images/portraits/portraits-14.jpg";
+import corporateImage from "@assets/images/corporate/corporate-01.jpg";
 import maternity from "@assets/images/maternite/maternite-01.jpg";
 import wedding from "@assets/images/mariage/mariage-01.jpg";
 import family from "@assets/images/famille-et-enfant/famille-enfant-01.jpg";
@@ -30,10 +30,10 @@ const portfolioItems = [
   },
   {
     id: 4,
-    image: portrait,
-    title: "Portrait Premium",
-    category: "Portrait",
-    description: "Portrait professionnel haute qualité",
+    image: corporateImage,
+    title: "Corporate Premium",
+    category: "Corporate",
+    description: "Images professionnelles haute qualité",
   },
   {
     id: 5,

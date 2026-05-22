@@ -9,16 +9,12 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Star } from "lucide-react";
 import { useState } from "react";
-import avatar1 from "@assets/images/portraits/portraits-01.jpg";
-import avatar2 from "@assets/images/portraits/portraits-02.jpg";
-import avatar3 from "@assets/images/portraits/portraits-03.jpg";
 
 const allTestimonials = [
   {
     id: 1,
     name: "Amina Konaté",
     role: "Directrice Marketing",
-    avatar: avatar1,
     rating: 5,
     message: "TSELEM a capturé notre événement corporate avec un professionnalisme exceptionnel. Les photos sont magnifiques et reflètent parfaitement l'esprit de notre marque.",
     projectType: "Événement Corporate",
@@ -27,16 +23,14 @@ const allTestimonials = [
     id: 2,
     name: "Jean-Pierre Mensah",
     role: "Entrepreneur",
-    avatar: avatar2,
     rating: 5,
     message: "Service impeccable du début à la fin. L'équipe est créative, à l'écoute et livre un travail de qualité supérieure. Je recommande vivement !",
-    projectType: "Portraits Professionnels",
+    projectType: "Corporate",
   },
   {
     id: 3,
     name: "Fatoumata Diallo",
     role: "Mariée",
-    avatar: avatar3,
     rating: 5,
     message: "Notre mariage a été immortalisé de façon extraordinaire. Chaque photo raconte une histoire. Merci TSELEM pour ces souvenirs inoubliables !",
     projectType: "Photographie de Mariage",
@@ -126,7 +120,7 @@ export default function Testimonials() {
                       <SelectContent>
                         <SelectItem value="mariage">Photographie de Mariage</SelectItem>
                         <SelectItem value="corporate">Événement Corporate</SelectItem>
-                        <SelectItem value="portrait">Portraits Professionnels</SelectItem>
+                        <SelectItem value="corporate">Corporate</SelectItem>
                         <SelectItem value="mode">Session Mode</SelectItem>
                         <SelectItem value="video">Production Vidéo</SelectItem>
                         <SelectItem value="autre">Autre</SelectItem>
@@ -173,7 +167,7 @@ export default function Testimonials() {
                   <Button
                     type="submit"
                     size="lg"
-                    className="w-full font-['Montserrat']"
+                    className="w-full font-sans"
                     disabled={rating === 0}
                     data-testid="button-submit"
                   >

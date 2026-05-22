@@ -15,7 +15,7 @@ export default function NotFound() {
             Désolé, la page que vous recherchez n'existe pas ou a été déplacée.
           </p>
           <Link href="/">
-            <Button size="lg" className="font-['Montserrat']" data-testid="button-home">
+            <Button size="lg" className="font-sans" data-testid="button-home">
               RETOUR À L'ACCUEIL
             </Button>
           </Link>

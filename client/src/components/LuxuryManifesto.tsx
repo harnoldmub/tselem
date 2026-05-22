@@ -24,7 +24,7 @@ export default function LuxuryManifesto() {
             transition={{ duration: 1, delay: 0.2 }}
             className="inline-block mb-6"
           >
-            <span className="text-destructive text-sm font-['Montserrat'] font-semibold tracking-[0.2em] uppercase">
+            <span className="text-destructive text-sm font-sans font-semibold tracking-[0.2em] uppercase">
               Notre Philosophie
             </span>
           </motion.div>
@@ -34,7 +34,7 @@ export default function LuxuryManifesto() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-5xl sm:text-6xl lg:text-7xl font-['Playfair_Display'] font-bold mb-8 leading-tight"
+            className="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold mb-8 leading-tight"
             style={{ letterSpacing: "-0.02em" }}
             data-testid="heading-manifesto"
           >
@@ -73,13 +73,13 @@ export default function LuxuryManifesto() {
                 transition={{ duration: 0.3 }}
                 className="bg-card border border-card-border rounded-lg p-8 h-full hover-elevate transition-all duration-300"
               >
-                <div className="text-7xl font-['Playfair_Display'] font-bold text-destructive/20 mb-4 leading-none">
+                <div className="text-6xl font-heading font-bold text-destructive/20 mb-4 leading-none">
                   {item.number}
                 </div>
-                <h3 className="text-2xl font-['Playfair_Display'] font-bold mb-4 text-foreground">
+                <h3 className="text-2xl font-heading font-bold mb-4 text-foreground">
                   {item.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed font-['Cormorant_Garamond'] text-lg">
+                <p className="text-muted-foreground leading-relaxed font-sans text-lg">
                   {item.description}
                 </p>
               </motion.div>
@@ -94,7 +94,7 @@ export default function LuxuryManifesto() {
           transition={{ duration: 0.8, delay: 1 }}
           className="mt-20 text-center"
         >
-          <p className="text-2xl sm:text-3xl font-['Cormorant_Garamond'] italic text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+          <p className="text-2xl sm:text-3xl font-sans italic text-muted-foreground max-w-4xl mx-auto leading-relaxed">
             "Dans chaque image que nous créons, nous capturons l'essence même de l'instant, 
             transformant les émotions fugaces en souvenirs éternels."
           </p>

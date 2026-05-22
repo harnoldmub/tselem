@@ -4,9 +4,9 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
 import BlogCard from "@/components/BlogCard";
-import photoService from "@assets/images/portraits/portraits-08.jpg";
+import photoService from "@assets/images/corporate/corporate-01.jpg";
 import wedding from "@assets/images/mariage/mariage-01.jpg";
-import portrait from "@assets/images/portrait-large.jpg";
+import corporate from "@assets/images/corporate/corporate-01.jpg";
 import branding from "@assets/images/mode/mode-04.jpg";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
@@ -14,12 +14,12 @@ import type { BlogPost as BlogPostType } from "@shared/schema";
 
 const editorialPosts = [
   {
-    title: "Préparer une séance portrait qui impose une vraie présence",
-    excerpt: "Choix des tenues, intention, lumière et direction artistique: les détails qui transforment un portrait en image d'autorité.",
-    image: portrait,
-    category: "Portrait",
+    title: "Préparer une séance corporate qui inspire confiance",
+    excerpt: "Tenues, posture, lumière et direction artistique: les détails qui transforment une image professionnelle en signal de crédibilité.",
+    image: corporate,
+    category: "Corporate",
     date: "12 mai 2026",
-    slug: "preparer-seance-portrait-premium",
+    slug: "preparer-seance-corporate",
   },
   {
     title: "Mariage premium: construire un récit visuel intemporel",
@@ -30,12 +30,12 @@ const editorialPosts = [
     slug: "mariage-premium-recit-visuel",
   },
   {
-    title: "Branding personnel: pourquoi vos images vendent avant vos mots",
-    excerpt: "Pour dirigeants, créateurs et marques personnelles, l'image devient un signal de confiance immédiat.",
+    title: "Mode: créer une série éditoriale cohérente",
+    excerpt: "Comment construire une narration visuelle cohérente pour les réseaux, la presse et les supports commerciaux.",
     image: branding,
-    category: "Branding Personnel",
+    category: "Mode",
     date: "04 avr. 2026",
-    slug: "branding-personnel-images-confiance",
+    slug: "mode-serie-editoriale",
   },
 ];
 
@@ -76,9 +76,9 @@ export default function Blog() {
           >
             <div>
               <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.35em] text-[#BE1E2D]">CMS Blog</p>
-              <h2 className="text-5xl font-semibold leading-[0.95] sm:text-7xl">Publier comme un magazine.</h2>
+              <h2 className="text-4xl font-semibold leading-[1] sm:text-5xl lg:text-6xl">Publier comme un magazine.</h2>
             </div>
-            <p className="max-w-2xl text-xl leading-relaxed text-[#2A2A2A]/72">
+            <p className="max-w-2xl text-lg leading-relaxed text-[#2A2A2A]/72 sm:text-xl">
               Articles administrables, catégories, SEO et contenu éditorial pour nourrir la confiance avant le premier contact.
             </p>
           </motion.div>

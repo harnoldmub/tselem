@@ -47,10 +47,10 @@ export default function AdminLogin() {
           <div className="flex justify-center mb-6">
             <img src={logoWhite} alt="TSELEM Logo" className="h-12 invert" />
           </div>
-          <CardTitle className="text-3xl font-['Playfair_Display']">
+          <CardTitle className="text-3xl font-heading">
             Back Office TSELEM
           </CardTitle>
-          <p className="text-muted-foreground mt-2 font-['Cormorant_Garamond']">
+          <p className="text-muted-foreground mt-2 font-sans">
             Connectez-vous pour accéder au tableau de bord
           </p>
         </CardHeader>
@@ -86,7 +86,7 @@ export default function AdminLogin() {
 
             <Button
               type="submit"
-              className="w-full font-['Montserrat']"
+              className="w-full font-sans"
               disabled={loginMutation.isPending}
               data-testid="button-login"
             >

@@ -148,7 +148,7 @@ export default function ContactForm() {
             <Button 
               type="submit" 
               size="lg" 
-              className="w-full font-['Montserrat']" 
+              className="w-full font-sans" 
               data-testid="button-submit"
               disabled={mutation.isPending}
             >

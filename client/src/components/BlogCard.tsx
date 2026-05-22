@@ -21,7 +21,7 @@ export default function BlogCard({ title, excerpt, image, category, date, slug }
         data-testid={`blog-card-${slug}`}
       >
         <div className="aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-[#ECECEC]">
-          <img src={image} alt={title} className="h-full w-full object-cover grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0" />
+          <img src={image} alt={title} className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
         </div>
         <div className="px-1 py-6">
           <div className="mb-5 flex flex-wrap items-center gap-3 text-[11px] font-bold uppercase tracking-[0.2em]">

@@ -226,7 +226,7 @@ export default function BookingForm() {
                       onClick={() => {
                         setFormData({ ...formData, duration: dur.value, time: "" });
                       }}
-                      className="font-['Montserrat']"
+                      className="font-sans"
                       data-testid={`duration-${dur.value}`}
                     >
                       <Clock className="w-4 h-4 mr-2" />
@@ -256,7 +256,7 @@ export default function BookingForm() {
                         type="button"
                         variant={formData.time === time ? "default" : "outline"}
                         onClick={() => setFormData({ ...formData, time })}
-                        className="font-['Montserrat']"
+                        className="font-sans"
                         data-testid={`time-${time}`}
                       >
                         {time}
@@ -337,7 +337,7 @@ export default function BookingForm() {
                 <Button type="button" variant="outline" onClick={() => setStep(2)}>
                   Retour
                 </Button>
-                <Button type="submit" className="flex-1 font-['Montserrat']" data-testid="button-confirm" disabled={isSubmitting}>
+                <Button type="submit" className="flex-1 font-sans" data-testid="button-confirm" disabled={isSubmitting}>
                   {isSubmitting ? "ENVOI EN COURS..." : "ENVOYER LA DEMANDE"}
                 </Button>
               </div>

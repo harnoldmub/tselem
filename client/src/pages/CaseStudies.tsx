@@ -73,7 +73,7 @@ export default function CaseStudies() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6"
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6"
           >
             Études de Cas
           </motion.h1>
@@ -81,7 +81,7 @@ export default function CaseStudies() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-xl sm:text-2xl text-primary-foreground/90 max-w-3xl mx-auto font-['Cormorant_Garamond']"
+            className="text-xl sm:text-2xl text-primary-foreground/90 max-w-3xl mx-auto font-sans"
           >
             Découvrez en détail nos projets les plus marquants et les résultats exceptionnels obtenus
           </motion.p>
@@ -110,7 +110,7 @@ export default function CaseStudies() {
                     </div>
 
                     <div className="p-8 flex flex-col justify-center">
-                      <div className="flex flex-wrap gap-4 mb-4 text-sm text-muted-foreground font-['Montserrat']">
+                      <div className="flex flex-wrap gap-4 mb-4 text-sm text-muted-foreground font-sans">
                         <div className="flex items-center gap-2">
                           <User className="w-4 h-4" />
                           <span>{study.client}</span>
@@ -125,19 +125,19 @@ export default function CaseStudies() {
                         {study.title}
                       </h2>
 
-                      <p className="text-lg text-muted-foreground mb-6 font-['Cormorant_Garamond']">
+                      <p className="text-lg text-muted-foreground mb-6 font-sans">
                         {study.excerpt}
                       </p>
 
                       <div className="mb-6">
-                        <h3 className="text-sm font-semibold text-foreground mb-3 font-['Montserrat'] uppercase tracking-wide">
+                        <h3 className="text-sm font-semibold text-foreground mb-3 font-sans uppercase tracking-wide">
                           Résultats clés
                         </h3>
                         <ul className="space-y-2">
                           {study.results.map((result, i) => (
                             <li
                               key={i}
-                              className="flex items-center gap-2 text-muted-foreground font-['Cormorant_Garamond']"
+                              className="flex items-center gap-2 text-muted-foreground font-sans"
                             >
                               <div className="w-1.5 h-1.5 rounded-full bg-destructive" />
                               <span>{result}</span>
@@ -149,7 +149,7 @@ export default function CaseStudies() {
                       <Link href={`/etudes-de-cas/${study.id}`}>
                         <Button
                           variant="default"
-                          className="font-['Montserrat'] gap-2"
+                          className="font-sans gap-2"
                           data-testid={`case-study-${study.id}`}
                         >
                           Lire l'étude complète

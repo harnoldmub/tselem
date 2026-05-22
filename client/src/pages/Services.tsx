@@ -4,21 +4,21 @@ import Footer from "@/components/Footer";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Camera, Video, Sparkles, Building2, Heart, UserRound } from "lucide-react";
-import servicePhoto from "@assets/images/portraits/portraits-08.jpg";
+import servicePhoto from "@assets/images/corporate/corporate-01.jpg";
 import wedding from "@assets/images/mariage/mariage-01.jpg";
-import portrait from "@assets/images/portraits/portraits-08.jpg";
 import maternity from "@assets/images/maternite/maternite-01.jpg";
 import branding from "@assets/images/mode/mode-04.jpg";
 import family from "@assets/images/famille-et-enfant/famille-enfant-01.jpg";
-import corporate from "@assets/images/portraits/portraits-14.jpg";
+import corporate from "@assets/images/corporate/corporate-01.jpg";
+import team from "@assets/images/portraits/portraits-14.jpg";
 
 const services = [
   {
     icon: UserRound,
-    title: "Portrait",
-    description: "Portraits premium, éditoriaux et corporate pour construire une image mémorable.",
-    image: portrait,
-    items: ["Direction de pose", "Sélection artistique", "Retouche peau premium"],
+    title: "Corporate",
+    description: "Images professionnelles pour dirigeants, équipes et communication d'entreprise.",
+    image: corporate,
+    items: ["Portrait dirigeant", "Équipe", "Communication"],
   },
   {
     icon: Heart,
@@ -36,16 +36,16 @@ const services = [
   },
   {
     icon: Camera,
-    title: "Mode & Personal Branding",
-    description: "Banque d'images pour dirigeants, créateurs, artistes, marques personnelles et éditos mode.",
+    title: "Mode",
+    description: "Séances éditoriales, silhouettes, attitudes et images pensées pour une présence visuelle forte.",
     image: branding,
-    items: ["Portraits", "Lifestyle", "Assets réseaux"],
+    items: ["Édito", "Lookbook", "Assets réseaux"],
   },
   {
     icon: Building2,
-    title: "Portrait Corporate",
+    title: "Entreprise",
     description: "Images de marque pour équipes, dirigeants, campagnes et communication corporate.",
-    image: corporate,
+    image: team,
     items: ["Reportage", "Portraits équipe", "Usage commercial"],
   },
   {
@@ -64,7 +64,7 @@ export default function Services() {
       <Hero
         image={servicePhoto}
         title="Services"
-        subtitle="Des offres administrables pour piloter portraits, mariages, marques, entreprises et productions vidéo."
+        subtitle="Des offres administrables pour piloter corporate, mariages, mode, entreprises et productions visuelles."
         showCTA={false}
       />
 
@@ -79,9 +79,9 @@ export default function Services() {
           >
             <div>
               <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.35em] text-[#BE1E2D]">Catalogue dynamique</p>
-              <h2 className="text-5xl font-semibold leading-[0.95] sm:text-7xl">Une offre claire. Une perception premium.</h2>
+              <h2 className="text-4xl font-semibold leading-[1] sm:text-5xl lg:text-6xl">Une offre claire. Une perception premium.</h2>
             </div>
-            <p className="max-w-2xl text-xl leading-relaxed text-[#2A2A2A]/72">
+            <p className="max-w-2xl text-lg leading-relaxed text-[#2A2A2A]/72 sm:text-xl">
               Chaque service est pensé comme un produit éditorial: promesse nette, visuels forts, options lisibles et conversion directe vers la réservation.
             </p>
           </motion.div>
@@ -99,14 +99,14 @@ export default function Services() {
                   className="group rounded-[2rem] bg-[#ECECEC] p-3 shadow-[inset_0_0_0_1px_rgba(17,17,17,0.04)]"
                 >
                   <div className="relative aspect-[5/4] overflow-hidden rounded-[1.5rem] bg-[#ECECEC]">
-                    <img src={service.image} alt={service.title} className="h-full w-full object-cover grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0" />
+                    <img src={service.image} alt={service.title} className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
                     <div className="absolute left-5 top-5 flex h-12 w-12 items-center justify-center rounded-full bg-[#111111] text-[#F8F6F3]">
                       <Icon className="h-5 w-5" />
                     </div>
                   </div>
                   <div className="p-7">
                     <p className="mb-10 text-xs text-[#BE1E2D]">0{index + 1}</p>
-                    <h3 className="mb-4 text-4xl font-semibold leading-none">{service.title}</h3>
+                    <h3 className="mb-4 text-3xl font-semibold leading-tight">{service.title}</h3>
                     <p className="mb-7 text-base leading-relaxed text-[#2A2A2A]/72">{service.description}</p>
                     <div className="mb-8 space-y-3 border-y border-[#111111]/10 py-5">
                       {service.items.map((item) => (
@@ -133,7 +133,7 @@ export default function Services() {
         <div className="mx-auto flex max-w-[1440px] flex-col gap-8 rounded-[2.5rem] bg-[#111111] p-8 text-[#F8F6F3] shadow-[0_26px_90px_rgba(17,17,17,0.12)] sm:p-12 md:flex-row md:items-end md:justify-between lg:p-16">
           <div>
             <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.35em] text-[#BE1E2D]">Prochaine étape</p>
-            <h2 className="max-w-4xl text-5xl font-semibold leading-[0.95] sm:text-7xl">Transformer une demande en projet signé.</h2>
+            <h2 className="max-w-4xl text-4xl font-semibold leading-[1] sm:text-5xl lg:text-6xl">Transformer une demande en projet signé.</h2>
           </div>
           <Link href="/contact">
             <span className="inline-flex items-center gap-3 rounded-full bg-[#BE1E2D] px-6 py-4 text-[11px] font-black uppercase tracking-[0.22em] text-white hover:bg-[#A01C32]">

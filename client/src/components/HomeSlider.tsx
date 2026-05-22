@@ -115,7 +115,7 @@ export default function HomeSlider({ slides, autoPlayDelay = 5000 }: HomeSliderP
                   transition={{ duration: 0.6, delay: 0.2 }}
                 >
                   <motion.h1
-                    className="text-5xl sm:text-6xl lg:text-8xl font-bold text-white mb-6 leading-tight"
+                    className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
                     style={{ letterSpacing: "-0.02em" }}
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -125,7 +125,7 @@ export default function HomeSlider({ slides, autoPlayDelay = 5000 }: HomeSliderP
                   </motion.h1>
 
                   <motion.p
-                    className="text-xl sm:text-2xl lg:text-3xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed font-['Cormorant_Garamond'] font-light"
+                    className="text-xl sm:text-2xl lg:text-3xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed font-sans font-light"
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.6 }}
@@ -142,7 +142,7 @@ export default function HomeSlider({ slides, autoPlayDelay = 5000 }: HomeSliderP
                       <Button
                         size="lg"
                         variant="destructive"
-                        className="text-lg px-10 py-6 font-['Montserrat'] font-semibold"
+                        className="text-lg px-10 py-6 font-sans font-semibold"
                         data-testid={`slider-cta-${currentSlide}`}
                       >
                         {slides[currentSlide].ctaText}

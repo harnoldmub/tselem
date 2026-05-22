@@ -45,7 +45,7 @@ export default function Footer() {
               alt="TSELEM Logo"
               className="h-10 mb-4"
             />
-            <p className="text-primary-foreground/80 mb-4 font-['Cormorant_Garamond']">
+            <p className="text-primary-foreground/80 mb-4 font-sans">
               Studio professionnel de photographie et production vidéo. Chaque pixel compte.
             </p>
             <div className="flex gap-4">
@@ -86,7 +86,7 @@ export default function Footer() {
           </motion.div>
 
           <motion.div variants={itemVariants}>
-            <h3 className="text-lg font-semibold mb-4 font-['Montserrat']">LIENS RAPIDES</h3>
+            <h3 className="text-lg font-semibold mb-4 font-sans">LIENS RAPIDES</h3>
             <ul className="space-y-2">
               {[
                 { path: "/", label: "Accueil" },
@@ -108,8 +108,8 @@ export default function Footer() {
           </motion.div>
 
           <motion.div variants={itemVariants}>
-            <h3 className="text-lg font-semibold mb-4 font-['Montserrat']">SERVICES</h3>
-            <ul className="space-y-2 text-primary-foreground/80 font-['Cormorant_Garamond']">
+            <h3 className="text-lg font-semibold mb-4 font-sans">SERVICES</h3>
+            <ul className="space-y-2 text-primary-foreground/80 font-sans">
               <li>Photographie</li>
               <li>Production Vidéo</li>
               <li>Design Graphique</li>
@@ -119,7 +119,7 @@ export default function Footer() {
           </motion.div>
 
           <motion.div variants={itemVariants}>
-            <h3 className="text-lg font-semibold mb-4 font-['Montserrat']">CONTACT</h3>
+            <h3 className="text-lg font-semibold mb-4 font-sans">CONTACT</h3>
             <ul className="space-y-3">
               <li className="flex items-start gap-2">
                 <MapPin className="w-5 h-5 flex-shrink-0 mt-0.5" />
@@ -156,7 +156,7 @@ export default function Footer() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="border-t border-primary-foreground/20 pt-8 text-center text-sm text-primary-foreground/60 font-['Montserrat']"
+          className="border-t border-primary-foreground/20 pt-8 text-center text-sm text-primary-foreground/60 font-sans"
         >
           <p>© {currentYear} TSELEM. Tous droits réservés.</p>
         </motion.div>

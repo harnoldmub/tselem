@@ -47,11 +47,11 @@ function AnimatedCounter({ end, duration = 2, label, suffix = "", testId }: Stat
       <div
         ref={ref}
         data-testid={testId}
-        className="text-5xl sm:text-6xl lg:text-7xl font-['Playfair_Display'] font-bold text-destructive mb-3"
+        className="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-destructive mb-3"
       >
         0
       </div>
-      <div className="text-lg sm:text-xl font-['Montserrat'] font-medium text-muted-foreground uppercase tracking-wider">
+      <div className="text-lg sm:text-xl font-sans font-medium text-muted-foreground uppercase tracking-wider">
         {label}
       </div>
     </motion.div>
@@ -80,13 +80,13 @@ export default function StatsSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-destructive text-sm font-['Montserrat'] font-semibold tracking-[0.2em] uppercase mb-4 block">
+          <span className="text-destructive text-sm font-sans font-semibold tracking-[0.2em] uppercase mb-4 block">
             Nos Réalisations
           </span>
-          <h2 className="text-4xl sm:text-5xl font-['Playfair_Display'] font-bold mb-6">
+          <h2 className="text-4xl sm:text-5xl font-heading font-bold mb-6">
             Une Décennie d'Excellence
           </h2>
-          <p className="text-xl text-primary-foreground/80 max-w-3xl mx-auto font-['Cormorant_Garamond']">
+          <p className="text-xl text-primary-foreground/80 max-w-3xl mx-auto font-sans">
             Des chiffres qui témoignent de notre passion et de votre confiance
           </p>
         </motion.div>
