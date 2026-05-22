@@ -100,7 +100,7 @@ export default function Portfolio() {
             </p>
           </div>
 
-          <PortfolioGrid items={portfolioItems} showFilter={true} />
+          <PortfolioGrid items={portfolioItems} showFilter={true} linkToGallery={true} />
         </div>
       </section>
 

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { Link, useLocation } from "wouter";
 
 interface PortfolioItem {
   id: number;
@@ -13,12 +14,38 @@ interface PortfolioItem {
 interface PortfolioGridProps {
   items: PortfolioItem[];
   showFilter?: boolean;
+  linkToGallery?: boolean;
 }
 
-export default function PortfolioGrid({ items, showFilter = true }: PortfolioGridProps) {
+const CATEGORY_TO_GALLERY_ID: Record<string, string> = {
+  Mariage: "mariage",
+  Corporate: "corporate",
+  Mode: "mode",
+  Portrait: "portraits",
+  Couple: "couple",
+  Famille: "famille-et-enfant",
+  Maternité: "maternite",
+  Backstage: "all",
+};
+
+export default function PortfolioGrid({ items, showFilter = true, linkToGallery = false }: PortfolioGridProps) {
   const [selectedCategory, setSelectedCategory] = useState("Tous");
+  const [, navigate] = useLocation();
   const categories = ["Tous", ...Array.from(new Set(items.map((item) => item.category)))];
   const filteredItems = selectedCategory === "Tous" ? items : items.filter((item) => item.category === selectedCategory);
+
+  const handleCategoryClick = (category: string) => {
+    if (linkToGallery) {
+      if (category === "Tous") {
+        navigate("/galerie");
+      } else {
+        const galleryId = CATEGORY_TO_GALLERY_ID[category] || "all";
+        navigate(`/galerie?category=${galleryId}`);
+      }
+    } else {
+      setSelectedCategory(category);
+    }
+  };
 
   return (
     <div>
@@ -33,15 +60,18 @@ export default function PortfolioGrid({ items, showFilter = true }: PortfolioGri
           {categories.map((category) => (
             <button
               key={category}
-              onClick={() => setSelectedCategory(category)}
+              onClick={() => handleCategoryClick(category)}
               className={`rounded-full border px-5 py-3 text-[11px] font-bold uppercase tracking-[0.22em] transition-all ${
-                selectedCategory === category
+                !linkToGallery && selectedCategory === category
                   ? "border-[#111111] bg-[#111111] text-[#F8F6F3]"
                   : "border-[#111111]/14 text-[#111111]/60 hover:border-[#BE1E2D] hover:text-[#BE1E2D]"
               }`}
               data-testid={`filter-${category.toLowerCase()}`}
             >
               {category}
+              {linkToGallery && (
+                <ArrowUpRight className="ml-1 inline-block h-3 w-3 opacity-40" />
+              )}
             </button>
           ))}
         </motion.div>
