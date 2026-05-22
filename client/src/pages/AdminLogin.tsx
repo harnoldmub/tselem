@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
-import logoWhite from "@assets/logo-white_1762333728331.png";
+import logoWhite from "@assets/logos/logo-blanc.png";
 
 export default function AdminLogin() {
   const [_, setLocation] = useLocation();

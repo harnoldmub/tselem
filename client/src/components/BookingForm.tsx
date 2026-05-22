@@ -6,6 +6,8 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Calendar, Camera, Video, Palette, Clock } from "lucide-react";
+import { apiRequest } from "@/lib/queryClient";
+import { useToast } from "@/hooks/use-toast";
 
 const serviceTypes = [
   { value: "photo", label: "Photographie", icon: Camera },
@@ -59,6 +61,7 @@ function getAvailableTimeSlots(selectedDate: string, durationHours: number): str
 }
 
 export default function BookingForm() {
+  const { toast } = useToast();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     serviceType: "",
@@ -71,16 +74,51 @@ export default function BookingForm() {
     message: "",
   });
   const [confirmed, setConfirmed] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleServiceSelect = (service: string) => {
     setFormData({ ...formData, serviceType: service });
     setStep(2);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Booking submitted:", formData);
-    setConfirmed(true);
+    setIsSubmitting(true);
+
+    const serviceLabel = serviceTypes.find((service) => service.value === formData.serviceType)?.label || formData.serviceType;
+    const message = [
+      `Nouvelle demande de réservation`,
+      ``,
+      `Service: ${serviceLabel}`,
+      `Date souhaitée: ${formData.date}`,
+      `Heure: ${formData.time}`,
+      `Durée: ${formData.duration}`,
+      `Téléphone: ${formData.phone}`,
+      ``,
+      `Message client:`,
+      formData.message || "Aucun message complémentaire.",
+    ].join("\n");
+
+    try {
+      await apiRequest("POST", "/api/contacts", {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        subject: `Réservation - ${serviceLabel}`,
+        message,
+      });
+
+      setConfirmed(true);
+      toast({ title: "Demande de réservation envoyée" });
+    } catch (error) {
+      toast({
+        title: "Impossible d'envoyer la réservation",
+        description: "Veuillez réessayer ou contacter directement le studio.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const availableTimeSlots = useMemo(() => {
@@ -102,10 +140,10 @@ export default function BookingForm() {
           </div>
           <h2 className="text-3xl font-bold mb-4">Réservation Confirmée !</h2>
           <p className="text-muted-foreground mb-2">
-            Votre rendez-vous a été enregistré avec succès.
+            Votre demande de réservation a été envoyée avec succès.
           </p>
           <p className="text-muted-foreground mb-6">
-            Vous recevrez un email de confirmation à {formData.email}
+            L'équipe Tselem vous recontactera à {formData.email} pour confirmer le créneau.
           </p>
           <div className="bg-muted/50 p-6 rounded-lg text-left max-w-md mx-auto">
             <p className="mb-2"><strong>Service:</strong> {serviceTypes.find(s => s.value === formData.serviceType)?.label}</p>
@@ -299,8 +337,8 @@ export default function BookingForm() {
                 <Button type="button" variant="outline" onClick={() => setStep(2)}>
                   Retour
                 </Button>
-                <Button type="submit" className="flex-1 font-['Montserrat']" data-testid="button-confirm">
-                  CONFIRMER LA RÉSERVATION
+                <Button type="submit" className="flex-1 font-['Montserrat']" data-testid="button-confirm" disabled={isSubmitting}>
+                  {isSubmitting ? "ENVOI EN COURS..." : "ENVOYER LA DEMANDE"}
                 </Button>
               </div>
             </div>

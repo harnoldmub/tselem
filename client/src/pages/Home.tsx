@@ -1,24 +1,26 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { AnimatePresence, motion, useInView, useScroll, useTransform } from "framer-motion";
 import { ArrowUpRight, Calendar, MessageCircle } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import heroVideo from "@assets/videos/tselem-instagram-showcase.mp4";
-import logoWhite from "@assets/logo-white_1762333728331.png";
-import weddingHero from "@assets/tslm_hp_slider_1_1762333728329.jpg";
-import weddingGroup from "@assets/image00011_1762333728333.jpeg";
-import editorialWide from "@assets/tslm_hp_slider_3-1_1762333728332.jpg";
-import portraitVertical from "@assets/image_1762347872912.png";
-import portraitStudio from "@assets/image_1762347913707.png";
-import maternityMood from "@assets/image_1762348066656.png";
-import brandFrame from "@assets/image_1762348129373.png";
-import productionStill from "@assets/image_1762348165011.png";
-import detailFrame from "@assets/image_1762348182312.png";
-import backstageFrame from "@assets/image_1762348207402.png";
-import socialFrame from "@assets/image_1762348245300.png";
-import clientPortrait from "@assets/generated_images/Client_testimonial_avatar_1_e9ec5690.png";
-import clientPortrait2 from "@assets/generated_images/Client_testimonial_avatar_2_9020b159.png";
+import hero1 from "@assets/images/hero/hero-1.jpg";
+import hero2 from "@assets/images/hero/hero-2.jpg";
+import weddingHero from "@assets/images/mariage/mariage-01.jpg";
+import weddingGroup from "@assets/images/mariage/mariage-01.jpg";
+import editorialWide from "@assets/images/slider-editorial.jpg";
+import portraitVertical from "@assets/images/portrait-large.jpg";
+import portraitStudio from "@assets/images/portraits/portraits-08.jpg";
+import maternityMood from "@assets/images/maternite/maternite-01.jpg";
+import brandFrame from "@assets/images/mode/mode-04.jpg";
+import productionStill from "@assets/images/corporate/corporate-01.jpg";
+import detailFrame from "@assets/images/couple/couple-01.jpg";
+import backstageFrame from "@assets/images/famille-et-enfant/famille-enfant-01.jpg";
+import socialFrame from "@assets/images/anniversaire/anniversaire-01.jpg";
+import clientPortrait from "@assets/images/portraits/portraits-01.jpg";
+import clientPortrait2 from "@assets/images/portraits/portraits-02.jpg";
+
+const HERO_SLIDES = [hero1, hero2];
 
 const fadeUp = { hidden: { opacity: 0, y: 42 }, visible: { opacity: 1, y: 0 } };
 const reveal = { hidden: { opacity: 0, y: 70, scale: 0.98 }, visible: { opacity: 1, y: 0, scale: 1 } };
@@ -28,13 +30,13 @@ const services = [
   ["Mariage", "Un récit visuel sobre et cinématographique pour les engagements qui traversent une vie.", weddingHero],
   ["Maternité", "Une lumière douce, une direction sensible, une mémoire intime sans artifice.", maternityMood],
   ["Branding Personnel", "Images d'autorité pour dirigeants, artistes, créateurs et marques personnelles.", brandFrame],
-  ["Production Visuelle", "Photo, vidéo, direction artistique et post-production pour campagnes et lancements.", productionStill],
+  ["Événement & Famille", "Couple, famille, anniversaire et moments précieux avec une direction sobre et sensible.", backstageFrame],
 ];
 
 const projects = [
   ["Mariage", "Kinshasa Ceremony", "Une célébration pensée comme un film: gestes mesurés, lumière naturelle, élégance collective.", weddingGroup],
   ["Portrait Premium", "The Quiet Icon", "Portraits de caractère pour une présence publique plus forte, plus maîtrisée, plus mémorable.", portraitVertical],
-  ["Direction Artistique", "Maison de l'Image", "Une production sobre et précise, entre identité visuelle, mouvement et narration de marque.", backstageFrame],
+  ["Maternité", "The Waiting Room", "Une série intime et lumineuse autour du corps, du lien et de la transmission.", maternityMood],
 ];
 
 const socialPosts = [weddingHero, detailFrame, brandFrame, productionStill, socialFrame, editorialWide];
@@ -91,17 +93,46 @@ function EditorialLink({ href, children, dark = false }: { href: string; childre
 }
 
 export default function Home() {
+  const [heroIndex, setHeroIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => setHeroIndex((i) => (i + 1) % HERO_SLIDES.length), 5000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div className="min-h-screen cursor-default bg-[#E8E8E8] text-[#111111] selection:bg-[#BE1E2D] selection:text-white">
       <Header />
 
-      <section className="relative min-h-screen overflow-hidden bg-[#E8E8E8] p-4 pt-24 text-[#F8F6F3] sm:p-6 sm:pt-24">
-        <video className="absolute inset-x-4 bottom-4 top-24 h-auto w-auto rounded-[2.2rem] object-cover opacity-75 sm:inset-x-6 sm:bottom-6 sm:top-24 sm:rounded-[3rem]" src={heroVideo} autoPlay muted loop playsInline poster={weddingHero} />
-        <div className="absolute inset-x-4 bottom-4 top-24 rounded-[2.2rem] bg-[#111111]/42 sm:inset-x-6 sm:bottom-6 sm:top-24 sm:rounded-[3rem]" />
-        <div className="absolute inset-x-4 bottom-4 top-24 rounded-[2.2rem] bg-gradient-to-t from-[#111111]/92 via-transparent to-[#111111]/12 sm:inset-x-6 sm:bottom-6 sm:top-24 sm:rounded-[3rem]" />
-        <div className="relative z-10 flex min-h-[calc(100vh-7rem)] flex-col justify-end rounded-[2.2rem] px-5 pb-10 pt-28 sm:rounded-[3rem] sm:px-8 lg:px-12 lg:pb-14">
+      <section className="relative min-h-screen overflow-hidden bg-[#111111] text-[#F8F6F3]">
+        <AnimatePresence mode="sync">
+          <motion.img
+            key={HERO_SLIDES[heroIndex]}
+            src={HERO_SLIDES[heroIndex]}
+            alt="Tselem Studio"
+            initial={{ opacity: 0, scale: 1.04 }}
+            animate={{ opacity: 0.86, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        </AnimatePresence>
+        <div className="absolute inset-0 bg-[#111111]/36" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/92 via-transparent to-[#111111]/14" />
+        {/* Slide dots */}
+        <div className="absolute bottom-8 right-8 z-10 flex gap-2">
+          {HERO_SLIDES.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => setHeroIndex(i)}
+              aria-label={`Image ${i + 1}`}
+              className={`h-1.5 rounded-full transition-all duration-500 ${i === heroIndex ? "w-8 bg-[#F8F6F3]" : "w-1.5 bg-[#F8F6F3]/30 hover:bg-[#F8F6F3]/60"}`}
+            />
+          ))}
+        </div>
+        <div className="relative z-10 flex min-h-screen flex-col justify-end px-5 pb-10 pt-28 sm:px-8 lg:px-12 lg:pb-14">
           <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }} className="max-w-7xl">
-            <img src={logoWhite} alt="Tselem Studio" className="mb-8 h-8 w-auto opacity-90 sm:hidden" />
             <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.42em] text-[#F8F6F3]/70">Kinshasa · Photo · Film · Direction artistique</p>
             <h1 className="max-w-6xl text-[18vw] font-semibold uppercase leading-[0.78] tracking-normal sm:text-[13vw] lg:text-[11.5vw]">
               TSELEM<br />STUDIO
@@ -109,7 +140,7 @@ export default function Home() {
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.35 }} className="mt-8 flex flex-col gap-7 border-t border-[#F8F6F3]/20 pt-7 md:flex-row md:items-end md:justify-between">
             <p className="max-w-xl text-2xl leading-tight text-[#F8F6F3] sm:text-3xl md:text-4xl">Créer des images qui traversent le temps.</p>
-            <Link href="/portfolio">
+            <Link href="/galerie">
               <motion.span whileHover={{ scale: 1.02 }} className="inline-flex w-fit items-center gap-3 rounded-full bg-[#BE1E2D] px-6 py-4 text-[11px] font-bold uppercase tracking-[0.22em] text-white shadow-[0_18px_44px_rgba(190,30,45,0.28)] transition-colors hover:bg-[#A01C32]">
                 Découvrir notre univers <ArrowUpRight className="h-4 w-4" />
               </motion.span>
@@ -126,7 +157,13 @@ export default function Home() {
               Nous créons des portraits, des films et des récits visuels pour celles et ceux qui veulent être vus avec justesse, émotion et exigence.
             </p>
           </div>
-          <ParallaxImage src={editorialWide} alt="Production éditoriale Tselem Studio" className="mt-16 aspect-[16/9] w-full rounded-[2rem] md:mt-24" />
+          <div className="mt-16 overflow-hidden rounded-[2rem] bg-[#111111] md:mt-24">
+            <img
+              className="aspect-[16/9] w-full object-cover grayscale"
+              src={editorialWide}
+              alt="Séance éditoriale Tselem Studio"
+            />
+          </div>
         </motion.div>
       </section>
 
@@ -161,7 +198,7 @@ export default function Home() {
       <section className="px-4 py-8 sm:px-6 md:py-10">
         <div className="mx-auto max-w-[1440px] rounded-[2.5rem] bg-[#F8F6F3] p-6 shadow-[0_26px_90px_rgba(17,17,17,0.06)] sm:p-10 lg:p-16">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} transition={{ duration: 0.8 }} className="mb-20 max-w-4xl">
-            <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.35em] text-[#BE1E2D]">Portfolio</p>
+            <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.35em] text-[#BE1E2D]">Galerie</p>
             <h2 className="text-5xl font-semibold leading-[0.95] sm:text-7xl lg:text-8xl">Des images qui installent une présence.</h2>
           </motion.div>
           <div className="space-y-24 md:space-y-32">
@@ -172,7 +209,7 @@ export default function Home() {
                   <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.3em] text-[#BE1E2D]">{category}</p>
                   <h3 className="mb-6 text-4xl font-semibold leading-none sm:text-6xl">{title}</h3>
                   <p className="mb-9 text-lg leading-relaxed text-[#2A2A2A]">{description}</p>
-                  <EditorialLink href="/portfolio">Voir le projet</EditorialLink>
+                  <EditorialLink href="/galerie">Voir le projet</EditorialLink>
                 </div>
               </motion.article>
             ))}

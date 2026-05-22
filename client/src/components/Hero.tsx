@@ -55,9 +55,9 @@ export default function Hero({ image, title, subtitle, showCTA = true }: HeroPro
                   Réserver <ArrowUpRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
-              <Link href="/portfolio" data-testid="button-hero-portfolio">
+              <Link href="/galerie" data-testid="button-hero-portfolio">
                 <Button size="lg" variant="outline" className="rounded-full border-[#F8F6F3]/30 bg-transparent px-6 text-[11px] font-black uppercase tracking-[0.22em] text-[#F8F6F3] hover:bg-[#F8F6F3] hover:text-[#111111]">
-                  Portfolio
+                  Galerie
                 </Button>
               </Link>
             </div>

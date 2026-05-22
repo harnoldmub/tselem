@@ -8,7 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { LogOut, Mail, Phone, Clock, Trash2, CheckCircle, Star, MessageSquare, BarChart3, KanbanSquare, CalendarDays, Images, FileText, LayoutTemplate } from "lucide-react";
-import logoWhite from "@assets/logo-white_1762333728331.png";
+import logoWhite from "@assets/logos/logo-blanc.png";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 
@@ -36,6 +36,23 @@ interface Testimonial {
   createdAt: string;
 }
 
+type ReservationStatus = "Nouvelle" | "Confirmée" | "En attente" | "Terminée" | "Annulée";
+
+interface ReservationRequest {
+  id: string;
+  client: string;
+  email: string;
+  phone: string;
+  service: string;
+  date: string;
+  time: string;
+  participants: number;
+  location: string;
+  budget: string;
+  status: ReservationStatus;
+  message: string;
+}
+
 export default function AdminDashboard() {
   const [_, setLocation] = useLocation();
   const queryClient = useQueryClient();
@@ -52,6 +69,50 @@ export default function AdminDashboard() {
   }, [authData, setLocation]);
 
   const [activeTab, setActiveTab] = useState("contacts");
+  const [reservations, setReservations] = useState<ReservationRequest[]>([
+    {
+      id: "RSV-1024",
+      client: "Grâce M.",
+      email: "grace@example.com",
+      phone: "+243 899 000 210",
+      service: "Mariage",
+      date: "2026-06-14",
+      time: "14:00",
+      participants: 120,
+      location: "Kinshasa, Gombe",
+      budget: "Premium",
+      status: "Nouvelle",
+      message: "Nous voulons une couverture photo et vidéo complète pour la cérémonie et la soirée.",
+    },
+    {
+      id: "RSV-1025",
+      client: "Jonathan K.",
+      email: "jonathan@example.com",
+      phone: "+243 980 441 019",
+      service: "Portrait",
+      date: "2026-05-29",
+      time: "10:30",
+      participants: 1,
+      location: "Studio Tselem",
+      budget: "Standard",
+      status: "Confirmée",
+      message: "Portrait professionnel pour LinkedIn, presse et site web.",
+    },
+    {
+      id: "RSV-1026",
+      client: "Maison Kivu",
+      email: "brand@example.com",
+      phone: "+243 812 300 777",
+      service: "Branding Personnel",
+      date: "2026-06-03",
+      time: "09:00",
+      participants: 4,
+      location: "Client",
+      budget: "Sur devis",
+      status: "En attente",
+      message: "Création d'une banque d'images pour lancement de campagne.",
+    },
+  ]);
 
   const { data: contacts = [], isLoading: isLoadingContacts } = useQuery<Contact[]>({
     queryKey: ["/api/admin/contacts"],
@@ -124,10 +185,21 @@ export default function AdminDashboard() {
 
   const unreadCount = contacts.filter((c) => !c.isRead).length;
   const pendingTestimonials = testimonials.filter((t) => !t.isApproved).length;
+  const newReservations = reservations.filter((reservation) => reservation.status === "Nouvelle").length;
+
+  const updateReservationStatus = (id: string, status: ReservationStatus) => {
+    setReservations((currentReservations) =>
+      currentReservations.map((reservation) =>
+        reservation.id === id ? { ...reservation, status } : reservation
+      )
+    );
+    toast({ title: `Réservation ${status.toLowerCase()}` });
+  };
 
   const platformModules = [
     { label: "Leads actifs", value: contacts.length, icon: KanbanSquare, note: "Messages convertis en opportunités" },
     { label: "Demandes entrantes", value: unreadCount, icon: MessageSquare, note: "À traiter dans l'inbox" },
+    { label: "Réservations", value: reservations.length, icon: CalendarDays, note: `${newReservations} nouvelle${newReservations > 1 ? "s" : ""} à traiter` },
     { label: "Contenus CMS", value: "6", icon: FileText, note: "Pages, services, projets, blog" },
     { label: "Templates", value: "5", icon: LayoutTemplate, note: "Luxury, portfolio, wedding, corporate" },
   ];
@@ -466,7 +538,7 @@ export default function AdminDashboard() {
 
           <TabsContent value="content">
             <div className="grid gap-px bg-[#111111]/10 md:grid-cols-3">
-              {["Pages", "Services", "Portfolio", "Études de cas", "Blog", "FAQ", "Instagram", "Témoignages", "SEO"].map((module) => (
+              {["Pages", "Services", "Portfolio", "Blog", "FAQ", "Instagram", "Témoignages", "SEO"].map((module) => (
                 <Card key={module} className="rounded-none border-0 bg-[#F8F6F3] shadow-none">
                   <CardContent className="p-6">
                     <p className="mb-10 text-[11px] font-bold uppercase tracking-[0.25em] text-[#BE1E2D]">CRUD</p>
@@ -479,17 +551,77 @@ export default function AdminDashboard() {
           </TabsContent>
 
           <TabsContent value="reservations">
-            <Card className="rounded-none border-[#111111]/10 bg-[#F8F6F3] shadow-none">
-              <CardContent className="grid gap-8 p-8 md:grid-cols-5">
-                {["Type séance", "Date souhaitée", "Heure", "Lieu", "Participants"].map((field, index) => (
-                  <div key={field} className="border-t border-[#111111]/15 pt-5">
-                    <p className="mb-8 text-sm text-[#BE1E2D]">0{index + 1}</p>
-                    <h3 className="text-2xl font-semibold">{field}</h3>
-                    <p className="mt-3 text-sm text-[#2A2A2A]/60">Synchronisable agenda.</p>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
+            <div className="mb-8 grid gap-4 md:grid-cols-4">
+              {[
+                ["Nouvelles", newReservations],
+                ["Confirmées", reservations.filter((reservation) => reservation.status === "Confirmée").length],
+                ["En attente", reservations.filter((reservation) => reservation.status === "En attente").length],
+                ["Total", reservations.length],
+              ].map(([label, value]) => (
+                <Card key={label} className="rounded-none border-[#111111]/10 bg-[#F8F6F3] shadow-none">
+                  <CardContent className="p-5">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#BE1E2D]">{label}</p>
+                    <p className="mt-4 text-4xl font-semibold">{value}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            <div className="space-y-4">
+              {reservations.map((reservation) => (
+                <Card key={reservation.id} className="rounded-none border-[#111111]/10 bg-[#F8F6F3] shadow-none">
+                  <CardHeader>
+                    <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+                      <div>
+                        <div className="mb-3 flex flex-wrap items-center gap-3">
+                          <CardTitle className="text-2xl font-semibold">{reservation.client}</CardTitle>
+                          <Badge variant={reservation.status === "Nouvelle" ? "destructive" : "outline"}>
+                            {reservation.status}
+                          </Badge>
+                          <span className="text-sm text-[#2A2A2A]/55">{reservation.id}</span>
+                        </div>
+                        <p className="text-lg font-medium">{reservation.service}</p>
+                        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[#2A2A2A]/68">
+                          {reservation.message}
+                        </p>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {(["Nouvelle", "Confirmée", "En attente", "Terminée", "Annulée"] as ReservationStatus[]).map((status) => (
+                          <Button
+                            key={status}
+                            size="sm"
+                            variant={reservation.status === status ? "destructive" : "outline"}
+                            onClick={() => updateReservationStatus(reservation.id, status)}
+                            className="rounded-none"
+                          >
+                            {status}
+                          </Button>
+                        ))}
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid gap-px bg-[#111111]/10 md:grid-cols-4">
+                      {[
+                        ["Date", format(new Date(reservation.date), "PPP", { locale: fr })],
+                        ["Heure", reservation.time],
+                        ["Participants", reservation.participants.toString()],
+                        ["Lieu", reservation.location],
+                        ["Budget", reservation.budget],
+                        ["Email", reservation.email],
+                        ["Téléphone", reservation.phone],
+                        ["Agenda", "À synchroniser"],
+                      ].map(([label, value]) => (
+                        <div key={label} className="bg-[#F8F6F3] p-4">
+                          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#BE1E2D]">{label}</p>
+                          <p className="mt-2 break-words text-sm text-[#111111]">{value}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </TabsContent>
 
           <TabsContent value="media">

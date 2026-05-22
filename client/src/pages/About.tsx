@@ -3,7 +3,7 @@ import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Camera, Heart, Award, Users } from "lucide-react";
-import teamImage from "@assets/tslm_hp_slider_3-1_1762333728332.jpg";
+import teamImage from "@assets/images/slider-editorial.jpg";
 
 const values = [
   {

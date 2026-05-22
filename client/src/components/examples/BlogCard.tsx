@@ -1,5 +1,5 @@
 import BlogCard from "../BlogCard";
-import photoService from "@assets/generated_images/Photography_service_studio_setup_7ea0b469.png";
+import photoService from "@assets/images/portraits/portraits-08.jpg";
 
 export default function BlogCardExample() {
   return (

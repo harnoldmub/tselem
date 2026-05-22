@@ -2,15 +2,15 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
 import PortfolioGrid from "@/components/PortfolioGrid";
-import portfolioHero from "@assets/generated_images/Fashion_photography_portfolio_sample_f408a497.png";
-import corporate from "@assets/generated_images/Corporate_event_portfolio_sample_33e8e1fb.png";
-import fashion from "@assets/generated_images/Fashion_photography_portfolio_sample_f408a497.png";
-import product from "@assets/generated_images/Product_photography_portfolio_sample_b044f8fc.png";
-import architectural from "@assets/generated_images/Architectural_portfolio_sample_89347eba.png";
-import wedding from "@assets/tslm_hp_slider_1_1762333728329.jpg";
-import team from "@assets/tslm_hp_slider_3-1_1762333728332.jpg";
-import photoService from "@assets/generated_images/Photography_service_studio_setup_7ea0b469.png";
-import videoService from "@assets/generated_images/Video_production_service_scene_d18c7b2e.png";
+import portfolioHero from "@assets/images/hero/hero-1.jpg";
+import corporate from "@assets/images/corporate/corporate-01.jpg";
+import fashion from "@assets/images/mode/mode-04.jpg";
+import portrait from "@assets/images/portraits/portraits-14.jpg";
+import couple from "@assets/images/couple/couple-01.jpg";
+import wedding from "@assets/images/mariage/mariage-01.jpg";
+import family from "@assets/images/famille-et-enfant/famille-enfant-01.jpg";
+import photoService from "@assets/images/portraits/portraits-08.jpg";
+import maternity from "@assets/images/maternite/maternite-01.jpg";
 
 const portfolioItems = [
   {
@@ -23,9 +23,9 @@ const portfolioItems = [
   {
     id: 2,
     image: corporate,
-    title: "Conférence Internationale",
+    title: "Portrait Corporate",
     category: "Corporate",
-    description: "Événement d'entreprise avec captation complète",
+    description: "Image professionnelle pour marque, dirigeant et communication d'entreprise",
   },
   {
     id: 3,
@@ -36,24 +36,24 @@ const portfolioItems = [
   },
   {
     id: 4,
-    image: product,
-    title: "Photographie Produit Premium",
-    category: "Commercial",
-    description: "Packshot haute qualité pour marque de luxe",
+    image: portrait,
+    title: "Portrait Signature",
+    category: "Portrait",
+    description: "Portrait premium avec direction de pose et retouche éditoriale",
   },
   {
     id: 5,
-    image: architectural,
-    title: "Architecture Contemporaine",
-    category: "Architecture",
-    description: "Photographie d'architecture moderne et design",
+    image: couple,
+    title: "Couple Studio",
+    category: "Couple",
+    description: "Images intimes et élégantes pour célébrer une relation",
   },
   {
     id: 6,
-    image: team,
-    title: "Portraits d'Équipe",
-    category: "Corporate",
-    description: "Session photo professionnelle pour entreprise",
+    image: family,
+    title: "Famille & Enfant",
+    category: "Famille",
+    description: "Moments familiaux en studio, sobres et intemporels",
   },
   {
     id: 7,
@@ -64,10 +64,10 @@ const portfolioItems = [
   },
   {
     id: 8,
-    image: videoService,
-    title: "Production Vidéo",
-    category: "Vidéo",
-    description: "Tournage de vidéo promotionnelle cinématographique",
+    image: maternity,
+    title: "Maternité Lumière",
+    category: "Maternité",
+    description: "Séance maternité avec une direction douce et émotionnelle",
   },
   {
     id: 9,

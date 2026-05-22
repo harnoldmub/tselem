@@ -1,10 +1,10 @@
 import PortfolioGrid from "../PortfolioGrid";
-import corporate from "@assets/generated_images/Corporate_event_portfolio_sample_33e8e1fb.png";
-import fashion from "@assets/generated_images/Fashion_photography_portfolio_sample_f408a497.png";
-import product from "@assets/generated_images/Product_photography_portfolio_sample_b044f8fc.png";
-import architectural from "@assets/generated_images/Architectural_portfolio_sample_89347eba.png";
-import wedding from "@assets/tslm_hp_slider_1_1762333728329.jpg";
-import team from "@assets/tslm_hp_slider_3-1_1762333728332.jpg";
+import corporate from "@assets/images/corporate/corporate-01.jpg";
+import fashion from "@assets/images/mode/mode-04.jpg";
+import portrait from "@assets/images/portraits/portraits-14.jpg";
+import maternity from "@assets/images/maternite/maternite-01.jpg";
+import wedding from "@assets/images/mariage/mariage-01.jpg";
+import family from "@assets/images/famille-et-enfant/famille-enfant-01.jpg";
 
 const portfolioItems = [
   {
@@ -30,24 +30,24 @@ const portfolioItems = [
   },
   {
     id: 4,
-    image: product,
-    title: "Photographie Produit",
-    category: "Commercial",
-    description: "Packshot professionnel haute qualité",
+    image: portrait,
+    title: "Portrait Premium",
+    category: "Portrait",
+    description: "Portrait professionnel haute qualité",
   },
   {
     id: 5,
-    image: architectural,
-    title: "Architecture Urbaine",
-    category: "Architecture",
-    description: "Photographie d'architecture moderne",
+    image: maternity,
+    title: "Maternité Studio",
+    category: "Maternité",
+    description: "Séance maternité douce et intemporelle",
   },
   {
     id: 6,
-    image: team,
-    title: "Portrait d'Équipe",
-    category: "Corporate",
-    description: "Session photo professionnelle d'équipe",
+    image: family,
+    title: "Famille & Enfant",
+    category: "Famille",
+    description: "Session photo familiale en studio",
   },
 ];
 

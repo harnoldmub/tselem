@@ -4,13 +4,13 @@ import Footer from "@/components/Footer";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Camera, Video, Sparkles, Building2, Heart, UserRound } from "lucide-react";
-import servicePhoto from "@assets/generated_images/Photography_service_studio_setup_7ea0b469.png";
-import wedding from "@assets/tslm_hp_slider_1_1762333728329.jpg";
-import portrait from "@assets/image_1762347913707.png";
-import maternity from "@assets/image_1762348066656.png";
-import branding from "@assets/image_1762348129373.png";
-import production from "@assets/image_1762348165011.png";
-import corporate from "@assets/generated_images/Corporate_event_portfolio_sample_33e8e1fb.png";
+import servicePhoto from "@assets/images/portraits/portraits-08.jpg";
+import wedding from "@assets/images/mariage/mariage-01.jpg";
+import portrait from "@assets/images/portraits/portraits-08.jpg";
+import maternity from "@assets/images/maternite/maternite-01.jpg";
+import branding from "@assets/images/mode/mode-04.jpg";
+import family from "@assets/images/famille-et-enfant/famille-enfant-01.jpg";
+import corporate from "@assets/images/portraits/portraits-14.jpg";
 
 const services = [
   {
@@ -36,24 +36,24 @@ const services = [
   },
   {
     icon: Camera,
-    title: "Branding Personnel",
-    description: "Banque d'images pour dirigeants, créateurs, artistes et marques personnelles.",
+    title: "Mode & Personal Branding",
+    description: "Banque d'images pour dirigeants, créateurs, artistes, marques personnelles et éditos mode.",
     image: branding,
     items: ["Portraits", "Lifestyle", "Assets réseaux"],
   },
   {
     icon: Building2,
-    title: "Entreprise",
-    description: "Images de marque pour équipes, campagnes, événements et communication corporate.",
+    title: "Portrait Corporate",
+    description: "Images de marque pour équipes, dirigeants, campagnes et communication corporate.",
     image: corporate,
     items: ["Reportage", "Portraits équipe", "Usage commercial"],
   },
   {
     icon: Video,
-    title: "Production Vidéo",
-    description: "Films courts, reels, campagnes et contenus vidéo avec direction artistique.",
-    image: production,
-    items: ["Storyboard", "Tournage", "Montage & colorimétrie"],
+    title: "Couple, Famille & Enfants",
+    description: "Images sensibles pour couples, familles, enfants, anniversaires et moments intimes.",
+    image: family,
+    items: ["Séance famille", "Portrait enfant", "Galerie privée"],
   },
 ];
 

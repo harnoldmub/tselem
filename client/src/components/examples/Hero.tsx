@@ -1,5 +1,5 @@
 import Hero from "../Hero";
-import heroImage from "@assets/tslm_hp_slider_1_1762333728329.jpg";
+import heroImage from "@assets/images/hero/hero-1.jpg";
 
 export default function HeroExample() {
   return (

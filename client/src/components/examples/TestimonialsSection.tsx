@@ -1,7 +1,7 @@
 import TestimonialsSection from "../TestimonialsSection";
-import avatar1 from "@assets/generated_images/Client_testimonial_avatar_1_e9ec5690.png";
-import avatar2 from "@assets/generated_images/Client_testimonial_avatar_2_9020b159.png";
-import avatar3 from "@assets/generated_images/Client_testimonial_avatar_3_68bb7cac.png";
+import avatar1 from "@assets/images/portraits/portraits-01.jpg";
+import avatar2 from "@assets/images/portraits/portraits-02.jpg";
+import avatar3 from "@assets/images/portraits/portraits-03.jpg";
 
 const testimonials = [
   {

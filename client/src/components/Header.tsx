@@ -1,9 +1,8 @@
 import { Link, useLocation } from "wouter";
 import { Menu, X, ChevronDown, ArrowUpRight } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import logoWhite from "@assets/logo-white_1762333728331.png";
-import icon from "@assets/tselem_icon_1762333728332.png";
+import logoWhite from "@assets/logos/logo-blanc.png";
 
 interface SubMenuItem {
   path: string;
@@ -30,8 +29,7 @@ const navItems: NavItem[] = [
   {
     label: "Travaux",
     submenu: [
-      { path: "/portfolio", label: "Portfolio", description: "Sélection photo, vidéo et branding." },
-      { path: "/etudes-de-cas", label: "Études de cas", description: "Projets racontés façon magazine." },
+      { path: "/galerie", label: "Galerie", description: "Toutes les images en mosaïque dense." },
     ],
   },
   { path: "/services", label: "Services" },
@@ -42,19 +40,6 @@ export default function Header() {
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileSubMenuOpen, setMobileSubMenuOpen] = useState<string | null>(null);
-  const [scrolled, setScrolled] = useState(false);
-  const isHomeAtTop = location === "/" && !scrolled;
-  const darkMode = isHomeAtTop;
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [location]);
-
-  const textColor = darkMode ? "text-[#F8F6F3]" : "text-[#111111]";
-  const mutedColor = darkMode ? "text-[#F8F6F3]/72" : "text-[#111111]/62";
 
   return (
     <motion.header
@@ -63,23 +48,10 @@ export default function Header() {
       transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
       className="fixed left-0 right-0 top-0 z-50 px-4 py-4"
     >
-      <div
-        className={`mx-auto max-w-[1440px] rounded-full border px-5 shadow-[0_20px_80px_rgba(17,17,17,0.08)] backdrop-blur-2xl transition-all duration-500 sm:px-7 ${
-          darkMode
-            ? "border-[#F8F6F3]/16 bg-[#111111]/24"
-            : "border-white/80 bg-[#F8F6F3]/88"
-        }`}
-      >
+      <div className="mx-auto max-w-[1440px] rounded-full border border-[#F8F6F3]/10 bg-[#111111] px-5 shadow-[0_20px_80px_rgba(17,17,17,0.18)] sm:px-7">
         <div className="flex h-14 items-center justify-between gap-6">
           <Link href="/" className="group flex items-center gap-3" data-testid="link-home">
-            {darkMode ? (
-              <motion.img src={logoWhite} alt="TSELEM Logo" className="h-8 w-auto" layoutId="tselem-logo" />
-            ) : (
-              <motion.span layoutId="tselem-logo" className="flex items-center gap-3">
-                <img src={icon} alt="" className="h-8 w-8" />
-                <span className="text-sm font-black uppercase tracking-[0.28em] text-[#111111]">Tselem</span>
-              </motion.span>
-            )}
+            <motion.img src={logoWhite} alt="TSELEM Logo" className="h-8 w-auto" layoutId="tselem-logo" />
           </Link>
 
           <nav className="hidden items-center gap-1 lg:flex">
@@ -89,12 +61,8 @@ export default function Header() {
                 <div key={item.label} className="group relative">
                   {item.submenu ? (
                     <button
-                      className={`inline-flex h-10 items-center gap-1 px-4 text-[11px] font-bold uppercase tracking-[0.22em] transition-colors ${
-                        active
-                          ? "text-[#BE1E2D]"
-                          : darkMode
-                            ? "text-[#F8F6F3]/72 hover:text-[#F8F6F3]"
-                            : "text-[#111111]/62 hover:text-[#111111]"
+                      className={`inline-flex h-10 items-center gap-1 rounded-full px-4 text-[11px] font-bold uppercase tracking-[0.22em] transition-colors ${
+                        active ? "bg-[#F8F6F3]/8 text-[#F8F6F3]" : "text-[#F8F6F3] hover:text-[#BE1E2D]"
                       }`}
                       data-testid={`menu-${item.label.toLowerCase()}`}
                     >
@@ -104,12 +72,8 @@ export default function Header() {
                   ) : (
                     <Link href={item.path || "/"}>
                       <span
-                        className={`inline-flex h-10 cursor-pointer items-center px-4 text-[11px] font-bold uppercase tracking-[0.22em] transition-colors ${
-                          active
-                            ? "text-[#BE1E2D]"
-                            : darkMode
-                              ? "text-[#F8F6F3]/72 hover:text-[#F8F6F3]"
-                              : "text-[#111111]/62 hover:text-[#111111]"
+                        className={`inline-flex h-10 cursor-pointer items-center rounded-full px-4 text-[11px] font-bold uppercase tracking-[0.22em] transition-colors ${
+                          active ? "bg-[#F8F6F3]/8 text-[#F8F6F3]" : "text-[#F8F6F3] hover:text-[#BE1E2D]"
                         }`}
                         data-testid={`link-${item.label.toLowerCase()}`}
                       >
@@ -147,11 +111,6 @@ export default function Header() {
           </nav>
 
           <div className="hidden items-center gap-3 lg:flex">
-            <Link href="/admin/login">
-              <span className={`text-[11px] font-bold uppercase tracking-[0.22em] ${mutedColor} transition-colors hover:text-[#BE1E2D]`}>
-                Studio OS
-              </span>
-            </Link>
             <Link href="/rendez-vous" data-testid="button-book-cta">
               <motion.span
                 whileHover={{ y: -2 }}
@@ -165,7 +124,7 @@ export default function Header() {
           </div>
 
           <button
-            className={`lg:hidden ${textColor}`}
+            className="text-[#F8F6F3] lg:hidden"
             onClick={() => setMobileMenuOpen((open) => !open)}
             data-testid="button-menu-toggle"
           >

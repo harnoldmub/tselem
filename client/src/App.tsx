@@ -7,14 +7,12 @@ import ScrollToTop from "@/components/ScrollToTop";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Services from "@/pages/Services";
-import Portfolio from "@/pages/Portfolio";
+import Gallery from "@/pages/Gallery";
 import Testimonials from "@/pages/Testimonials";
 import Blog from "@/pages/Blog";
 import BlogPost from "@/pages/BlogPost";
 import Contact from "@/pages/Contact";
 import Booking from "@/pages/Booking";
-import CaseStudies from "@/pages/CaseStudies";
-import CaseStudyDetail from "@/pages/CaseStudyDetail";
 import AdminLogin from "@/pages/AdminLogin";
 import AdminDashboard from "@/pages/AdminDashboard";
 import NotFound from "@/pages/not-found";
@@ -27,9 +25,8 @@ function Router() {
         <Route path="/" component={Home} />
         <Route path="/apropos" component={About} />
         <Route path="/services" component={Services} />
-        <Route path="/portfolio" component={Portfolio} />
-        <Route path="/etudes-de-cas" component={CaseStudies} />
-        <Route path="/etudes-de-cas/:id" component={CaseStudyDetail} />
+        <Route path="/portfolio" component={Gallery} />
+        <Route path="/galerie" component={Gallery} />
         <Route path="/temoignages" component={Testimonials} />
         <Route path="/blog" component={Blog} />
         <Route path="/blog/:slug" component={BlogPost} />

@@ -5,6 +5,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 
 export default function Contact() {
+  const mapSrc =
+    "https://maps.google.com/maps?cid=11284033825054725502&z=17&output=embed";
+
   return (
     <div className="min-h-screen">
       <Header />
@@ -96,6 +99,17 @@ export default function Contact() {
                 </CardContent>
               </Card>
             </div>
+          </div>
+
+          <div className="overflow-hidden rounded-[2rem] border border-[#111111]/10 bg-[#ECECEC] shadow-[0_24px_80px_rgba(17,17,17,0.08)]">
+            <iframe
+              title="Localisation Tselem Studio RDC"
+              src={mapSrc}
+              className="h-[420px] w-full border-0"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
           </div>
         </div>
       </section>

@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { Facebook, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
-import logoWhite from "@assets/logo-white_1762333728331.png";
+import logoWhite from "@assets/logos/logo-blanc.png";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -92,7 +92,7 @@ export default function Footer() {
                 { path: "/", label: "Accueil" },
                 { path: "/apropos", label: "À Propos" },
                 { path: "/services", label: "Services" },
-                { path: "/portfolio", label: "Portfolio" },
+                { path: "/galerie", label: "Galerie" },
                 { path: "/blog", label: "Blog" },
                 { path: "/admin/login", label: "Admin" },
               ].map((link) => (
