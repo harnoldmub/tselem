@@ -12,10 +12,10 @@ import editorialWide from "@assets/images/slider-editorial.jpg";
 import portraitVertical from "@assets/images/portrait-large.jpg";
 import portraitStudio from "@assets/images/portraits/portraits-08.jpg";
 import maternityMood from "@assets/images/maternite/maternite-01.jpg";
-import brandFrame from "@assets/images/mode/mode-04.jpg";
+import brandFrame from "@assets/images/mode/mode-08.jpg";
 import productionStill from "@assets/images/corporate/corporate-01.jpg";
 import detailFrame from "@assets/images/couple/couple-01.jpg";
-import backstageFrame from "@assets/images/famille-et-enfant/famille-enfant-01.jpg";
+import backstageFrame from "@assets/images/famille-et-enfant/famille-enfant-09.jpg";
 import socialFrame from "@assets/images/anniversaire/anniversaire-01.jpg";
 import clientPortrait from "@assets/images/portraits/portraits-01.jpg";
 import clientPortrait2 from "@assets/images/portraits/portraits-02.jpg";
@@ -26,16 +26,16 @@ const fadeUp = { hidden: { opacity: 0, y: 42 }, visible: { opacity: 1, y: 0 } };
 const reveal = { hidden: { opacity: 0, y: 70, scale: 0.98 }, visible: { opacity: 1, y: 0, scale: 1 } };
 
 const services = [
-  ["Portrait", "Présence, regard, peau, silence. Des portraits construits comme des couvertures éditoriales.", portraitStudio],
+  ["Corporate", "Présence, regard, peau, silence. Des portraits construits comme des couvertures éditoriales.", portraitStudio],
   ["Mariage", "Un récit visuel sobre et cinématographique pour les engagements qui traversent une vie.", weddingHero],
   ["Maternité", "Une lumière douce, une direction sensible, une mémoire intime sans artifice.", maternityMood],
-  ["Branding Personnel", "Images d'autorité pour dirigeants, artistes, créateurs et marques personnelles.", brandFrame],
+  ["Mode", "Images d'autorité pour dirigeants, artistes, créateurs et marques personnelles.", brandFrame],
   ["Événement & Famille", "Couple, famille, anniversaire et moments précieux avec une direction sobre et sensible.", backstageFrame],
 ];
 
 const projects = [
   ["Mariage", "Kinshasa Ceremony", "Une célébration pensée comme un film: gestes mesurés, lumière naturelle, élégance collective.", weddingGroup],
-  ["Portrait Premium", "The Quiet Icon", "Portraits de caractère pour une présence publique plus forte, plus maîtrisée, plus mémorable.", portraitVertical],
+  ["Corporate", "Corporate", "Portraits de caractère pour une présence publique plus forte, plus maîtrisée, plus mémorable.", productionStill],
   ["Maternité", "The Waiting Room", "Une série intime et lumineuse autour du corps, du lien et de la transmission.", maternityMood],
 ];
 
