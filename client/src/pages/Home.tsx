@@ -34,7 +34,7 @@ const services = [
 ];
 
 const projects = [
-  ["Mariage", "Kinshasa Ceremony", "Une célébration pensée comme un film: gestes mesurés, lumière naturelle, élégance collective.", weddingGroup],
+  ["Mariage", "Mariage d'Exception", "Une célébration pensée comme un film: gestes mesurés, lumière naturelle, élégance collective.", weddingGroup],
   ["Corporate", "Corporate", "Portraits de caractère pour une présence publique plus forte, plus maîtrisée, plus mémorable.", productionStill],
   ["Maternité", "The Waiting Room", "Une série intime et lumineuse autour du corps, du lien et de la transmission.", maternityMood],
 ];
