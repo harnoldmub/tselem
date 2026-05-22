@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
 import { AnimatePresence, motion, useInView, useScroll, useTransform } from "framer-motion";
-import { ArrowUpRight, Calendar, MessageCircle } from "lucide-react";
+import { ArrowUpRight, Calendar, MessageCircle, Volume2, VolumeX } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import hero1 from "@assets/images/hero/hero-1.jpg";
@@ -94,17 +94,38 @@ function EditorialLink({ href, children, dark = false }: { href: string; childre
 
 export default function Home() {
   const [heroIndex, setHeroIndex] = useState(0);
+  const [muted, setMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const timer = setInterval(() => setHeroIndex((i) => (i + 1) % HERO_SLIDES.length), 5000);
     return () => clearInterval(timer);
   }, []);
 
+  function toggleMute() {
+    if (!videoRef.current) return;
+    const next = !muted;
+    videoRef.current.muted = next;
+    if (!next) videoRef.current.play().catch(() => {});
+    setMuted(next);
+  }
+
   return (
     <div className="min-h-screen cursor-default bg-[#E8E8E8] text-[#111111] selection:bg-[#BE1E2D] selection:text-white">
       <Header />
 
       <section className="relative min-h-screen overflow-hidden bg-[#111111] text-[#F8F6F3]">
+        {/* Mobile: video hero */}
+        <video
+          ref={videoRef}
+          src="/attached_assets/videos/hero-mobile.mp4"
+          autoPlay
+          playsInline
+          loop
+          muted
+          className="absolute inset-0 h-full w-full object-cover sm:hidden"
+        />
+        {/* Desktop: image slideshow */}
         <AnimatePresence mode="sync">
           <motion.img
             key={HERO_SLIDES[heroIndex]}
@@ -114,13 +135,13 @@ export default function Home() {
             animate={{ opacity: 0.86, scale: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute inset-0 h-full w-full object-cover"
+            className="absolute inset-0 hidden h-full w-full object-cover sm:block"
           />
         </AnimatePresence>
         <div className="absolute inset-0 bg-[#111111]/36" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/92 via-transparent to-[#111111]/14" />
-        {/* Slide dots */}
-        <div className="absolute bottom-8 right-8 z-10 flex gap-2">
+        {/* Desktop: slide dots */}
+        <div className="absolute bottom-8 right-8 z-10 hidden gap-2 sm:flex">
           {HERO_SLIDES.map((_, i) => (
             <button
               key={i}
@@ -131,6 +152,15 @@ export default function Home() {
             />
           ))}
         </div>
+        {/* Mobile: sound toggle */}
+        <button
+          type="button"
+          onClick={toggleMute}
+          aria-label={muted ? "Activer le son" : "Couper le son"}
+          className="absolute bottom-8 right-8 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-[#F8F6F3]/10 backdrop-blur-sm transition-colors hover:bg-[#F8F6F3]/20 sm:hidden"
+        >
+          {muted ? <VolumeX className="h-4 w-4 text-[#F8F6F3]" /> : <Volume2 className="h-4 w-4 text-[#F8F6F3]" />}
+        </button>
         <div className="relative z-10 flex min-h-screen flex-col justify-end px-5 pb-10 pt-28 sm:px-8 lg:px-12 lg:pb-14">
           <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }} className="max-w-7xl">
             <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.42em] text-[#F8F6F3]/70">Kinshasa · Photo · Film · Direction artistique</p>
